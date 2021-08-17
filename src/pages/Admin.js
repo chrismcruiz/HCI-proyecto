@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -49,11 +49,11 @@ function Admin(props) {
 
     const img = recorrerObjeto(filtrarUser(props.users, props.idUser)).photo
 
-    const alreadyRemoved = []
+    //const alreadyRemoved = []
     const [deleteShow, setDeleteShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
     const [viewShow, setViewShow] = useState(false);
-    const childRefs = useMemo(() => Array(aUsers.length).fill(0).map(i => React.createRef()), [aUsers])
+    //const childRefs = useMemo(() => Array(aUsers.length).fill(0).map(i => React.createRef()), [aUsers])
     //const [setShow] = useState(false);
 
     const handleCloseDelete = () => setDeleteShow(false);
@@ -64,15 +64,15 @@ function Admin(props) {
     const [formShow, setFormShow] = useState(false);
 
     const handleFormShow = () => {
-        formShow ? setFormShow(true) : setFormShow(true);
+        formShow ? setFormShow(false) : setFormShow(true);
     }
 
     const [filtroTabla, setFiltroTabla] = useState('')
 
     function filtroUsuarios(e) {
-        var a = e.target.value
+        let a = e.target.value
         if (a !== undefined && a !== "") {
-            var aResultado = aUsers.filter(function (valor) {
+            let aResultado = aUsers.filter(function (valor) {
                 return valor.name.toLowerCase().indexOf(a) > -1
                     || valor.career.toLowerCase().indexOf(a) > -1
                     || valor.email.indexOf(a) > -1
@@ -91,7 +91,7 @@ function Admin(props) {
         setIdActual(id)
     }
 
-    console.log(props.token)
+    //console.log(props.token)
     const borrar = async () => {
         setIsLoading(true)
         let config = { 
@@ -105,7 +105,7 @@ function Admin(props) {
         }
         await axios.delete('http://localhost:4000/app/admin/deleteuser', config)
             .then(response => {
-                    console.log(response.data);
+                    //console.log(response.data);
                     setDeleteShow(false)
                     setIsLoading(false)
                     window.location.reload()
@@ -267,7 +267,7 @@ function Admin(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <div className='div_imagen_perfil_admin fondo-verde'>
-                        <img src='' className='imagen_perfil_admin'></img>
+                        <img src='' alt="" className='imagen_perfil_admin'></img>
                     </div>
                     <p className='mt-3'>Nombre: </p>
                     <p className='mt-3'>Email: </p>
@@ -286,7 +286,7 @@ function Admin(props) {
                     <div className='col-3 px-0'>
                         <div className='menu_arriba w-100'>
                             <div className='py-3 px-4 d-flex align-items-center'>
-                                <img className='imagen_perfil' src={`/images/${img}`} />
+                                <img className='imagen_perfil' alt="" src={`/images/${img}`} />
                                 <p className='pl-3 m-0 text-titulos-1 texto-blanco'>
                                     Administrador
                             </p>
@@ -301,80 +301,86 @@ function Admin(props) {
                             </ul>
                         </div>
                     </div>
-                    {formShow ? <div className='col-9 px-0 fondo-blanco div_contenedor_informe p-5'>
 
-                        <p className='texto-negro h2'>Informe de tabla de usuarios</p>
-                        <Input
-                            placeholder='Buscar'
-                            type='text'
-                            className='mt-2 py-2 w-50'
-                            //onKeyUp={filtroUsuarios}
-                            value={filtroTabla}
-                            onChange={filtroUsuarios}
-                            name='txt_filtro'
-                        />
-                        <div className='table-responsive mt-4 shadow-sm'>
-                            <table className='table'>
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col" className="text-center">Id</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Carrera</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Match</th>
-                                        <th scope="col"># Matches</th>
-                                        <th scope="col">Fecha de creacion</th>
-                                        <th scope="col" className="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    {aUsers.map((user, index) =>
-
+                    {formShow ? 
+                        <div className='col-6 px-2 div_contenedor_informe p-5 fondo-blanco'>
+                            <p className='texto-negro h2'>Informe de Usuarios</p>
+                            <Input
+                                placeholder='Buscar'
+                                type='text'
+                                className='mt-2 py-2 w-50'
+                                //onKeyUp={filtroUsuarios}
+                                value={filtroTabla}
+                                onChange={filtroUsuarios}
+                                name='txt_filtro'
+                            />
+                            <div className='table-responsive mt-4 shadow-sm'>
+                                <table className='table'>
+                                    <thead className="thead-dark">
                                         <tr>
-                                            <td>
-                                                <img className='imagen_personas_matches_admin' src={`/images/${user.photo}`} />
-                                            </td>
-                                            <td scope="row" className="text-center">{user._id.substr(-5, 20)}</td>
-                                            <td>{user.name}</td>
-                                            <td>{user.career}</td>
-                                            <td>{user.email}</td>
-                                            <td>{
-                                                user.matches.map(function (val) {
-                                                    if (val != "") {
-                                                        return aNombres[val]
-                                                    }
-                                                    //console.log(val.length)
-                                                    //console.log(typeof val);
-                                                }).join(' ').trim().replace(' ', ', ')
-                                            }
-                                            </td>
-                                            <td>{user.matches.length - 1}</td>
-                                            <td>{user.Date.substr(0, 10)}
-                                            </td>
-                                            <td className='d-flex justify-content-center'>
-                                                <CancelIcon className='m-2 iconos_crud' onClick={() => deleteUser(user._id)}></CancelIcon>
-                                                <CreateIcon className='m-2 iconos_crud' onClick={() => setEditShow(true)}></CreateIcon>
-                                                <VisibilityIcon className='m-2 iconos_crud' onClick={() => setViewShow(true)}></VisibilityIcon>
-                                            </td>
+                                            <th scope="col">Photo</th>
+                                            <th scope="col" className="text-center">Id</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Carrera</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Match</th>
+                                            <th scope="col"># Matches</th>
+                                            <th scope="col">Fecha de creacion</th>
+                                            <th scope="col" className="text-center">Acciones</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    )}
+                                        {aUsers.map((user, index) =>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div> :
+                                            <tr>
+                                                <td>
+                                                    <img className='imagen_personas_matches_admin' alt="" src={`/images/${user.photo}`} />
+                                                </td>
+                                                <td className="text-center">{user._id.substr(-5, 20)}</td>
+                                                <td>{user.name}</td>
+                                                <td>{user.career}</td>
+                                                <td>{user.email}</td>
+                                                <td>{
+                                                    user.matches.map((val) => {
+                                                        if (val !== "") {
+                                                            return aNombres[val]
+                                                        }
+                                                        //console.log(val.length)
+                                                        //console.log(typeof val);
+                                                    }).join(' ').trim().replace(' ', ', ')
+                                                }
+                                                </td>
+                                                <td>{user.matches.length - 1}</td>
+                                                <td>{user.Date.substr(0, 10)}
+                                                </td>
+                                                <td>
+                                                    <div className='d-flex justify-content-center'>
+                                                        <CancelIcon className='m-2 iconos_crud' onClick={() => deleteUser(user._id)}></CancelIcon>
+                                                        <CreateIcon className='m-2 iconos_crud' onClick={() => setEditShow(true)}></CreateIcon>
+                                                        <VisibilityIcon className='m-2 iconos_crud' onClick={() => setViewShow(true)}></VisibilityIcon>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        )}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                    :
                         <div className='col-9 px-0 fondo-blanco div_contenedor_informe p-5 text-center position-relative'>
                             <div className='div_contenedor_logo_nombre_admin position-relative'>
-                                <img className='admin_perfil' src={`/images/${img}`} ></img>
+                                <img className='admin_perfil' alt="" src={`/images/${img}`} ></img>
                                 <h2 className='mt-5'>Administrador TRADE URSELF</h2>
                             </div>
                         </div>
                     }
+
                     <div className='col-12 p-0 text-center'>
-                        <div className='fondo-verde py-3 div_footer_admin w-100'>
+                        <div className='fondo-verde py-2 w-100'>
                             <p className='texto-blanco'>Copyright © 2021 TRADE URSELF® - TODOS LOS DERECHOS RESERVADOS</p>
                         </div>
                     </div>

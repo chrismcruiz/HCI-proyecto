@@ -206,13 +206,13 @@ function Cards(props) {
                                 style={{ backgroundImage: `url(./images/${user.photo})` }}
                                 ref={imagen_persona_card}
                             >
-                                <div className='position-absolute div_info_personas texto-blanco'
+                                <div className='position-absolute div_info_personas texto-blanco '
                                 onClick={mostrarInfo}
                                 ref={div_datos_persona}
                                 >
                                     <h3 className='m-0 d-flex mb-2' >
-                                        {user.name} -
-                                        <p className='ml-3 font-weight-normal'>{calcularEdad(user.birthday)}</p>
+                                        {user.name} - 
+                                        <p className='ml-4 font-weight-normal'>{ calcularEdad(user.birthday) }</p>
                                     </h3>
                                     <p className='h4'>{user.career}</p>
                                 </div>
