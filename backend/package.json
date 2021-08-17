@@ -1,0 +1,20 @@
+{
+  "name": "proyecto-hci-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "mongoose": "^5.13.7",
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.12"
+  }
+}
