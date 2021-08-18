@@ -17,12 +17,10 @@ function Cards(props) {
     const [isLoading, setIsLoading] = useState(true);
     const peopleLiked = recorrerObjeto(filtrarUser(props.users, props.idUser)).liked
     const [matches, setMatches] = useState(false);
-    // peopleLiked = Object.values(peopleLiked)
-    // console.log('hola')
-    // console.log(peopleLiked.indexOf('6038742ce9e05e0e789dd80a'))
+ 
 
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
             const req = await axios.get("http://localhost:4000/app/users");
             if (req.data.length > 0) {
                 for (let i = 0; i < req.data.length; i++) {
@@ -58,6 +56,7 @@ function Cards(props) {
     // let charactersState = db
 
     const [lastDirection, setLastDirection] = useState()
+    //const lastDirection = useState()
     const childRefs = useMemo(() => Array(db.length).fill(0).map(i => React.createRef()), [db])
 
     const swiped = (direction, nameToDelete) => {
@@ -126,10 +125,9 @@ function Cards(props) {
             });
     }
 
-    const calcularEdad = (años) => {
-        años = años;
+    const calcularEdad = (anios) => {
         let hoy = new Date();
-        let cumpleanos = new Date(años);
+        let cumpleanos = new Date(anios);
         let edad = hoy.getFullYear() - cumpleanos.getFullYear();
         let m = hoy.getMonth() - cumpleanos.getMonth();
 

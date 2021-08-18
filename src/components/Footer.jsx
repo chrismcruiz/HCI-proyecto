@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <div className='col-12 p-0 text-center copyright'>           
             <div className='fondo-verde py-2 div_footer_admin w-100'>

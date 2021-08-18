@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm.jsx";
 import { motion } from "framer-motion";
@@ -16,10 +16,6 @@ const BoxContainer = styled.div`
   position: relative;
   overflow: hidden;
   margin: 30px 0px;
-  // position: absolute;
-  // transform: translate(-50%,-50%);
-  // top: 50%;
-  // left: 50%;
 `;
 
 const TopContainer = styled.div`

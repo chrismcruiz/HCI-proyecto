@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
-
-// import logo from '../images/207bd542-ca2a-4553-9024-2b6f2ee80011-1614290002828.jpg'
+import React from "react";
 import Cards from '../components/Cards'
-import {
-  Input,
-  SubmitButton,
-} from "../components/accountBox/common";
-import CreateIcon from '@material-ui/icons/Create';
-// import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer"
-import { filtrarUser, recorrerObjeto } from '../utils/Utils'
-import axios from 'axios'
-
 
 function Home(props) {
   props = props.props

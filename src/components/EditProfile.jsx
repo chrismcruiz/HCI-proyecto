@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Input,
     SubmitButton,
@@ -79,7 +79,7 @@ const EditProfile = (props) => {
         <div className='p-3'>
             <div className='fondo-blanco pantalla_match px-4'>
                 <div className='div_imagen_edit_perfil'>
-                    <img className='imagen_persona_perfil' src={`/images/${img}`} />
+                    <img className='imagen_persona_perfil' alt="" src={`/images/${img}`} />
                 </div>
             </div>
             <form method='POST' className='' encType='multipart/form-data'>

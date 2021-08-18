@@ -15,7 +15,7 @@ function Admin(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [aUsers, setUsers] = useState([]);
     const [aUsersIniciales, setUsersIni] = useState([]);
-    const [aNombres, setNombres] = useState([]);
+    //const [aNombres, setNombres] = useState([]);
     const [idActual, setIdActual] = useState('')
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function Admin(props) {
             //     console.log(req.data)
             //     //setUsers(req.data);
             // }
-            var nombres = [];
+            let nombres = [];
             if (req.data.length > 0) {
                 for (let i = 0; i < req.data.length; i++) {
                     if (req.data[i].admin) {
@@ -38,7 +38,7 @@ function Admin(props) {
                     }
                 }
                 //console.log(req.data)
-                setNombres(nombres);
+                //setNombres(nombres);
                 setUsers(req.data);
                 setUsersIni(req.data);
                 setIsLoading(false)
@@ -69,7 +69,7 @@ function Admin(props) {
 
     const [filtroTabla, setFiltroTabla] = useState('')
 
-    function filtroUsuarios(e) {
+    const filtroUsuarios = (e) => {
         let a = e.target.value
         if (a !== undefined && a !== "") {
             let aResultado = aUsers.filter(function (valor) {
@@ -309,7 +309,6 @@ function Admin(props) {
                                 placeholder='Buscar'
                                 type='text'
                                 className='mt-2 py-2 w-50'
-                                //onKeyUp={filtroUsuarios}
                                 value={filtroTabla}
                                 onChange={filtroUsuarios}
                                 name='txt_filtro'
@@ -330,9 +329,7 @@ function Admin(props) {
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        {aUsers.map((user, index) =>
-
+                                        {aUsers.map((user) =>
                                             <tr>
                                                 <td>
                                                     <img className='imagen_personas_matches_admin' alt="" src={`/images/${user.photo}`} />
@@ -342,13 +339,13 @@ function Admin(props) {
                                                 <td>{user.career}</td>
                                                 <td>{user.email}</td>
                                                 <td>{
-                                                    user.matches.map((val) => {
+                                                    user.matches.slice(1,).map((val) => {
+                                                        let match_id
                                                         if (val !== "") {
-                                                            return aNombres[val]
+                                                            match_id = val.substr(-5, 20)
                                                         }
-                                                        //console.log(val.length)
-                                                        //console.log(typeof val);
-                                                    }).join(' ').trim().replace(' ', ', ')
+                                                        return match_id
+                                                    }).join(', ')
                                                 }
                                                 </td>
                                                 <td>{user.matches.length - 1}</td>

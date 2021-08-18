@@ -22,7 +22,7 @@ const Sidebar = (props) => {
                 <div className='py-3 px-4 a_hover_perfil d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                         {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
-                        <img className='imagen_perfil' src={`/images/${img}`} />
+                        <img className='imagen_perfil' alt="" src={`/images/${img}`} />
                         <p className='pl-3 m-0 text-titulos-1 texto-blanco'>
                             Mi perfil
                         </p>

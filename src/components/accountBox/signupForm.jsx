@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
   BoldLink,
   BoxContainer,
@@ -8,7 +8,7 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
-import { Button, Modal, Alert } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 export function SignupForm(props) {
   props = props.props.props;
@@ -18,10 +18,10 @@ export function SignupForm(props) {
   let confirmP;
   const limpiar = React.createRef();
 
-  const handleChangeP = (e) => {
-    confirmP = e.target.value
+  // const handleChangeP = (e) => {
+  //   confirmP = e.target.value
 
-  }
+  // }
   // const handlePass = (e) => {
   //   let pass = props.signUpPassword
   //   if (pass !== confirmP) {
@@ -71,27 +71,33 @@ export function SignupForm(props) {
         </Modal.Footer>
       </Modal>
       <form method='POST' encType='multipart/form-data' style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-        <Input
-          className='mb-2'
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={props.signUpName}
-          onChange={props.onTextboxChangeSignUpName}
-          
-        />
-        <Input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={props.signUpEmail}
-          onChange={props.onTextboxChangeSignUpEmail}
-          
-        />
-        <div className=''>
-          <label className='label_inputs py-2 ps-2' style={{ fontWeight: '700' }}>Fecha de nacimiento</label>
+        <div className="form-floating mb-2">
           <Input
-            className='label_inputs'
+            className='form-control'
+            id="name"
+            type="text"
+            name="name"
+            placeholder="Nombre"
+            value={props.signUpName}
+            onChange={props.onTextboxChangeSignUpName}
+          />
+          <label for="name">Nombre</label>
+        </div>
+        <div className="form-floating mb-2">
+          <Input
+            className="form-control"
+            id="email"
+            type="email"
+            name="email"
+            value={props.signUpEmail}
+            onChange={props.onTextboxChangeSignUpEmail}
+          />
+          <label for="email">Email</label>
+        </div>
+        
+        <div className='form-floating mb-3 mt-2'>
+          <Input
+            className='form-control'
             type="date"
             name="birthday"
             placeholder="Fecha de nacimiento"
@@ -99,47 +105,46 @@ export function SignupForm(props) {
             onChange={props.onTextboxChangeSignUpBirthday}
             
           />
+          <label className='label_inputs py-2 ps-2'>Fecha de nacimiento</label>
         </div>
-        <label className='label_inputs mt-2 ps-2' style={{ fontWeight: '700' }}>Género</label>
+        <label className='label_inputs mt-2 ps-2'>Género</label>
         <div
-          className='d-flex ps-2'
           value={props.signUpGender}
           onChange={props.onTextboxChangeSignUpGender}>
-          <div className='d-flex align-items-center'>
+          <div className='form-check form-check-inline'>
             <Input
-              className='d-inline-block inputs_radius mr-2'
+              className='inputs_radius'
               type="radio"
               name='gender'
               id='male'
               value={'masculino'}
                />
-            <label htmlFor="male" className='label_inputs mr-3 mt-1 pt-1'>Masculino</label>
+            <label htmlFor="male" className='form-check-label'>Masculino</label>
           </div>
-          <div className='d-flex align-items-center'>
+          <div className='form-check form-check-inline'>
             <Input
-              className='d-inline-block inputs_radius mr-2'
+              className='inputs_radius'
               type="radio"
               name='gender'
               id='female'
               value={'femenino'}
                />
-            <label htmlFor="female" className='label_inputs mr-3 mt-1 pt-1'>Femenino</label>
+            <label htmlFor="female" className='form-check-label'>Femenino</label>
           </div>
-          <div className='d-flex align-items-center'>
+          <div className='form-check form-check-inline'>
             <Input
-              className='d-inline-block inputs_radius mr-2'
+              className='inputs_radius'
               type="radio"
               name='gender'
               id='other'
               value={'otro'}
                />
-            <label htmlFor="other" className='label_inputs mr-3 mt-1 pt-1'>Otro</label>
+            <label htmlFor="other" className='form-check-label'>Otro</label>
           </div>
         </div>
-        <div className='pb-2'>
-          <label className='label_inputs py-2 ps-2 d-block' style={{ fontWeight: '700' }}>Carrera</label>
+        <div className='form-floating mb-3 mt-3'>
           <select
-            
+            className='form-select'
             name='career'
             id='career'
             value={props.signUpCareer}
@@ -154,11 +159,11 @@ export function SignupForm(props) {
             <option value='Ingeniería Electrónica'>Ingeniería Electrónica</option>
             <option value='Iicenciatura en Idiomas'>Licenciatura en Idiomas</option>
           </select>
+          <label htmlFor='career' >Carrera</label>
         </div>
-        <div className=''>
-          <label className='label_inputs py-2 ps-2' style={{ fontWeight: '700' }}>Subir imagen</label>
+        <div className='input-group mb-2 mt-2'>
           <Input
-            className='label_inputs border-0 ps-2 pl-0'
+            className='form-control'
             type="file"
             name='photo'
             accept=".png, .jpg, .jpeg"
@@ -166,24 +171,32 @@ export function SignupForm(props) {
             onChange={props.onPhotoChangeSignUpPhoto}
             
           />
+          <label htmlFor="photo" className='input-group-text'>Subir imagen</label>
         </div>
-        <Input
-          className='mb-2'
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={props.signUpPassword}
-          onChange={props.onTextboxChangeSignUpPassword}
-        />
-        <Input
-          type="password"
-          name="confirm_password"
-          placeholder="Confirmar Contraseña"
-          value={confirmP}
-          ref={limpiar}
-          // onChange={handleChangeP}
-          
-        />
+        <div className="form-floating mb-2">
+          <Input
+            className='form-control'
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            value={props.signUpPassword}
+            onChange={props.onTextboxChangeSignUpPassword}
+          />
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+         <div className="form-floating">
+          <Input
+            className='form-control'
+            type="password"
+            name="confirm_password"
+            placeholder="Confirmar Contraseña"
+            value={confirmP}
+            ref={limpiar}
+            // onChange={handleChangeP}
+          />
+          <label for="floatingPassword">Confirmar contraseña</label>
+        </div>
+        
         <SubmitButton className='mt-3' onClick={props.onSignUp}>Registrarme</SubmitButton>
       </form>
       <Marginer direction="vertical" margin={10} />

@@ -9,14 +9,13 @@ const Matches = (props) => {
     const [aMatchesUser, setMatchesUser] = useState([]);
 
     useEffect(() => {
-        async function matches() {
-            
+        const matches = async () => {
             const req = await axios.post("http://localhost:4000/app/users/match",{
                 _id: props.idUser
             });
             
             if (req.data) {
-                var aMatches = req.data;
+                let aMatches = req.data;
                 const req2 = await axios.post("http://localhost:4000/app/matches",{
                     matches: aMatches
                 });
@@ -26,7 +25,7 @@ const Matches = (props) => {
             }
         }
         matches()
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='fondo-blanco pantalla_match p-3'>
@@ -34,7 +33,7 @@ const Matches = (props) => {
             <div className='div_personas_matches'>
                 {aMatchesUser.map((match, index) =>
                     <div className='div_imagen_personas_matches position-relative m-2 d-inline-block'>
-                        <img className='imagen_personas_matches' src={`/images/${match.photo}`} />
+                        <img className='imagen_personas_matches' alt="" src={`/images/${match.photo}`} />
                         <label className='position-absolute label_nombre_matches texto-blanco fw-bold'>{match.name}</label>
                     </div>
                 )}

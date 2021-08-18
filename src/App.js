@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css'
@@ -15,8 +15,7 @@ import { AccountBox } from "./components/accountBox";
 import styled from "styled-components";
 import { CircularProgress } from '@material-ui/core';
 import { filtrarUser, recorrerObjeto } from './utils/Utils'
-import { AccountContext } from "./components/accountBox/accountContext";
-import { Button, Modal, Alert } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 
 <script
@@ -36,9 +35,9 @@ const App = () => {
 
   const [active, setActive] = useState("signup");
 
-  const switchToSignup = () => {
-    setActive("signup");
-  };
+  // const switchToSignup = () => {
+  //   setActive("signup");
+  // };
 
   const [users, setUsers] = useState([]);
   const [sessions, setSessions] = useState([]);
@@ -50,7 +49,7 @@ const App = () => {
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signUpName, setSignUpName] = useState('');
-  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('name@example.com');
   const [signUpGender, setSignUpGender] = useState('');
   const [signUpCareer, setSignUpCareer] = useState('');
   const [signUpBirthday, setSignUpBirthday] = useState('');
