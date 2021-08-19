@@ -26,7 +26,7 @@ const TopContainer = styled.div`
   justify-content: flex-end;
   padding: 0 1.8em;
   padding-bottom: 5em;
-  zIndex: "1",
+  
 `;
 
 const BackDrop = styled(motion.div)`
@@ -92,7 +92,7 @@ const backdropVariants = {
     height: "510px",
     borderRadius: "50%",
     transform: "rotate(-25deg)",
-    
+    zIndex: "1",
   },
 };
 
