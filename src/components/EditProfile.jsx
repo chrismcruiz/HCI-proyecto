@@ -83,22 +83,10 @@ const EditProfile = (props) => {
                 </div>
             </div>
             <form method='POST' className='' encType='multipart/form-data'>
-                <div className="form-group  mb-0">
-                    <label htmlFor='description' className='label_inputs py-2 pt-4' style={{ fontWeight: '700' }}>Descripción</label>
-                    <textarea
-                        rows="3"
-                        cols="3"
-                        id='description'
-                        className='form-control textarea'
-                        placeholder='Añade una descripción breve de tí...'
-                        value={editDescription}
-                        onChange={onTextboxChangeUpdateDescription}
-                    ></textarea>
-                </div>
-                <div className=''>
-                    <label className='label_inputs py-2 pt-4' style={{ fontWeight: '700' }}>Cambiar imagen</label>
+
+                <div className='input-group mb-3'>
                     <Input
-                        className='label_inputs border-0 ps-2 pl-0'
+                        className='label_inputs form-control'
                         type="file"
                         name='photo'
                         accept=".png, .jpg, .jpeg"
@@ -106,29 +94,53 @@ const EditProfile = (props) => {
                         required
                         onChange={onPhotoChangeUpdatePhoto}
                     />
+                    <label htmlFor="photo" className='label_inputs input-group-text'>Cambiar imagen</label>
                 </div>
 
-                <Input
-                    className='mb-2'
+
+                <div className="form-floating mb-3">
+                    <textarea
+                        id='description'
+                        className='form-control'
+                        placeholder='Añade una descripción breve de tí...'
+                        value={editDescription}
+                        onChange={onTextboxChangeUpdateDescription}
+                        style={{height: "100px"}}
+                    ></textarea>
+                    <label className="label_inputs" htmlFor='description'>Añade una breve descripción tuya...</label>
+                </div>
+
+                
+
+                <div className="input-group mb-2">
+                    <span class="input-group-text label_inputs">Nombre</span>
+                    <Input
+                    className='form-control'
                     type="text"
                     name="name"
                     placeholder="Nombre"
                     value={editName}
                     onChange={onTextboxChangeUpdateNombre}
                     required
-                />
-                <Input
+                    />
+                </div>
+                
+                 <div className="input-group mb-3">
+                    <span class="label_inputs input-group-text">Correo</span>
+                    <Input
+                    className='form-control'
                     type="email"
                     placeholder="Email"
                     name="email"
                     value={editEmail}
                     onChange={onTextboxChangeUpdateEmail}
                     required
-                />
-                <div className=''>
-                    <label className='label_inputs py-2 ps-2' style={{ fontWeight: '700' }}>Fecha de nacimiento</label>
+                    />
+                </div>
+                
+                <div className='form-floating mb-3'>
                     <Input
-                        className='label_inputs'
+                        className='form-control label_inputs'
                         type="date"
                         name="birthday"
                         placeholder="Fecha de nacimiento"
@@ -136,11 +148,13 @@ const EditProfile = (props) => {
                         onChange={onTextboxChangeUpdateFecha}
                         required
                     />
+                    <label className='label_inputs'>Fecha de nacimiento</label>
                 </div>
-                <div className='pb-2'>
-                    <label className='label_inputs py-2 ps-2 d-block' style={{ fontWeight: '700' }}>Carrera</label>
+
+                <div className='form-floating'>
                     <select
                         required
+                        className="form-select"
                         name='career'
                         id='career'
                         value={editCareer}
@@ -155,6 +169,7 @@ const EditProfile = (props) => {
                         <option value='ingenieria electronica'>Ingeniería Electrónica</option>
                         <option value='licenciatura en idiomas'>Licenciatura en Idiomas</option>
                     </select>
+                    <label htmlFor="career" className='label_inputs'>Carrera</label>
                 </div>
                 <SubmitButton className='mt-3' type="submit" value='submit' onClick={onEdit} >Guardar</SubmitButton>
             </form>

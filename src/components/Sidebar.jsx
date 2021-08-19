@@ -23,7 +23,7 @@ const Sidebar = (props) => {
                     <div className='d-flex align-items-center'>
                         {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
                         <img className='imagen_perfil' alt="" src={`/images/${img}`} />
-                        <p className='pl-3 m-0 text-titulos-1 texto-blanco'>
+                        <p className='ms-3 m-0 text-titulos-1 texto-blanco'>
                             Mi perfil
                         </p>
                     </div>
@@ -34,7 +34,7 @@ const Sidebar = (props) => {
                 </div>
             </div>
             {perfilShow ?
-                // Ventana de Matches
+                // Ventana de Matches y Grupos
                 (<Matches props={props}/>)
                 :
                 // Ventana de editar perfil

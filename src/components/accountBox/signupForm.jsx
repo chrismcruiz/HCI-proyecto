@@ -81,7 +81,7 @@ export function SignupForm(props) {
             value={props.signUpName}
             onChange={props.onTextboxChangeSignUpName}
           />
-          <label for="name">Nombre</label>
+          <label className="label_inputs" htmlFor="name">Nombre</label>
         </div>
         <div className="form-floating mb-2">
           <Input
@@ -92,10 +92,10 @@ export function SignupForm(props) {
             value={props.signUpEmail}
             onChange={props.onTextboxChangeSignUpEmail}
           />
-          <label for="email">Email</label>
+          <label className="label_inputs" htmlFor="email">Email</label>
         </div>
         
-        <div className='form-floating mb-3 mt-2'>
+        <div className='form-floating mb-3'>
           <Input
             className='form-control'
             type="date"
@@ -105,44 +105,50 @@ export function SignupForm(props) {
             onChange={props.onTextboxChangeSignUpBirthday}
             
           />
-          <label className='label_inputs py-2 ps-2'>Fecha de nacimiento</label>
+          <label className='label_inputs'>Fecha de nacimiento</label>
         </div>
-        <label className='label_inputs mt-2 ps-2'>Género</label>
-        <div
-          value={props.signUpGender}
-          onChange={props.onTextboxChangeSignUpGender}>
-          <div className='form-check form-check-inline'>
-            <Input
-              className='inputs_radius'
-              type="radio"
-              name='gender'
-              id='male'
-              value={'masculino'}
-               />
-            <label htmlFor="male" className='form-check-label'>Masculino</label>
+
+        <div id="combo" className="form-floating mb-3">
+          <div
+            className="form-control"
+            value={props.signUpGender}
+            onChange={props.onTextboxChangeSignUpGender}>
+            <div className='form-check form-check-inline'>
+              <Input
+                className='inputs_radius'
+                type="radio"
+                name='gender'
+                id='male'
+                value={'masculino'}
+                />
+              <label htmlFor="male" className='form-check-label'>Masculino</label>
+            </div>
+            <div className='form-check form-check-inline'>
+              <Input
+                className='inputs_radius'
+                type="radio"
+                name='gender'
+                id='female'
+                value={'femenino'}
+                />
+              <label htmlFor="female" className='form-check-label'>Femenino</label>
+            </div>
+            <div className='form-check form-check-inline'>
+              <Input
+                className='inputs_radius'
+                type="radio"
+                name='gender'
+                id='other'
+                value={'otro'}
+                />
+              <label htmlFor="other" className='form-check-label'>Otro</label>
+            </div>
           </div>
-          <div className='form-check form-check-inline'>
-            <Input
-              className='inputs_radius'
-              type="radio"
-              name='gender'
-              id='female'
-              value={'femenino'}
-               />
-            <label htmlFor="female" className='form-check-label'>Femenino</label>
-          </div>
-          <div className='form-check form-check-inline'>
-            <Input
-              className='inputs_radius'
-              type="radio"
-              name='gender'
-              id='other'
-              value={'otro'}
-               />
-            <label htmlFor="other" className='form-check-label'>Otro</label>
-          </div>
+          <label htmlFor="combo" className='label_inputs'>Género</label>
         </div>
-        <div className='form-floating mb-3 mt-3'>
+        
+
+        <div className='form-floating mb-3'>
           <select
             className='form-select'
             name='career'
@@ -163,7 +169,7 @@ export function SignupForm(props) {
         </div>
         <div className='input-group mb-2 mt-2'>
           <Input
-            className='form-control'
+            className='label_inputs form-control'
             type="file"
             name='photo'
             accept=".png, .jpg, .jpeg"
@@ -176,17 +182,19 @@ export function SignupForm(props) {
         <div className="form-floating mb-2">
           <Input
             className='form-control'
+            id="pass"
             type="password"
             name="password"
             placeholder="Contraseña"
             value={props.signUpPassword}
             onChange={props.onTextboxChangeSignUpPassword}
           />
-          <label for="floatingPassword">Contraseña</label>
+          <label className="label_inputs" htmlFor="pass">Contraseña</label>
         </div>
          <div className="form-floating">
           <Input
             className='form-control'
+            id="cpass"
             type="password"
             name="confirm_password"
             placeholder="Confirmar Contraseña"
@@ -194,7 +202,7 @@ export function SignupForm(props) {
             ref={limpiar}
             // onChange={handleChangeP}
           />
-          <label for="floatingPassword">Confirmar contraseña</label>
+          <label className="label_inputs" htmlFor="cpass">Confirmar contraseña</label>
         </div>
         
         <SubmitButton className='mt-3' onClick={props.onSignUp}>Registrarme</SubmitButton>

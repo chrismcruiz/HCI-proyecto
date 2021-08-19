@@ -21,19 +21,33 @@ export function LoginForm(props) {
         ) : (null)
       }
       <form onSubmit={() => props.onSignIn()} style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-        <Input
-          className='mb-2'
+        <div className="form-floating mb-2">
+          <Input
+          className='form-control'
+          id="email"
           type="email"
           placeholder="Email"
           name="email"
           value={props.signInEmail}
-          onChange={props.onTextboxChangeSignInEmail} />
-        <Input
+          onChange={props.onTextboxChangeSignInEmail} 
+          />
+          <label className="label_inputs" htmlFor="email">Email</label>
+        </div>
+        
+        <div className="form-floating mb-2">
+          <Input
+          id="password"
+          className="form-control"
           type="password"
           name="password"
           placeholder="Contraseña"
           value={props.signInPassword}
-          onChange={props.onTextboxChangeSignInPassword} />
+          onChange={props.onTextboxChangeSignInPassword} 
+          />
+          <label className="label_inputs" htmlFor="password">Contraseña</label>
+        </div>
+
+        
         <SubmitButton className='mt-3'>Entrar</SubmitButton>
       </form>
       <Marginer direction="vertical" margin={10} />

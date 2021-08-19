@@ -7,7 +7,7 @@ body {
   height: 100%;
   font-family: "Poppins", sans-serif;
   /*background: -webkit-linear-gradient(left, #20c997, #198754);*/
-  background-color: #e6e9f0;
+  background-color: #f5f5f5;
   overflow-x: hidden;
   font-size: 16px;
 }
@@ -293,7 +293,7 @@ p {
   border-radius: 50%;
 }
 
-.boton_salir {
+.pointer {
   cursor: pointer;
 }
 .div_info_personas {
@@ -413,7 +413,7 @@ p {
 
 .infoText {
   width: 100%;
-  color: #fff;
+  color: #212529;
   animation-name: popup;
   animation-duration: 800ms;
   margin-top: 2rem;

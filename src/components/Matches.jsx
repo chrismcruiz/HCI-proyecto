@@ -7,6 +7,7 @@ const Matches = (props) => {
     props = props.props
 
     const [aMatchesUser, setMatchesUser] = useState([]);
+    const [mostrarMatches, setMostrarMatches] = useState(false);
 
     useEffect(() => {
         const matches = async () => {
@@ -27,19 +28,31 @@ const Matches = (props) => {
         matches()
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+    const mostrarMisMatch = () => {
+        setMostrarMatches(!mostrarMatches)
+    }
+
     return (
         <div className='fondo-blanco pantalla_match p-3'>
-            <h2 className='h5 pl-2'>Matches</h2>
-            <div className='div_personas_matches'>
-                {aMatchesUser.map((match, index) =>
-                    <div className='div_imagen_personas_matches position-relative m-2 d-inline-block'>
-                        <img className='imagen_personas_matches' alt="" src={`/images/${match.photo}`} />
-                        <label className='position-absolute label_nombre_matches texto-blanco fw-bold'>{match.name}</label>
-                    </div>
-                )}
-            </div>
+            <div className="d-flex justify-content-between">
+                <div onClick={mostrarMisMatch} className="p-2 bd-highlight pointer">Matches</div>
+                <div className="p-2 bd-highlight pointer">Mis grupos</div>
+            </div> 
+            {mostrarMatches ? 
+                <div className='div_personas_matches'>
+                    {aMatchesUser.map((match, index) =>
+                        <div key={index} className='div_imagen_personas_matches position-relative m-2 d-inline-block'>
+                            <img className='imagen_personas_matches' alt="" src={`/images/${match.photo}`} />
+                            <label className='position-absolute label_nombre_matches texto-blanco fw-bold'>{match.name}</label>
+                        </div>
+                    )}
+                </div>
+            :
+                ''
+            }
         </div>
     )
 }
+
 
 export default Matches
