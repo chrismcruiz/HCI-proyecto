@@ -6,8 +6,6 @@ const Matches = (props) => {
   props = props.props;
 
   const [aMatchesUser, setMatchesUser] = useState([]);
-  const [mostrarMatches, setMostrarMatches] = useState(true);
-  const [mostrarGrupos, setMostrarGrupos] = useState(false);
 
   useEffect(() => {
     const matches = async () => {
@@ -28,27 +26,17 @@ const Matches = (props) => {
     matches();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const muestraGrupos = () => {
-    setMostrarMatches(false);
-    setMostrarGrupos(true);
-  };
-
-  const muestraMatches = () => {
-    setMostrarMatches(true);
-    setMostrarGrupos(false);
-  };
-
   return (
-    <div className="fondo-blanco pantalla_match p-3">
+    <div className="fondo-blanco rounded-3 p-3 height_bgw">
       {/* <div className="d-flex justify-content-between">
                 <div onClick={mostrarMisMatch} className="p-2 bd-highlight pointer">Matches</div>
                 <div className="p-2 bd-highlight pointer">Mis grupos</div>
             </div>  */}
 
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link active"
+            class="nav-link active links_items"
             id="home-tab"
             data-bs-toggle="tab"
             data-bs-target="#home"
@@ -62,7 +50,7 @@ const Matches = (props) => {
         </li>
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link"
+            class="nav-link links_items"
             id="profile-tab"
             data-bs-toggle="tab"
             data-bs-target="#profile"
@@ -76,7 +64,7 @@ const Matches = (props) => {
         </li>
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link"
+            class="nav-link links_items"
             id="contact-tab"
             data-bs-toggle="tab"
             data-bs-target="#contact"
@@ -103,11 +91,11 @@ const Matches = (props) => {
                 className="div_imagen_personas_matches position-relative m-2 d-inline-block"
               >
                 <img
-                  className="imagen_personas_matches"
+                  className="imagen_personas_matches rounded-2"
                   alt=""
                   src={`/images/${match.photo}`}
                 />
-                <label className="position-absolute label_nombre_matches texto-blanco fw-bold">
+                <label className="position-absolute label_nombre_matches text-tarjetas fw-bold">
                   {match.name}
                 </label>
               </div>

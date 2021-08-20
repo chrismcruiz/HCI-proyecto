@@ -74,16 +74,11 @@ const EditProfile = (props) => {
   }
 
   return (
-    <div className="p-3">
-      <div className="fondo-blanco pantalla_match px-4 mb-3">
-        <div className="div_imagen_edit_perfil">
-          <img
-            className="imagen_persona_perfil"
-            alt=""
-            src={`/images/${img}`}
-          />
-        </div>
+    <div className="fondo-blanco rounded-3 p-3 px-4 height_bgw">
+      <div className="div_imagen_edit_perfil mb-3">
+        <img className="imagen_persona_perfil" alt="" src={`/images/${img}`} />
       </div>
+
       <form method="POST" className="" encType="multipart/form-data">
         <div className="input-group mb-3">
           <Input
@@ -198,7 +193,7 @@ const EditProfile = (props) => {
       </form>
       <div className="d-flex justify-content-center fondo-blanco pt-4">
         <p
-          className="text-danger font-weight-bold h4 m-0 py-3 pointer"
+          className="text-danger font-weight-bold h4 m-0 py-0 pointer"
           onClick={props.logOut}
         >
           Cerrar sesion

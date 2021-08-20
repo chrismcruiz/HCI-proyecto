@@ -11,7 +11,7 @@ function Home(props) {
     <div className='contenedor_home'>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-3 px-0 fondo-blanco vh-100' style={{ width: '19.75%' }}>
+          <div className='col-3 px-0 vh-100'>
             {/* Menú lateral */}
             <Sidebar props={props} />
           </div>
@@ -23,7 +23,7 @@ function Home(props) {
       </div>
       {/* Parte del CopyRight */}
     </div>
-    <Footer props={props} />
+    {/* <Footer props={props} /> */}
     </div>
   );
 }
