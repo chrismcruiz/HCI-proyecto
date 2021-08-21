@@ -74,15 +74,15 @@ const EditProfile = (props) => {
   }
 
   return (
-    <div className="fondo-blanco rounded-3 p-3 px-4 height_bgw">
+    <div className="fondo-blanco rounded-3">
       <div className="div_imagen_edit_perfil mb-3">
         <img className="imagen_persona_perfil" alt="" src={`/images/${img}`} />
       </div>
 
       <form method="POST" className="" encType="multipart/form-data">
-        <div className="input-group mb-3">
+        <div className="input-group mb-3 d-flex justify-content-center">
           <Input
-            className="label_inputs form-control"
+            className="d-none label_inputs form-control"
             type="file"
             name="photo"
             accept=".png, .jpg, .jpeg"

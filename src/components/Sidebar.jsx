@@ -17,9 +17,9 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div className="ms-5 mt-4 border">
-      <div className="menu_arriba w-100">
-        <div className="py-1 px-4 a_hover_perfil d-flex justify-content-between align-items-center">
+    <div className="d-flex flex-column h-100">
+      <div className="menu_arriba border-bottom">
+        <div className="py-1 px-4 d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
             {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
             <img
@@ -31,20 +31,22 @@ const Sidebar = (props) => {
           </div>
           <div>
             <CreateIcon
-              className="m-2 texto-blanco"
+              className="pointer"
               onClick={handlePerfilShow}
             ></CreateIcon>
             {/* <ExitToAppIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ExitToAppIcon> */}
           </div>
         </div>
       </div>
-      {perfilShow ? (
-        // Ventana de Matches y Grupos
-        <Matches props={props} />
-      ) : (
-        // Ventana de editar perfil
-        <EditProfile props={props} />
-      )}
+      <div className="menu-abajo fondo-blanco rounded-3 p-3 h-100">
+        {perfilShow ? (
+          // Ventana de Matches y Grupos
+          <Matches props={props} />
+        ) : (
+          // Ventana de editar perfil
+          <EditProfile props={props} />
+        )}
+      </div>
     </div>
   );
 };

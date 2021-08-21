@@ -26,17 +26,24 @@ const Matches = (props) => {
     matches();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const recortarNombre = (name) => {
+    return name.split(" ")[0];
+  };
   return (
-    <div className="fondo-blanco rounded-3 p-3 height_bgw">
+    <>
       {/* <div className="d-flex justify-content-between">
                 <div onClick={mostrarMisMatch} className="p-2 bd-highlight pointer">Matches</div>
                 <div className="p-2 bd-highlight pointer">Mis grupos</div>
             </div>  */}
 
-      <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
+      <ul
+        className="nav nav-tabs mb-3 d-flex justify-content-between"
+        id="myTab"
+        role="tablist"
+      >
+        <li className="nav-item" role="presentation">
           <button
-            class="nav-link active links_items"
+            className="nav-link active links_items"
             id="home-tab"
             data-bs-toggle="tab"
             data-bs-target="#home"
@@ -48,9 +55,9 @@ const Matches = (props) => {
             Matches
           </button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li className="nav-item" role="presentation">
           <button
-            class="nav-link links_items"
+            className="nav-link links_items"
             id="profile-tab"
             data-bs-toggle="tab"
             data-bs-target="#profile"
@@ -62,9 +69,9 @@ const Matches = (props) => {
             Grupos
           </button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li className="nav-item" role="presentation">
           <button
-            class="nav-link links_items"
+            className="nav-link links_items"
             id="contact-tab"
             data-bs-toggle="tab"
             data-bs-target="#contact"
@@ -77,14 +84,14 @@ const Matches = (props) => {
           </button>
         </li>
       </ul>
-      <div class="tab-content" id="myTabContent">
+      <div className="tab-content" id="myTabContent">
         <div
-          class="tab-pane fade show active"
+          className="tab-pane fade show active"
           id="home"
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <div className="div_personas_matches">
+          <div className="div_personas_matches d-flex flex-wrap">
             {aMatchesUser.map((match, index) => (
               <div
                 key={index}
@@ -95,15 +102,15 @@ const Matches = (props) => {
                   alt=""
                   src={`/images/${match.photo}`}
                 />
-                <label className="position-absolute label_nombre_matches text-tarjetas fw-bold">
-                  {match.name}
-                </label>
+                <p className="position-absolute label_nombre_matches text-tarjetas shadow fw-bold">
+                  {recortarNombre(match.name)}
+                </p>
               </div>
             ))}
           </div>
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="profile"
           role="tabpanel"
           aria-labelledby="profile-tab"
@@ -111,7 +118,7 @@ const Matches = (props) => {
           <h6 className="mt-3">No hay grupos para mostrar</h6>
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="contact"
           role="tabpanel"
           aria-labelledby="contact-tab"
@@ -119,7 +126,7 @@ const Matches = (props) => {
           <h6 className="mt-3">No hay grupos para mostrar</h6>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

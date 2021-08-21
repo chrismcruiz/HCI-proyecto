@@ -280,7 +280,7 @@ const App = () => {
     )
   }
   return (
-    <div>
+    <div className="d-flex">
       <Router>
         <Switch>
           <Route path="/home">

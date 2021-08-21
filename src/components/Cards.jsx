@@ -227,7 +227,7 @@ function Cards(props) {
                   ref={div_datos_persona}
                 >
                   <h3 className="m-0 d-flex mb-2">
-                    {user.name} -
+                    {user.name} <span className="mx-3">-</span>
                     <p className="ml-4 font-weight-normal">
                       {calcularEdad(user.birthday)}
                     </p>
@@ -256,7 +256,7 @@ function Cards(props) {
         ))}
       </div>
       {/* Botones */}
-      <div className="buttons-container pt-5">
+      <div className="buttons-container mt-5">
         <div className="buttons d-flex justify-content-center">
           <IconButton onClick={() => swipe("left")}>
             <CloseIcon className="buttons__close" fontSize="large" />
@@ -271,9 +271,11 @@ function Cards(props) {
           Deslizaste a la {lastDirection}
         </h2>
       ) : (
-        <h2 className="infoText">
-          ¡Desliza una tarjeta o presiona un botón para comenzar!
-        </h2>
+        <div className="mt-3 d-flex justify-content-center align-items-center">
+          <p className="infoText">
+            ¡Desliza una tarjeta o presiona un botón para comenzar!
+          </p>
+        </div>
       )}
     </div>
   );
