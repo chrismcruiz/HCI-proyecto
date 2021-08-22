@@ -104,7 +104,7 @@ function Cards(props) {
   };
 
   const mostrarMatch = () => {
-    setTimeout(function () {
+    setTimeout(() => {
       setMatches(true);
     }, 500);
   };
@@ -187,10 +187,10 @@ function Cards(props) {
   }
 
   const quitarMatch = () => {
-    setTimeout(function () {
+    setTimeout(() => {
       setMatches(false);
     }, 1800);
-    setTimeout(function () {
+    setTimeout(() => {
       window.location.reload();
     }, 1100);
   };

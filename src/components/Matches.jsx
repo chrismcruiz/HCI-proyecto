@@ -95,16 +95,18 @@ const Matches = (props) => {
             {aMatchesUser.map((match, index) => (
               <div
                 key={index}
-                className="div_imagen_personas_matches position-relative m-2 d-inline-block"
+                className="div_imagen_personas_matches position-relative mx-2 mt-2 mb-4 d-inline-block"
               >
                 <img
                   className="imagen_personas_matches rounded-2"
                   alt=""
                   src={`/images/${match.photo}`}
                 />
-                <p className="position-absolute label_nombre_matches text-tarjetas shadow fw-bold">
-                  {recortarNombre(match.name)}
-                </p>
+                <div className="d-flex justify-content-center">
+                  <p className="label_nombre_matches text-tarjetas shadow fw-bold">
+                    {recortarNombre(match.name)}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
