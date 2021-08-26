@@ -3,6 +3,7 @@ import { Input, SubmitButton } from "./accountBox/common";
 import { filtrarUser, recorrerObjeto } from "../utils/Utils";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
+import CloseSession from "./CloseSession";
 
 const EditProfile = (props) => {
   props = props.props;
@@ -102,7 +103,6 @@ const EditProfile = (props) => {
             placeholder="Añade una descripción breve de tí..."
             value={editDescription}
             onChange={onTextboxChangeUpdateDescription}
-            style={{ height: "100px" }}
           ></textarea>
           <label className="label_inputs" htmlFor="description">
             Añade una breve descripción tuya...
@@ -191,14 +191,7 @@ const EditProfile = (props) => {
           Guardar
         </SubmitButton>
       </form>
-      <div className="d-flex justify-content-center fondo-blanco pt-4">
-        <p
-          className="text-danger font-weight-bold h4 m-0 py-0 pointer"
-          onClick={props.logOut}
-        >
-          Cerrar sesion
-        </p>
-      </div>
+      <CloseSession />
     </div>
   );
 };

@@ -27,7 +27,7 @@ const Sidebar = (props) => {
               alt=""
               src={`/images/${usr.photo}`}
             />
-            <p className="ms-3 m-0 text-titulos-1 texto-blanco">{usr.name}</p>
+            <p className="ms-3 m-0 text-titulos-1 texto-negro">{usr.name}</p>
           </div>
           <div>
             <CreateIcon
