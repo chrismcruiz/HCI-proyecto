@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   BoldLink,
   BoxContainer,
-  Input,
+  // Input,
   MutedLink,
   SubmitButton,
 } from "./common";
@@ -70,7 +70,7 @@ export const LoginForm = (props) => {
         style={{ width: "100%", display: "flex", flexDirection: "column" }}
       >
         <div className="form-floating mb-2">
-          <Input
+          <input
             className="form-control"
             id="email"
             type="email"
@@ -79,13 +79,13 @@ export const LoginForm = (props) => {
             value={signInEmail}
             onChange={onTextboxChangeSignInEmail}
           />
-          <label className="label_inputs" htmlFor="email">
+          <label className="label-color" htmlFor="email">
             Email
           </label>
         </div>
 
         <div className="form-floating mb-2">
-          <Input
+          <input
             id="password"
             className="form-control"
             type="password"
@@ -94,7 +94,7 @@ export const LoginForm = (props) => {
             value={signInPassword}
             onChange={onTextboxChangeSignInPassword}
           />
-          <label className="label_inputs" htmlFor="password">
+          <label className="label-color" htmlFor="password">
             Contraseña
           </label>
         </div>

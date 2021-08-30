@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const signUpTemplateCopy = require("../models/SingUp");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 let path = require("path");
@@ -27,13 +26,11 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage, fileFilter });
 
-router.post("/signup", upload.single("photo"), async (req, res, next) => {
+router.post("/signup", upload.single("photo"), async (req, res) => {
   const { body, file } = req;
-  const { name, birthday, gender, career, password } = body;
+  const { name, email, birthday, gender, career, password } = body;
 
-  let { email } = body;
-
-  let photo = file.filename;
+  let photo = file
 
   if (!name) {
     return res.send({
@@ -65,24 +62,22 @@ router.post("/signup", upload.single("photo"), async (req, res, next) => {
       message: "Error: La carrera no puede ir en blanco.",
     });
   }
+  // if (!photo) {
+  //   return res.send({
+  //     success: false,
+  //     message: "Error: La foto no puede ir en blanco.",
+  //   });
+  // }
   if (!password) {
     return res.send({
       success: false,
       message: "Error: La contraseña no puede ir en blanco.",
     });
   }
-  if (!photo) {
-    return res.send({
-      success: false,
-      message: "Error: La foto no puede ir en blanco.",
-    });
-  }
-
-  email = email.toLowerCase();
 
   users.find(
     {
-      email: email,
+      email: email.toLowerCase(),
     },
     (err, previousUsers) => {
       if (err) {
@@ -93,7 +88,7 @@ router.post("/signup", upload.single("photo"), async (req, res, next) => {
       } else if (previousUsers.length > 0) {
         return res.send({
           success: false,
-          message: "Error: La cuenta ya existe",
+          message: "Error: Ya existe una cuenta registrada con ese correo",
         });
       }
 
@@ -104,7 +99,7 @@ router.post("/signup", upload.single("photo"), async (req, res, next) => {
       newUser.gender = gender;
       newUser.career = career;
       newUser.birthday = birthday;
-      newUser.photo = photo;
+      newUser.photo = photo ? photo.filename : gender === 'masculino' ? 'male_icon.png' : gender === 'femenino' ? 'female_icon.png' : 'user_icon.png';
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
         if (err) {

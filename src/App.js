@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/App.css";
 import Home from "./pages/Home";
 import "whatwg-fetch";

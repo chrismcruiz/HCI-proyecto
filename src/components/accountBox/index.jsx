@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LoginForm } from "./loginForm.jsx";
+import { LoginForm } from "./LoginForm";
+import { SignupForm } from "./SignUpForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
-import { SignupForm } from "./signupForm";
 
 const BoxContainer = styled.div`
   width: 600px;
@@ -26,7 +26,6 @@ const TopContainer = styled.div`
   justify-content: flex-end;
   padding: 0 1.8em;
   padding-bottom: 5em;
-  
 `;
 
 const BackDrop = styled(motion.div)`
@@ -103,7 +102,6 @@ const expandingTransition = {
 };
 
 export function AccountBox(props) {
-
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState("signin");
 
