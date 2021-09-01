@@ -21,8 +21,6 @@ export const LoginForm = () => {
 
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
   const [signInError, setSignInError] = useState("");
-  const [token, setToken] = useState("");
-  const [idUser, setIdUser] = useState("");
 
   // Función para loguearse y crear un token en el LocalStorage
 
@@ -37,8 +35,6 @@ export const LoginForm = () => {
             idUser: response.data.id_user,
           })
           setSignInError("");
-          setToken(response.data.token);
-          setIdUser(response.data.id_user);
           window.location.reload()
           setIsLoading(false);
         } else {
@@ -47,8 +43,8 @@ export const LoginForm = () => {
         }
       })
       .catch((error) => {
-        setIsLoading(false);
         console.log(error);
+        setIsLoading(false);
       });
   };
 

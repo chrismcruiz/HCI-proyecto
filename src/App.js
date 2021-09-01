@@ -32,39 +32,36 @@ const App = () => {
   const [user, setUser] = useState({});
 
   // Revisar que estas peticiones estén bien hechas
-  useEffect(() => {
+  useEffect(async () => {
     const obj = getFromStorage("the_main_app");
 
     if (obj && obj.token) { // si hay token verifico el token en la bd y luego obtengo la info del usuario
       const { token, idUser } = obj;
       // verify token
-      axios
-        .get("http://localhost:4000/app/verify?token=" + token)
-        .then((response) => {
-          if (response.status === 200) {
-            setTokencito(token);
-            setIdUsuario(response.data.idUsuario);
-            axios
-              .post("http://localhost:4000/app/getInfo", {
-                _id: idUsuario,
-              })
-              .then((response) => {
-                setUser(response.data[0])
-                setIsLoading(false);
-              }, (error) => {
-                console.log(error);
-                setIsLoading(false);
-              });
+      try{
+        const response = await axios.get("http://localhost:4000/app/verify?token=" + token)
+        if (response.status === 200) {
+          setTokencito(token);
+          setIdUsuario(idUser);
+          try {
+            const dataUser = await axios.post("http://localhost:4000/app/getInfo", {
+              _id: idUser,
+            })
+            if (dataUser.status === 200) setUser(dataUser.data[0])
+            setIsLoading(false)
+          } catch (err) {
+            console.log(err)
           }
-        })
-        .catch((error) => {
-          console.log(error);
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoading(false)
-    }
-  }, [idUsuario, tokencito]); // revisar esto
+        } else {
+          console.log(response)
+          setIsLoading(false)
+        }
+      } catch (err) {
+        console.log(err)
+        setIsLoading(false)
+      }
+    } else setIsLoading(false)
+  }, []);  // depender de tokencito ? ( renderiza 2 veces )
 
   // Si está cargando muestro el spinner
   if (isLoading) {
@@ -86,7 +83,7 @@ const App = () => {
 
   // Si no está cargando y HAY token muestro la vista home o admin dependiendo del rol
   return (
-    <div className="d-flex">
+    <>
       <Router>
         <Switch>
           <Route path="/home">
@@ -106,7 +103,7 @@ const App = () => {
           <Route path="/">{tokencito ? <Redirect to="/home" /> : null}</Route>
         </Switch>
       </Router>
-    </div>
+    </>
   );
 };
 
