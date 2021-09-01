@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./css/App.css";
 import Home from "./pages/Home";
-import "whatwg-fetch";
-import { getFromStorage, setInStorage } from "./utils/storage";
+import { getFromStorage } from "./utils/storage";
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,42 +27,44 @@ const AppContainer = styled.div`
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState("");
-  const [idUser, setIdUser] = useState("");
-  const [user, setUser] = useState([]);
+  const [tokencito, setTokencito] = useState("");
+  const [idUsuario, setIdUsuario] = useState("");
+  const [user, setUser] = useState({});
 
   // Revisar que estas peticiones estén bien hechas
   useEffect(() => {
     const obj = getFromStorage("the_main_app");
-    if (obj && obj.token) {
+
+    if (obj && obj.token) { // si hay token verifico el token en la bd y luego obtengo la info del usuario
       const { token, idUser } = obj;
       // verify token
-      fetch("http://localhost:4000/app/verify?token=" + token) // TODO: cambiar a axios
-        .then((res) => res.json())
-        .then((json) => {
-          if (json.success) {
-            setToken(token);
-            setIdUser(idUser);
-            setIsLoading(false);
-          } else {
-            setIsLoading(false);
+      axios
+        .get("http://localhost:4000/app/verify?token=" + token)
+        .then((response) => {
+          if (response.status === 200) {
+            setTokencito(token);
+            setIdUsuario(response.data.idUsuario);
+            axios
+              .post("http://localhost:4000/app/getInfo", {
+                _id: idUsuario,
+              })
+              .then((response) => {
+                setUser(response.data[0])
+                setIsLoading(false);
+              }, (error) => {
+                console.log(error);
+                setIsLoading(false);
+              });
           }
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsLoading(false);
         });
     } else {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-
-    const fetchUser = async () => {
-      const req = await axios.post("http://localhost:4000/app/getInfo", {
-        _id: idUser,
-      });
-      setUser(req.data[0]);
-    };
-
-    if (token) {
-      fetchUser();
-    }
-  }, [idUser, token]); // revisar esto
+  }, [idUsuario, tokencito]); // revisar esto
 
   // Si está cargando muestro el spinner
   if (isLoading) {
@@ -75,7 +76,7 @@ const App = () => {
   }
 
   // Si no hay token muestro los formularios (Login - Register)
-  if (!token) {
+  if (!tokencito) {
     return (
       <AppContainer>
         <AccountBox />
@@ -92,17 +93,17 @@ const App = () => {
             {user.admin ? (
               <Redirect to="/admin" />
             ) : (
-              <Home props={{ token, idUser }} />
+              <Home userData={user} token={tokencito} idUser={idUsuario} />
             )}
           </Route>
           <Route path="/admin">
             {!user.admin ? (
               <Redirect to="/home" />
             ) : (
-              <Admin props={{ token, idUser }} />
+              <Admin props={{ user, tokencito, idUsuario }} />
             )}
           </Route>
-          <Route path="/">{token ? <Redirect to="/home" /> : ""}</Route>
+          <Route path="/">{tokencito ? <Redirect to="/home" /> : null}</Route>
         </Switch>
       </Router>
     </div>

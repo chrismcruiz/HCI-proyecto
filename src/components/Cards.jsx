@@ -10,15 +10,14 @@ import { filtrarUser, recorrerObjeto } from "../utils/Utils";
 import { CircularProgress } from "@material-ui/core";
 // import Buttons from "../components/Buttons"
 
-function Cards(props) {
-  props = props.props;
+function Cards({ userData, token, idUser }) {
+  console.log(userData)
+  // console.log(idUser)
 
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const peopleLiked = recorrerObjeto(
-    filtrarUser(props.users, props.idUser)
-  ).liked;
   const [matches, setMatches] = useState(false);
+  const peopleLiked = userData.liked;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,19 +36,19 @@ function Cards(props) {
     fetchData();
   }, []);
 
-  const limpiarUsers = (users) => {
-    for (let i = 0; i < users.length; i++) {
-      if (peopleLiked.includes(users[i]._id)) {
-        users.splice(i, 1);
-        continue;
-      } else if (users[i]._id === props.idUser) {
-        users.splice(i, 1);
-        continue;
-      }
-    }
-  };
+  // const limpiarUsers = (users) => {
+  //   for (let i = 0; i < users.length; i++) {
+  //     if (peopleLiked.includes(users[i]._id)) {
+  //       users.splice(i, 1);
+  //       continue;
+  //     } else if (users[i]._id === idUser) {
+  //       users.splice(i, 1);
+  //       continue;
+  //     }
+  //   }
+  // };
 
-  limpiarUsers(users);
+  // limpiarUsers(users);
 
   let db = users;
   const alreadyRemoved = [];
@@ -69,7 +68,7 @@ function Cards(props) {
     //console.log('removing: ' + nameToDelete)
     alreadyRemoved.push(nameToDelete);
     if (direction === "right") {
-      enviarLike(props.idUser, nameToDelete);
+      enviarLike(idUser, nameToDelete);
     }
   };
 
@@ -170,14 +169,6 @@ function Cards(props) {
     botton_hover.current.className = "boton_volver_card d-none";
   }
 
-  if (isLoading) {
-    return (
-      <div className="vertical-center">
-        <CircularProgress color="primary" size={60} />
-      </div>
-    );
-  }
-
   if (users.length === 0) {
     return (
       <div className="infoText d-inline-block d-flex justify-content-center align-items-center">
@@ -204,6 +195,14 @@ function Cards(props) {
     );
   }
 
+    // if (isLoading) {
+  //   return (
+  //     <div className="vertical-center">
+  //       <CircularProgress color="primary" size={60} />
+  //     </div>
+  //   );
+  // }
+  
   return (
     <div className="card__container position-relative">
       <div className="div_contenedor_personas">

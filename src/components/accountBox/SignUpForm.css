@@ -8,4 +8,15 @@
 
 .optional {
   font-size: 0.8em;
+  letter-spacing: 1px;
+}
+
+.cool {
+  background-image: none !important;
+  /* padding-right: 0 !important; */
+}
+
+.resetForm {
+  margin: 0 !important;
+  padding: 0 !important;
 }

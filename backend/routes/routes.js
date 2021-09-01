@@ -35,31 +35,31 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
   if (!name) {
     return res.send({
       success: false,
-      message: "Error: El nombre no puede ir en blanco.",
+      message: "El nombre no puede ir en blanco.",
     });
   }
   if (!email) {
     return res.send({
       success: false,
-      message: "Error: El email no puede ir en blanco.",
+      message: "El correo electrónico no puede ir en blanco.",
     });
   }
   if (!birthday) {
     return res.send({
       success: false,
-      message: "Error: La fecha de nacimiento no puede ir en blanco.",
+      message: "La fecha de nacimiento no puede ir en blanco.",
     });
   }
   if (!gender) {
     return res.send({
       success: false,
-      message: "Error: El género no puede ir en blanco.",
+      message: "El género no puede ir en blanco.",
     });
   }
   if (!career) {
     return res.send({
       success: false,
-      message: "Error: La carrera no puede ir en blanco.",
+      message: "La carrera no puede ir en blanco.",
     });
   }
   // if (!photo) {
@@ -71,7 +71,7 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
   if (!password) {
     return res.send({
       success: false,
-      message: "Error: La contraseña no puede ir en blanco.",
+      message: "La contraseña no puede ir en blanco.",
     });
   }
 
@@ -88,7 +88,7 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
       } else if (previousUsers.length > 0) {
         return res.send({
           success: false,
-          message: "Error: Ya existe una cuenta registrada con ese correo",
+          message: "¡Ya existe una cuenta registrada con ese correo!",
         });
       }
 
@@ -126,17 +126,17 @@ router.post("/signin", (req, res, next) => {
   if (!email) {
     return res.send({
       success: false,
-      message: "Error: El email no puede ir en blanco.",
+      message: "El correo electrónico no puede ir en blanco.",
     });
   }
   if (!password) {
     return res.send({
       success: false,
-      message: "Error: La contraseña no puede ir en blanco.",
+      message: "La contraseña no puede ir en blanco.",
     });
   }
 
-  email = email.toLowerCase();
+  email = email.trim().toLowerCase();
 
   users.find(
     {
@@ -152,7 +152,7 @@ router.post("/signin", (req, res, next) => {
       if (users.length != 1) {
         return res.send({
           success: false,
-          message: "Error: Invalido",
+          message: "El correo electrónico ingresado no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.",
         });
       }
 
@@ -160,7 +160,7 @@ router.post("/signin", (req, res, next) => {
       if (!user.validPassword(password)) {
         return res.send({
           success: false,
-          message: "Error: Invalido",
+          message: "La contraseña ingresada no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.",
         });
       }
 
@@ -212,7 +212,8 @@ router.get("/verify", (req, res, next) => {
       } else {
         return res.send({
           success: true,
-          message: "Correcto",
+          idUsuario: sessions[0].userId,
+          message: "Correctito!",
         });
       }
     }
@@ -262,16 +263,16 @@ router.get("/users", (req, res) => {
   });
 });
 
-// router.get('/users/sesion', (req, res) => { // downloading data from our database
-//     const sessions = req.body;
-//     UserSession.find((err, data) => {
-//         if (err){
-//             res.status(500).send(err) // 500 means 'internal server error'
-//         } else {
-//             res.status(200).send(data) // 200 means 'success'
-//         }
-//     })
-// })
+router.get('/users/sesion', (req, res) => { // downloading data from our database
+    const sessions = req.body;
+    UserSession.find((err, data) => {
+        if (err){
+            res.status(500).send(err) // 500 means 'internal server error'
+        } else {
+            res.status(200).send(data) // 200 means 'success'
+        }
+    })
+})
 
 router.post("/liked", (req, res, next) => {
   const { body } = req;
@@ -361,27 +362,27 @@ router.delete("/deletesessions", (req, res, next) => {
   });
 });
 
-router.post("/users/match", (req, res) => {
-  // downloading data from our database
+// router.post("/users/match", (req, res) => {
+//   // downloading data from our database
 
-  const { body } = req;
-  const { _id } = body;
+//   const { body } = req;
+//   const { _id } = body;
 
-  users.find(
-    {
-      _id: { $in: _id },
-    },
-    (err, data) => {
-      if (err) {
-        res.status(500).send(err); // 500 means 'internal server error'
-      } else {
-        var aMatches = data[0].matches;
-        aMatches.shift();
-        res.status(200).send(aMatches);
-      }
-    }
-  );
-});
+//   users.find(
+//     {
+//       _id: { $in: _id },
+//     },
+//     (err, data) => {
+//       if (err) {
+//         res.status(500).send(err); // 500 means 'internal server error'
+//       } else {
+//         var aMatches = data[0].matches;
+//         aMatches.shift();
+//         res.status(200).send(aMatches);
+//       }
+//     }
+//   );
+// });
 
 router.post("/matches", (req, res) => {
   // downloading data from our database

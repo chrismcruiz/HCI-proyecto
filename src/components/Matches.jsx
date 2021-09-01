@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-const Matches = (props) => {
-  props = props.props;
+const Matches = (userData) => {
+
 
   const [aMatchesUser, setMatchesUser] = useState([]);
 
   useEffect(() => {
     const matches = async () => {
       const req = await axios.post("http://localhost:4000/app/users/match", {
-        _id: props.idUser,
+        _id: userData.idUser,
       });
 
       if (req.data) {
