@@ -40,7 +40,7 @@ export const SignupForm = () => {
   const handleCloseInvalid = () => setShowInvalid(false); // Dejar de mostrar el modal de formulario inválido
 
   // Función para registrarse y almacenar los datos en la BD.
-  const onSignUp = async (values) => {
+  const onSignUp = (values) => {
     console.log(values)
     setIsLoading(true);
 
@@ -50,7 +50,7 @@ export const SignupForm = () => {
       formData.append(key, values[key]);
     }
 
-    await axios
+    axios
       .post("http://localhost:4000/app/signup/", formData)
       .then((response) => {
         if (response.status === 200 && response.data.success) {
@@ -123,7 +123,7 @@ export const SignupForm = () => {
               <div className="row">
                 {/****************** Términos y condiciones ******************/}
                 <div className="col-11 form-group form-check">
-                  <Field id="terms" type="checkbox" name="terms" className={`form-check-input ' ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
+                  <Field id="terms" type="checkbox" name="terms" className={`form-check-input ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
                   <label htmlFor="terms" className="form-check-label">Acepto los términos y condiciones</label>
                   <ErrorMessage name="terms" component="div" className="invalid-feedback" />
                 </div>

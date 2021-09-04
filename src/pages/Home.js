@@ -1,28 +1,27 @@
 import React from "react";
+import Navbar from '../components/Navbar'
 import Cards from '../components/Cards'
 import Sidebar from "../components/Sidebar";
+import './Home.css'
 // import Footer from "../components/Footer"
 
-const Home = ({ userData, token, idUser }) => {
+const Home = ({ userData, idUser }) => {
   return (
     <div className="grid-home">
-      <div className="grid-row-superior border-bottom">
-        <nav class="navbar navbar-light bg-light">
-          <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">Trade Urself</span>
-          </div>
-        </nav>
+      <div className="grid-row-superior">
+        {/* Barra superior */}
+        <Navbar />
       </div>
-      <div className='container mt-4 mb-4 grid-row-inferior'>
+      <div className='container grid-row-inferior'>
         <div className='row'>
-          <div className='col-4 px-0 border'>
+          <div className='px-0 bordes me-5 ancho_chr-3_5'>
             {/* Menú lateral */}
-            <Sidebar token={token} idUser={idUser} userData={userData} />
+            <Sidebar userData={userData} idUser={idUser} />
           </div>
-          <div className='col-8 px-0 border-top border-end border-bottom'>
-            <div className='seccion_tarjetas d-flex justify-content-center'>
+          <div className='px-0 bordes ancho_chr-7_5'>
+            <div className='seccion_tarjetas'>
               {/* Tarjetas */}
-              <Cards token={token} idUser={idUser} userData={userData} />
+              <Cards idUser={idUser} userData={userData} />
             </div>
           </div>
         </div>

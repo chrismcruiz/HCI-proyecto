@@ -264,14 +264,14 @@ router.get("/users", (req, res) => {
 });
 
 router.get('/users/sesion', (req, res) => { // downloading data from our database
-    const sessions = req.body;
-    UserSession.find((err, data) => {
-        if (err){
-            res.status(500).send(err) // 500 means 'internal server error'
-        } else {
-            res.status(200).send(data) // 200 means 'success'
-        }
-    })
+  const sessions = req.body;
+  UserSession.find((err, data) => {
+    if (err) {
+      res.status(500).send(err) // 500 means 'internal server error'
+    } else {
+      res.status(200).send(data) // 200 means 'success'
+    }
+  })
 })
 
 router.post("/liked", (req, res, next) => {
@@ -303,34 +303,60 @@ router.post("/liked", (req, res, next) => {
   );
 });
 
+
 router.post("/setmatch", (req, res, next) => {
   const { body } = req;
-  const { idUser, idPersonLiked } = body;
+  const peopleToUpdate = body;
 
-  users.updateOne(
-    {
-      _id: idUser,
-    },
-    {
-      $addToSet: {
-        matches: idPersonLiked,
-      },
-    },
-    null,
-    (err, sessions) => {
-      if (err) {
-        return res.send({
-          sucess: false,
-          message: "Error: Server error",
-        });
+  users.bulkWrite(
+    peopleToUpdate.map((person) =>
+    ({
+      updateOne: {
+        filter:
+        {
+          _id: person._id
+        },
+        update: {
+          $addToSet:
+          {
+            matches: person.liked,
+          },
+        }
       }
-      return res.send({
-        success: true,
-        message: "Correcto",
-      });
-    }
-  );
+    })
+    )
+  )
 });
+
+
+// router.post("/setmatch", (req, res, next) => {
+//   const { body } = req;
+//   const peopleToUpdate = body;
+
+//   users.updateMany(
+//     {
+//       _id: idUser,
+//     },
+//     {
+//       $addToSet: {
+//         matches: idPersonLiked,
+//       },
+//     },
+//     null,
+//     (err, sessions) => {
+//       if (err) {
+//         return res.send({
+//           sucess: false,
+//           message: "Error: Server error",
+//         });
+//       }
+//       return res.send({
+//         success: true,
+//         message: "Correcto",
+//       });
+//     }
+//   );
+// });
 
 router.delete("/deleteusers", (req, res, next) => {
   users.deleteMany({}, null, (err, sessions) => {
@@ -362,43 +388,36 @@ router.delete("/deletesessions", (req, res, next) => {
   });
 });
 
-// router.post("/users/match", (req, res) => {
-//   // downloading data from our database
 
-//   const { body } = req;
-//   const { _id } = body;
-
-//   users.find(
-//     {
-//       _id: { $in: _id },
-//     },
-//     (err, data) => {
-//       if (err) {
-//         res.status(500).send(err); // 500 means 'internal server error'
-//       } else {
-//         var aMatches = data[0].matches;
-//         aMatches.shift();
-//         res.status(200).send(aMatches);
-//       }
-//     }
-//   );
-// });
-
-router.post("/matches", (req, res) => {
+router.get("/matches", (req, res) => {
   // downloading data from our database
 
-  const { body } = req;
-  const { matches } = body;
+  const { query } = req;
+  const { _id } = query;
 
   users.find(
     {
-      _id: { $in: matches },
+      _id: _id,
     },
-    (err, data) => {
+    (err, user) => {
       if (err) {
-        res.status(500).send(err); // 500 means 'internal server error'
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+
+      if (user.length != 1) {
+        return res.send({
+          sucess: false,
+          message: "Error: Invalido",
+        });
       } else {
-        res.status(200).send(data);
+        return res.send({
+          success: true,
+          matches: user[0].matches,
+          message: "Correctito!",
+        });
       }
     }
   );
@@ -412,7 +431,31 @@ router.post("/getInfo", (req, res) => {
 
   users.find(
     {
-      _id: { $in: _id },
+      _id: { 
+        $in: _id 
+      },
+    },
+    (err, data) => {
+      if (err) {
+        res.status(500).send(err); // 500 means 'internal server error'
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  );
+});
+
+router.post("/getInfoMatches", (req, res) => {
+  // downloading data from our database
+
+  const { body } = req;
+  const { ids } = body;
+
+  users.find(
+    {
+      _id: { 
+        $in: ids 
+      },
     },
     (err, data) => {
       if (err) {
@@ -430,8 +473,6 @@ router.put("/update", upload.single("photo"), async (req, res) => {
   const { body, file } = req;
   const { _id, name, birthday, description, career, photo } = body;
 
-  let { email } = body;
-
   let photoxd = "";
 
   if (file === undefined) {
@@ -439,8 +480,6 @@ router.put("/update", upload.single("photo"), async (req, res) => {
   } else {
     photoxd = file.filename;
   }
-
-  email = email.toLowerCase();
 
   users.updateOne(
     {

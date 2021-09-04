@@ -35,7 +35,7 @@ export const LoginForm = () => {
             idUser: response.data.id_user,
           })
           setSignInError("");
-          window.location.reload()
+          window.location = '/home'
           setIsLoading(false);
         } else {
           setSignInError(response.data.message);

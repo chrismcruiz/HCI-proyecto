@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./css/App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import Home from "./pages/Home";
 import { getFromStorage } from "./utils/storage";
 import {
@@ -90,14 +91,14 @@ const App = () => {
             {user.admin ? (
               <Redirect to="/admin" />
             ) : (
-              <Home userData={user} token={tokencito} idUser={idUsuario} />
+              <Home userData={user} idUser={idUsuario} />
             )}
           </Route>
           <Route path="/admin">
             {!user.admin ? (
               <Redirect to="/home" />
             ) : (
-              <Admin props={{ user, tokencito, idUsuario }} />
+              <Admin props={{ user, idUsuario }} />
             )}
           </Route>
           <Route path="/">{tokencito ? <Redirect to="/home" /> : null}</Route>

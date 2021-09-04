@@ -1,0 +1,14 @@
+.icono {
+    margin: 0 1em !important; 
+}
+.navbar__icons {
+    /* margin-right: 2em; */
+}
+
+.icon__color {
+    color: black !important;
+}
+
+.borde_inferior {
+    border-bottom: 1px solid #dee2e6;
+}

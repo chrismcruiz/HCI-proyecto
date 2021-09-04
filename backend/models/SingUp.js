@@ -38,11 +38,9 @@ const signUpTemplate = new mongoose.Schema({
     },
     matches: {
         type: Array,
-        default: ''
     },
     liked: {
         type: Array,
-        default: ''
     },
     description: {
         type: String,

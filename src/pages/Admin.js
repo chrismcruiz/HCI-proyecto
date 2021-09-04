@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { filtrarUser, recorrerObjeto } from "../utils/Utils";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
-import TablaUsuarios from "../components/admin/TablaUsuarios";
-import Sidebar from "../components/admin/Sidebar";
-import LandingPage from "../components/admin/LandingPage";
+import TablaUsuariosAdmin from "../components/admin/TablaUsuariosAdmin";
+import SidebarAdmin from "../components/admin/SidebarAdmin";
+import LandingPageAdmin from "../components/admin/LandingPageAdmin";
 
 function Admin(props) {
   props = props.props;
@@ -73,16 +73,16 @@ function Admin(props) {
     <div className="container">
       <div className="row">
         <div className="col-3 px-0">
-          <Sidebar />
+          <SidebarAdmin />
         </div>
         {/* col-9 */}
         {formShow ? (
           <div className="col-9 px-2 div_contenedor_informe p-5 fondo-blanco">
-            <TablaUsuarios />
+            <TablaUsuariosAdmin />
           </div>
         ) : (
           <div className="col-9 px-0 fondo-blanco div_contenedor_informe p-5 text-center position-relative">
-            <LandingPage admin={adminInfo} />
+            <LandingPageAdmin admin={adminInfo} />
           </div>
         )}
       </div>

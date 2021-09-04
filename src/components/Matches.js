@@ -1,41 +1,29 @@
 import React, { useState, useEffect } from "react";
-
+import 'bootstrap/dist/js/bootstrap.min.js'
 import axios from "axios";
 
-const Matches = (userData) => {
+const Matches = ({ userData }) => {
+  // const [matchesUser, setMatchesUser] = useState([]);
+  const [tarjetas, setTarjetas] = useState([])
 
-
-  const [aMatchesUser, setMatchesUser] = useState([]);
-
-  useEffect(() => {
-    const matches = async () => {
-      const req = await axios.post("http://localhost:4000/app/users/match", {
-        _id: userData.idUser,
-      });
-
-      if (req.data) {
-        let aMatches = req.data;
-        const req2 = await axios.post("http://localhost:4000/app/matches", {
-          matches: aMatches,
-        });
-        if (req2.data) {
-          setMatchesUser(req2.data);
-        }
+  // Esto podría no ser necesario!
+  useEffect(async () => {
+    const response = await axios.get("http://localhost:4000/app/matches?_id=" + userData._id);
+    // console.log(response.data.matches)
+    if (response.status === 200 && response.data.matches.length > 0) {
+      const request = await axios.post('http://localhost:4000/app/getInfoMatches', {ids:response.data.matches})
+      if(request.status === 200) {
+        setTarjetas(request.data)
       }
-    };
-    matches();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }
+  }, [tarjetas]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const recortarNombre = (name) => {
     return name.split(" ")[0];
   };
+
   return (
     <>
-      {/* <div className="d-flex justify-content-between">
-                <div onClick={mostrarMisMatch} className="p-2 bd-highlight pointer">Matches</div>
-                <div className="p-2 bd-highlight pointer">Mis grupos</div>
-            </div>  */}
-
       <ul
         className="nav nav-tabs mb-3 d-flex justify-content-between"
         id="myTab"
@@ -92,7 +80,7 @@ const Matches = (userData) => {
           aria-labelledby="home-tab"
         >
           <div className="div_personas_matches d-flex flex-wrap">
-            {aMatchesUser.map((match, index) => (
+            {tarjetas.map((tarjeta, index) => (
               <div
                 key={index}
                 className="div_imagen_personas_matches position-relative mx-2 mt-2 mb-4 d-inline-block"
@@ -100,11 +88,11 @@ const Matches = (userData) => {
                 <img
                   className="imagen_personas_matches rounded-2"
                   alt=""
-                  src={`/images/${match.photo}`}
+                  src={`/images/${tarjeta.photo}`}
                 />
                 <div className="d-flex justify-content-center">
                   <p className="label_nombre_matches text-tarjetas shadow fw-bold">
-                    {recortarNombre(match.name)}
+                    {recortarNombre(tarjeta.name)}
                   </p>
                 </div>
               </div>

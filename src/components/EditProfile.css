@@ -1,0 +1,15 @@
+.foto_input {
+    width: 0 !important;
+}
+
+.div_imagen_edit_perfil {
+    width: 100%;
+    height: 100%;
+}
+
+.imagen_persona_perfil {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    /* border-radius: 50%; */
+  }

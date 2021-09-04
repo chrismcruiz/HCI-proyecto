@@ -1,5 +1,5 @@
 import * as yup from "yup";
-
+// Esquema de validación formulario de registro
 export const SignUpFormValidation = yup.object().shape({
   name: yup.string().min(2, 'El nombre debe contener al menos 2 caracteres').max(30, 'El nombre debe contener máximo 30 caracteres').required("Rellena este campo"),
   email: yup.string().email("Correo inválido").required("Rellena este campo"),
@@ -20,8 +20,16 @@ export const SignUpFormValidation = yup.object().shape({
     .boolean()
     .oneOf([true], "Debes aceptar los términos y condiciones"),
 });
-
+// Esquema de validación formulario de logueo
 export const LoginFormValidation = yup.object().shape({
   email: yup.string().email("Correo inválido"),
   password: yup.string()
+});
+// Esquema de validación formulario de editar perfil
+export const EditFormValidation = yup.object().shape({
+  description: yup.string().max(300, 'La descripción debe contener máximo 300 caracteres'),
+  photo: yup.mixed(),
+  name: yup.string().min(2, 'El nombre debe contener al menos 2 caracteres').max(30, 'El nombre debe contener máximo 30 caracteres').required("Rellena este campo"),
+  birthday: yup.date(),
+  career: yup.string(),
 });
