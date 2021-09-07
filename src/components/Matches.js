@@ -16,7 +16,7 @@ const Matches = ({ userData }) => {
         setTarjetas(request.data)
       }
     }
-  }, [tarjetas]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const recortarNombre = (name) => {
     return name.split(" ")[0];
