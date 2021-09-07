@@ -80,13 +80,13 @@ const Cards = ({ userData, idUser }) => {
   const mostrarMatch = () => {
     setTimeout(() => {
       setMatches(true);
-    }, 1000);
+    }, 950);
   };
 
   const quitarMatch = () => {
     setTimeout(() => {
       setMatches(false);
-    }, 1800);
+    }, 2000);
   };
 
 

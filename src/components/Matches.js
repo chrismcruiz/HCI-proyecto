@@ -16,11 +16,7 @@ const Matches = ({ userData }) => {
         setTarjetas(request.data)
       }
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const recortarNombre = (name) => {
-    return name.split(" ")[0];
-  };
+  }, [tarjetas]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -92,7 +88,7 @@ const Matches = ({ userData }) => {
                 />
                 <div className="d-flex justify-content-center">
                   <p className="label_nombre_matches text-tarjetas shadow fw-bold">
-                    {recortarNombre(tarjeta.name)}
+                    {tarjeta.name.split(" ")[0]}
                   </p>
                 </div>
               </div>

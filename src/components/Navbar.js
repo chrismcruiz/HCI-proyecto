@@ -11,6 +11,7 @@ const Navbar = () => {
             <nav className="navbar navbar-light bg-white borde_inferior">
                 <div className="container-fluid">
                     <span className="navbar-brand mb-0 h1 pointer" onClick={() => window.location.reload()}>Trade Urself</span>
+                    {/* <img src="public/logo.jpg" alt="" /> */}
                     <div className="navbar__icons">
                         <IconButton size="small" className="navbar__icons__search icono">
                             <SearchIcon className="icon__color"/>
