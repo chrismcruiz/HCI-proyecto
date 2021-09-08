@@ -1,3 +1,5 @@
+/* Formulario de Logueo */
+
 /* Error Tool Tip Styles*/
 .tool_tip {
     /* font */
@@ -34,3 +36,39 @@
     border-right: 7px solid #fcc2c3;
     left: -15px;
   } */
+
+
+  /* Formulario de Registro */
+
+  .a_hover_registrarse:hover {
+    color: rgb(0, 145, 62) !important;
+  }
+  
+  .a_hover_form_login_registro:hover {
+    color: rgba(200, 200, 200, 0.8) !important;
+  }
+  
+  .optional {
+    font-size: 0.8em;
+    letter-spacing: 1px;
+  }
+  
+  .cool {
+    background-image: none !important;
+    /* padding-right: 0 !important; */
+  }
+  
+  .resetForm {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .label-color {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .inputs_radius {
+    width: max-content !important;
+    height: auto !important;
+    margin-right: 5px;
+  }

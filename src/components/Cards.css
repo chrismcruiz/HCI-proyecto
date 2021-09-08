@@ -63,6 +63,10 @@
     margin-top: 57vh;
   }
   
+  .buttons button:hover {
+    transform: scale(1.05);
+  }
+  
   .buttons .MuiIconButton-root {
     background-color: white;
     padding: 1.8vw;
@@ -162,3 +166,36 @@
     justify-content: center;
 
   }
+
+
+  /* ************************ Alerta Match ******************************** */
+.alert_match {
+  background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, #262626, transparent, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 8vw;
+  font-family: "Dynalight", cursive;
+  animation: reveal 1000ms ease-in-out forwards 200ms,
+    glow 2000ms linear infinite 2000ms;
+  transform: translate(-50%, -50%);
+  top: 38%;
+  left: 50%;
+  position: absolute;
+}
+
+@keyframes reveal {
+  80% {
+    letter-spacing: 8px;
+  }
+  100% {
+    background-size: 300% 300%;
+  }
+}
+@keyframes glow {
+  40% {
+    text-shadow: 0 0 8px #fff;
+  }
+}
+/* *************************************************************************** */

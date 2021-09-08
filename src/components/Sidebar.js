@@ -4,6 +4,7 @@ import Matches from "./Matches";
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from "@material-ui/icons/Create";
 import { Tooltip } from '@material-ui/core';
+import './Sidebar.css'
 
 const Sidebar = ({ userData, idUser }) => {
   const [perfilShow, setPerfilShow] = useState(false);

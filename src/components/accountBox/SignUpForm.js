@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./SignUpForm.css";
+import "./Forms.css";
 import InputField from "./InputField"
 import RadioButtons from "./RadioButtons"
 import SelectField from "./SelectField"

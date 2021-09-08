@@ -108,6 +108,21 @@ const Cards = ({ userData, idUser }) => {
     [users]
   );
 
+  // Clickar tarjeta
+
+  const clickTarjeta = () => {
+    console.log('a')
+    const cardsLeft = users.filter(
+      (person) => !alreadyRemoved.includes(person._id)
+    );
+    if (cardsLeft.length) {
+      const currentCard = cardsLeft[cardsLeft.length - 1]._id; 
+      const index = db.map((person) => person._id).indexOf(currentCard);
+      childRefs[index].current.onClick = () => console.log(`Clickaste la tarjeta número ${index}`)
+    }
+  }
+
+  // Match
   const swiped = (direction, nameToDelete) => {
     if (direction === 'right') {
       setTimeout(() => enviarLike(idUser, nameToDelete), 1000)
@@ -164,7 +179,7 @@ const Cards = ({ userData, idUser }) => {
     <div className="main-contenido">
       <div className="card__container">
         {users.map((character, index) =>
-          <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
+          <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >
             <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
               <h3>{character.name} - {calcularEdad(character.birthday).toString()}</h3>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/js/bootstrap.min.js'
 import axios from "axios";
+import './Matches.css'
 
 const Matches = ({ userData }) => {
   // const [matchesUser, setMatchesUser] = useState([]);

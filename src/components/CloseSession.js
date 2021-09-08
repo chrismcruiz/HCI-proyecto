@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getFromStorage } from "../utils/storage";
 import { CircularProgress } from "@material-ui/core";
+import IconButton from '@material-ui/core/IconButton';
 
 const CloseSession = ({ type }) => {
   // Función para cerrar cesión y borrar el token almacenado en LocalStorage
@@ -41,12 +42,14 @@ const CloseSession = ({ type }) => {
     <>
       {type === 'editProfile' ? (
         <div className="d-flex justify-content-center fondo-blanco pt-4">
-          <p
+          <IconButton>
+            <p
             className="text-danger font-weight-bold h4 m-0 py-0 pointer"
             onClick={logOut}
-          >
-            Cerrar sesion
-          </p>
+            >
+            Cerrar sesión
+            </p>
+          </IconButton>
         </div>
       ) : null}
     </>
