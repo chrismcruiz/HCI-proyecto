@@ -12,3 +12,7 @@
 .borde_inferior {
     border-bottom: 1px solid #dee2e6;
 }
+
+.brand {
+    margin-left: 0.5em;
+}

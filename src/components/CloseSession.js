@@ -42,14 +42,12 @@ const CloseSession = ({ type }) => {
     <>
       {type === 'editProfile' ? (
         <div className="d-flex justify-content-center fondo-blanco pt-4">
-          <IconButton>
-            <p
+          <p
             className="text-danger font-weight-bold h4 m-0 py-0 pointer"
             onClick={logOut}
-            >
+          >
             Cerrar sesión
-            </p>
-          </IconButton>
+          </p>
         </div>
       ) : null}
     </>

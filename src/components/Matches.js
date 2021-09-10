@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/js/bootstrap.min.js'
 import axios from "axios";
 import './Matches.css'
+import ChatIcon from '@material-ui/icons/Chat';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { Tooltip } from '@material-ui/core';
 
 const Matches = ({ userData }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
@@ -12,8 +16,8 @@ const Matches = ({ userData }) => {
     const response = await axios.get("http://localhost:4000/app/matches?_id=" + userData._id);
     // console.log(response.data.matches)
     if (response.status === 200 && response.data.matches.length > 0) {
-      const request = await axios.post('http://localhost:4000/app/getInfoMatches', {ids:response.data.matches})
-      if(request.status === 200) {
+      const request = await axios.post('http://localhost:4000/app/getInfoMatches', { ids: response.data.matches })
+      if (request.status === 200) {
         setTarjetas(request.data)
       }
     }
@@ -82,11 +86,28 @@ const Matches = ({ userData }) => {
                 key={index}
                 className="div_imagen_personas_matches position-relative mx-2 mt-2 mb-4 d-inline-block"
               >
-                <img
-                  className="imagen_personas_matches rounded-2"
-                  alt=""
-                  src={`/images/${tarjeta.photo}`}
-                />
+                <div class="dropdown">
+                  <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img
+                      className="imagen_personas_matches rounded-2"
+                      alt=""
+                      src={`/images/${tarjeta.photo}`}
+                      width="115"
+                      height="115"
+                    />
+                  </button>
+                  <ul className="dropdown-menu options-menu">
+                    <Tooltip title="Iniciar una conversación">
+                      <ChatIcon />
+                    </ Tooltip>
+                    <Tooltip title="Ver perfil">
+                      <VisibilityIcon />
+                    </ Tooltip>
+                    <Tooltip title="Eliminar match">
+                      <DeleteOutlineIcon />
+                    </ Tooltip>
+                  </ul>
+                </div>
                 <div className="d-flex justify-content-center">
                   <p className="label_nombre_matches text-tarjetas shadow fw-bold">
                     {tarjeta.name.split(" ")[0]}

@@ -12,26 +12,9 @@
     width: 100%;
 }
   
-.div_imagen_personas_matches {
-    width: 102px;
-    height: 145px;
-    transition: transform 0.2s;
-    flex-basis: 119px;
-  }
 
-.div_imagen_personas_matches:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-  }
-
-.imagen_personas_matches {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
 .links_items {
     color: #262626;
   }
   
- 
