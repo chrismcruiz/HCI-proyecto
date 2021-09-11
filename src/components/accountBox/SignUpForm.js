@@ -102,7 +102,7 @@ export const SignupForm = () => {
             <RadioButtons label="Género" name="gender" type="radio" options={generos} />
             <SelectField label="Carrera" name="career" options={carreras} />
             {/****************** Subir imágen ******************/}
-            <div className="input-group mb-2">
+            {/* <div className="input-group mb-2">
               <input
                 className="label-color form-control"
                 type="file"
@@ -116,7 +116,7 @@ export const SignupForm = () => {
                 <br />
                 <span className="label-color optional">(Opcional)</span>
               </label>
-            </div>
+            </div> */}
             <InputField label="Contraseña" name="password" type="password" />
             <InputField label="Confirmar contraseña" name="confirmPassword" type="password" />
             <div className="container mb-1">

@@ -36,3 +36,8 @@
   display: flex;
   justify-content: space-around;
 }
+
+.btn-close {
+  position: absolute;
+  right: 1em;
+}

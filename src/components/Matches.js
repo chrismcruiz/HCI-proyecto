@@ -6,10 +6,15 @@ import ChatIcon from '@material-ui/icons/Chat';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { Tooltip } from '@material-ui/core';
+import ModalForm from "../components/accountBox/ModalForm"
+import { Modal } from "react-bootstrap";
 
 const Matches = ({ userData }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
+  const [showInvalid, setShowInvalid] = useState(false);
   const [tarjetas, setTarjetas] = useState([])
+  const [idMatch, setIdMatch] = useState('')
+  const [lgShow, setLgShow] = useState(false);
 
   // Esto podría no ser necesario!
   useEffect(async () => {
@@ -22,6 +27,19 @@ const Matches = ({ userData }) => {
       }
     }
   }, [tarjetas]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleShowInvalid = (id) => {
+    setIdMatch(id)
+    setShowInvalid(true)
+  };
+  const handleCloseInvalid = () => setShowInvalid(false);
+
+  const deleteUser = () => {
+    axios.post("http://localhost:4000/app/deleteMatch", [idMatch, userData._id])
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+    handleCloseInvalid()
+  }
 
   return (
     <>
@@ -86,7 +104,7 @@ const Matches = ({ userData }) => {
                 key={index}
                 className="div_imagen_personas_matches position-relative mx-2 mt-2 mb-4 d-inline-block"
               >
-                <div class="dropdown">
+                <div className="dropdown">
                   <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
                     <img
                       className="imagen_personas_matches rounded-2"
@@ -101,10 +119,10 @@ const Matches = ({ userData }) => {
                       <ChatIcon />
                     </ Tooltip>
                     <Tooltip title="Ver perfil">
-                      <VisibilityIcon />
+                      <VisibilityIcon onClick={() => setLgShow(true)} />
                     </ Tooltip>
                     <Tooltip title="Eliminar match">
-                      <DeleteOutlineIcon />
+                      <DeleteOutlineIcon onClick={() => handleShowInvalid(tarjeta._id)} />
                     </ Tooltip>
                   </ul>
                 </div>
@@ -134,6 +152,20 @@ const Matches = ({ userData }) => {
           <h6 className="mt-3">No hay grupos para mostrar</h6>
         </div>
       </div>
+      <ModalForm show={showInvalid} success={false} title="Advertencia" message={'¿Estás seguro que quieres eliminar este contacto?'} hide={handleCloseInvalid} btn_close={true} type="delete" delete={deleteUser} />
+      <Modal
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Perfil de Usuario
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>...</Modal.Body>
+      </Modal> 
     </>
   );
 };

@@ -10,14 +10,22 @@ const Navbar = () => {
         <>
             <nav className="navbar navbar-light bg-white borde_inferior">
                 <div className="container-fluid">
-                    <a class="navbar-brand vertical-center" href="/home">
-                        <img className="logo" src='/assets/logo.jpg' alt="" width="60" height="30" className="d-inline-block align-text-top" onClick={() => window.location.reload()} />
-                        <span className="brand">Trade Urself</span>
+                    <a className="navbar-brand vertical-center" href="/home">
+                        <img className="logo" src='/assets/unknown.png' alt="" width="110" height="65" className="d-inline-block align-text-top" onClick={() => window.location.reload()} />
+                        {/* <span className="brand">Trade Urself</span> */}
                     </a>
-                    <div className="navbar__icons">
+
+                    <div class="input-group rounded buscar">
+                        <input type="search" class="form-control rounded" placeholder="Buscar..." aria-label="Search"
+                            aria-describedby="search-addon" />
+                        <span class="input-group-text border-0" id="search-addon">
                         <IconButton size="small" className="navbar__icons__search icono">
                             <SearchIcon className="icon__color" />
                         </IconButton>
+                        </span>
+                    </div>
+                    <div className="navbar__icons">
+                    
                         <IconButton size="small" className="navbar__icons__group icono">
                             <GroupIcon className="icon__color" />
                         </IconButton>

@@ -80,13 +80,13 @@ const Cards = ({ userData, idUser }) => {
   const mostrarMatch = () => {
     setTimeout(() => {
       setMatches(true);
-    }, 950);
+    }, 1100);
   };
 
   const quitarMatch = () => {
     setTimeout(() => {
       setMatches(false);
-    }, 2000);
+    }, 3500);
   };
 
 
@@ -195,6 +195,7 @@ const Cards = ({ userData, idUser }) => {
           <FavoriteIcon className="buttons__fav" fontSize="large" />
         </IconButton>
       </div>
+      {/* {matches && (<div className="alert_match">¡Match!</div>)} */}
       <div className="info-container">
         {lastDirection ? <h2 key={lastDirection} className='text__information'>Deslizaste hacía la {lastDirection === 'left' ? 'izquierda' : 'derecha'}</h2> : <h2 className='text__information'>¡Desliza una tarjeta o presiona un botón para continuar!</h2>}
       </div>

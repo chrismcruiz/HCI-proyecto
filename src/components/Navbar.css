@@ -2,7 +2,7 @@
     margin: 0 1em !important; 
 }
 .navbar__icons {
-    /* margin-right: 2em; */
+    margin-right: 1em;
 }
 
 .icon__color {
@@ -15,4 +15,17 @@
 
 .brand {
     margin-left: 0.5em;
+}
+
+.navbar, .navbar-brand {
+    padding: 0;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.buscar {
+    width: 20em;
 }

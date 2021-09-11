@@ -180,9 +180,10 @@
   animation: reveal 1000ms ease-in-out forwards 200ms,
     glow 2000ms linear infinite 2000ms;
   transform: translate(-50%, -50%);
-  top: 38%;
-  left: 50%;
-  position: absolute;
+  /* top: 38%;
+  left: 50%; */
+  /* position: absolute; */
+
 }
 
 @keyframes reveal {
