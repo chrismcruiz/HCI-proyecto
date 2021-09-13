@@ -19,8 +19,12 @@ const SignupForm = () => {
   const [showValid, setShowValid] = useState(false); // Mostrar o ocultar el modal de registro exitoso
   const [showInvalid, setShowInvalid] = useState(false); // Mostrar o ocultar el modal de registro fallido
 
+  // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
+  const handleCloseValid = () => {
+    setShowValid(false)
+    window.location = '/login'
+  }; 
   
-  const handleCloseValid = () => setShowValid(false); // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
   const handleCloseInvalid = () => setShowInvalid(false); // Dejar de mostrar el modal de formulario inválido
 
   // Función para registrarse y almacenar los datos en la BD.

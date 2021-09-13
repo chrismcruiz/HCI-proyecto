@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './EditProfile.css'
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
-import CloseSession from "./CloseSession";
+import { logOut } from "../utils/CloseSession";
 import { EditFormValidation } from "../utils/FormValidation"
 import { carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -109,7 +109,14 @@ const EditProfile = ({ userData, idUser }) => {
         )}
       </Formik>
       {/* Cerrar sesión */}
-      <CloseSession type="editProfile" />
+      <div className="d-flex justify-content-center fondo-blanco pt-4">
+          <p
+            className="text-danger font-weight-bold h4 m-0 py-0 pointer"
+            onClick={logOut}
+          >
+            Cerrar sesión
+          </p>
+        </div>
     </div>
   );
 };

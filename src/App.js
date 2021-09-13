@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Home from "./pages/Home";
+import Admin from "./pages/Admin";
+import LandingPage  from "./pages/LandingPage";
 import { getFromStorage } from "./utils/storage";
 import {
   BrowserRouter as Router,
@@ -10,14 +12,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import axios from "axios";
-import Admin from "./pages/Admin";
 import { CircularProgress } from "@material-ui/core";
 import SignupForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
-import LandingPage  from "./components/LandingPage";
-
-// import { filtrarUser, recorrerObjeto } from "./utils/Utils";
-// import { Button, Modal } from "react-bootstrap";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,39 +63,22 @@ const App = () => {
     );
   }
 
-  // Si no hay token muestro los formularios (Login - Register)
-  // if (!tokencito) {
-  //   return (
-  //     <AppContainer>
-  //       <AccountBox />
-  //     </AppContainer>
-  //   );
-  // }
-
   // Si no está cargando y HAY token muestro la vista home o admin dependiendo del rol
   return (
     <>
       <Router>
         <Switch>
           <Route path="/home">
-            {user.admin ? (
-              <Redirect to="/admin" />
-            ) : (
-              <Home userData={user} idUser={idUsuario} />
-            )}
+            {!tokencito ? <Redirect to="/" /> : !user.admin ? <Home userData={user} idUser={idUsuario} /> : <Redirect to="/admin" />}
           </Route>
           <Route path="/login">
-              <LoginForm />
+            {tokencito ? <Redirect to="/home" /> : <LoginForm />}
           </Route>
           <Route path="/signup">
-              <SignupForm />
+            {tokencito ? <Redirect to="/home" /> : <SignupForm />}     
           </Route>
           <Route path="/admin">
-            {!user.admin ? (
-              <Redirect to="/home" />
-            ) : (
-              <Admin props={{ user, idUsuario }} />
-            )}
+            {!tokencito ? <Redirect to="/" /> : !user.admin ? <Redirect to="/home" /> : <Admin userData={user} idUser={idUsuario} />}
           </Route>
           <Route path="/">{tokencito ? <Redirect to="/home" /> : <LandingPage />}</Route>
         </Switch>

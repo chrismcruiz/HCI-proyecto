@@ -6,8 +6,7 @@ import TablaUsuariosAdmin from "../components/admin/TablaUsuariosAdmin";
 import SidebarAdmin from "../components/admin/SidebarAdmin";
 import LandingPageAdmin from "../components/admin/LandingPageAdmin";
 
-function Admin(props) {
-  props = props.props;
+function Admin({ userData, idUser }) {
   const [isLoading, setIsLoading] = useState(false); // verificar si está cargando para mostrar el spinner
   const [aUsers, setUsers] = useState([]);
   const [aUsersIniciales, setUsersIni] = useState([]);
@@ -42,8 +41,6 @@ function Admin(props) {
     users();
   }, []);
 
-  const adminInfo = recorrerObjeto(filtrarUser(props.users, props.idUser));
-
   //const alreadyRemoved = []
 
   const [editShow, setEditShow] = useState(false);
@@ -73,7 +70,7 @@ function Admin(props) {
     <div className="container">
       <div className="row">
         <div className="col-3 px-0">
-          <SidebarAdmin />
+          <SidebarAdmin admin={userData} />
         </div>
         {/* col-9 */}
         {formShow ? (
@@ -82,7 +79,7 @@ function Admin(props) {
           </div>
         ) : (
           <div className="col-9 px-0 fondo-blanco div_contenedor_informe p-5 text-center position-relative">
-            <LandingPageAdmin admin={adminInfo} />
+            <LandingPageAdmin admin={userData} />
           </div>
         )}
       </div>
