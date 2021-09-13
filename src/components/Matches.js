@@ -6,7 +6,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { Tooltip } from '@material-ui/core';
-import ModalForm from "../components/accountBox/ModalForm"
+import ModalForm from "./ModalForm"
 import { Modal } from "react-bootstrap";
 
 const Matches = ({ userData }) => {

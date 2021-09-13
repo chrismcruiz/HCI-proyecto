@@ -1,23 +1,13 @@
 import React, { useState, useContext } from "react";
+import "./LoginForm.css";
 import InputFieldVariation from "./InputFieldVariation"
-import {
-  BoldLink,
-  BoxContainer,
-  // Input,
-  MutedLink,
-  SubmitButton,
-} from "./common";
-import { Marginer } from "../marginer";
-import { AccountContext } from "./accountContext";
-import { setInStorage } from "../../utils/storage";
+import { setInStorage } from "../utils/storage";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { Formik, Form } from "formik";
-import { LoginFormValidation } from "../../utils/FormValidation"
+import { LoginFormValidation } from "../utils/FormValidation"
 
-export const LoginForm = () => {
-  const { switchToSignup } = useContext(AccountContext);
-
+const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
   const [signInError, setSignInError] = useState("");
 
@@ -57,7 +47,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <BoxContainer>
+    <div>
       <Formik
         initialValues={{
           email: "",
@@ -66,32 +56,27 @@ export const LoginForm = () => {
         validationSchema={LoginFormValidation}
         onSubmit={onSignIn}
       >
-        <Form
-          style={{ width: "100%", display: "flex", flexDirection: "column" }}
-        >
+        <Form>
           {signInError ? <p className="tool_tip">{signInError}</p> : null}
           <InputFieldVariation label="Correo" name="email" type="text" />
           <InputFieldVariation label="Contraseña" name="password" type="password" />
-          <SubmitButton className="mt-3">Entrar</SubmitButton>
+          <button className="mt-3">Entrar</button>
         </Form>
 
       </Formik>
-      <Marginer direction="vertical" margin={10} />
-      <MutedLink href="#" className="a_hover_form_login_registro mt-4">
+      <a href="#" className="a_hover_form_login_registro mt-4">
         ¿Olvidaste tu contraseña?
-      </MutedLink>
-      <Marginer direction="vertical" margin="1.6em" />
-      <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="#" className="a_hover_form_login_registro">
+      </a>
+      <a href="/signup" className="a_hover_form_login_registro">
         ¿No tienes una cuenta?{" "}
-        <BoldLink
+        <strong
           className="a_hover_registrarse"
-          href="#"
-          onClick={switchToSignup}
         >
           Registrarse
-        </BoldLink>
-      </MutedLink>
-    </BoxContainer>
+        </strong>
+      </a>
+    </div>
   );
 };
+
+export default LoginForm

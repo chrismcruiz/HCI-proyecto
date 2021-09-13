@@ -1,42 +1,26 @@
 import React, { useContext, useState } from "react";
-import "./Forms.css";
+import "./SignUpForm.css";
 import InputField from "./InputField"
 import RadioButtons from "./RadioButtons"
 import SelectField from "./SelectField"
 import ModalForm from "./ModalForm"
-import {
-  BoldLink,
-  BoxContainer,
-  // Input,
-  MutedLink,
-  SubmitButton,
-} from "./common";
-import { Marginer } from "../marginer";
-import { AccountContext } from "./accountContext";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
-import { generos, carreras } from "../../utils/dataForm";
+import { generos, carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import { SignUpFormValidation } from "../../utils/FormValidation"
+import { SignUpFormValidation } from "../utils/FormValidation"
 
-export const SignupForm = () => {
-  const { switchToSignin } = useContext(AccountContext); // Para cambiar al formulario de Login
+const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
   const [signUpError, setSignUpError] = useState(""); // Identificar si hubo errores en la validación del servidor al enviar el formulario
   const [showValid, setShowValid] = useState(false); // Mostrar o ocultar el modal de registro exitoso
   const [showInvalid, setShowInvalid] = useState(false); // Mostrar o ocultar el modal de registro fallido
 
-  // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
-  const handleCloseValid = () => {
-    setShowValid(false);
-    setTimeout(() => {
-      switchToSignin();
-    }, 400);
-  };
-
+  
+  const handleCloseValid = () => setShowValid(false); // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
   const handleCloseInvalid = () => setShowInvalid(false); // Dejar de mostrar el modal de formulario inválido
 
   // Función para registrarse y almacenar los datos en la BD.
@@ -94,29 +78,14 @@ export const SignupForm = () => {
       onSubmit={onSignUp}
     >
       {({ errors, touched, setFieldValue }) => (
-        <BoxContainer>
+        <div>
           <Form style={{ width: "100%", display: "flex", flexDirection: "column" }}>
             <InputField label="Nombre" name="name" type="text" />
             <InputField label="Correo" name="email" type="text" />
             <InputField label="Fecha de Nacimiento" name="birthday" type="date" />
             <RadioButtons label="Género" name="gender" type="radio" options={generos} />
             <SelectField label="Carrera" name="career" options={carreras} />
-            {/****************** Subir imágen ******************/}
-            {/* <div className="input-group mb-2">
-              <input
-                className="label-color form-control"
-                type="file"
-                name="photo"
-                accept=".png, .jpg, .jpeg"
-                id="photo"
-                onChange={(e) => setFieldValue("photo", e.target.files[0])}
-              />
-              <label htmlFor="photo" className="pointer w-100 input-group-text d-flex flex-column">
-                Sube una imagen
-                <br />
-                <span className="label-color optional">(Opcional)</span>
-              </label>
-            </div> */}
+       
             <InputField label="Contraseña" name="password" type="password" />
             <InputField label="Confirmar contraseña" name="confirmPassword" type="password" />
             <div className="container mb-1">
@@ -137,27 +106,25 @@ export const SignupForm = () => {
                 </div>
               </div>
             </div>
-            <SubmitButton type="submit">Registrarme</SubmitButton>
+            <button type="submit">Registrarme</button>
           </Form>
 
-          <Marginer direction="vertical" margin={10} />
-          <Marginer direction="vertical" margin="1em" />
-          <MutedLink href="#" className="a_hover_form_login_registro">
+          <a href="/login" className="a_hover_form_login_registro">
             ¿Ya tienes una cuenta?
-            <BoldLink
+            <strong
               className="a_hover_registrarse"
-              href="#"
-              onClick={switchToSignin}
             >
               Inicia sesión
-            </BoldLink>
-          </MutedLink>
+            </strong>
+          </a>
           {/****************** Modal para el registro satisfactorio ******************/}
           <ModalForm show={showValid} success={true} title="!Correcto!" message="Registro realizado satisfactoriamente!" hide={handleCloseValid} />
           {/****************** Modal para el registro fallido ******************/}
           <ModalForm show={showInvalid} success={false} title="Ooops!" message={signUpError} hide={handleCloseInvalid} />
-        </BoxContainer>
+        </div>
       )}
     </Formik>
   );
 };
+
+export default SignupForm

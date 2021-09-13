@@ -11,20 +11,13 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import Admin from "./pages/Admin";
-import { AccountBox } from "./components/accountBox";
-import styled from "styled-components";
 import { CircularProgress } from "@material-ui/core";
+import SignupForm from "./components/SignUpForm";
+import LoginForm from "./components/LoginForm";
+import LandingPage  from "./components/LandingPage";
+
 // import { filtrarUser, recorrerObjeto } from "./utils/Utils";
 // import { Button, Modal } from "react-bootstrap";
-
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -74,13 +67,13 @@ const App = () => {
   }
 
   // Si no hay token muestro los formularios (Login - Register)
-  if (!tokencito) {
-    return (
-      <AppContainer>
-        <AccountBox />
-      </AppContainer>
-    );
-  }
+  // if (!tokencito) {
+  //   return (
+  //     <AppContainer>
+  //       <AccountBox />
+  //     </AppContainer>
+  //   );
+  // }
 
   // Si no está cargando y HAY token muestro la vista home o admin dependiendo del rol
   return (
@@ -94,6 +87,12 @@ const App = () => {
               <Home userData={user} idUser={idUsuario} />
             )}
           </Route>
+          <Route path="/login">
+              <LoginForm />
+          </Route>
+          <Route path="/signup">
+              <SignupForm />
+          </Route>
           <Route path="/admin">
             {!user.admin ? (
               <Redirect to="/home" />
@@ -101,7 +100,7 @@ const App = () => {
               <Admin props={{ user, idUsuario }} />
             )}
           </Route>
-          <Route path="/">{tokencito ? <Redirect to="/home" /> : null}</Route>
+          <Route path="/">{tokencito ? <Redirect to="/home" /> : <LandingPage />}</Route>
         </Switch>
       </Router>
     </>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CreateIcon from "@material-ui/icons/Create";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { Input } from "../../components/accountBox/common";
 
 const TablaUsuarios = (props) => {
   const [filtroTabla, setFiltroTabla] = useState("");
@@ -28,7 +27,7 @@ const TablaUsuarios = (props) => {
   return (
     <>
       <p className="texto-negro h2">Informe de Usuarios</p>
-      <Input
+      <input
         placeholder="Buscar"
         type="text"
         className="mt-2 py-2 w-50"

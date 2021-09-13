@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import './EditProfile.css'
-import { SubmitButton } from "./accountBox/common";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import CloseSession from "./CloseSession";
 import { EditFormValidation } from "../utils/FormValidation"
 import { carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import SelectField from "./accountBox/SelectField"
-import InputFieldVariation from "./accountBox/InputFieldVariation"
+import SelectField from "./SelectField"
+import InputFieldVariation from "./InputFieldVariation"
 
 const EditProfile = ({ userData, idUser }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +104,7 @@ const EditProfile = ({ userData, idUser }) => {
             <InputFieldVariation label="Fecha de Nacimiento" name="birthday" type="date" />
             <SelectField label="Carrera" name="career" options={carreras} />
 
-            <SubmitButton type="submit">Guardar</SubmitButton>
+            <button type="submit">Guardar</button>
           </Form>
         )}
       </Formik>
