@@ -7,18 +7,18 @@ import './Home.css'
 
 const Home = ({ userData, idUser }) => {
   return (
-    <div className="grid-home">
-      <div className="grid-row-superior">
+    <div className="container-fluid">
+      <div className="row">
         {/* Barra superior */}
         <Navbar />
       </div>
       <div className='container grid-row-inferior'>
         <div className='row'>
-          <div className='px-0 bordes me-5 ancho_chr-3_5'>
+          <div className='px-0 bordes me-5 col col-lg-4'>
             {/* Menú lateral */}
             <Sidebar userData={userData} idUser={idUser} />
           </div>
-          <div className='px-0 bordes ancho_chr-7_5'>
+          <div className='px-0 bordes col col-lg-7'>
             <div className='seccion_tarjetas'>
               {/* Tarjetas */}
               <Cards idUser={idUser} userData={userData} />

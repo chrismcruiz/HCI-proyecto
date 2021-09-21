@@ -152,7 +152,7 @@ const Cards = ({ userData, idUser }) => {
 
   if (users.length === 0 && !matches) {
     return (
-      <div className="no-people">
+      <div className="no-people align-bottom">
         No hay personas para mostrar...
       </div>
     );

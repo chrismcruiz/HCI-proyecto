@@ -23,9 +23,11 @@ const Navbar = () => {
                         <input type="search" class="form-control rounded" placeholder="Buscar..." aria-label="Search"
                             aria-describedby="search-addon" />
                         <span class="input-group-text border-0" id="search-addon">
-                            <IconButton size="small" className="navbar__icons__search icono">
-                                <SearchIcon className="icon__color" />
-                            </IconButton>
+                            <Tooltip title="Buscar">
+                                <IconButton size="small" className="navbar__icons__search icono">
+                                    <SearchIcon className="icon__color" />
+                                </IconButton>
+                            </Tooltip>
                         </span>
                     </div>
                     <div className="navbar__icons">

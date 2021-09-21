@@ -104,11 +104,11 @@ const Matches = ({ userData }) => {
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <div className="div_personas_matches d-flex flex-wrap">
+          <div className="d-flex flex-wrap justify-content-evenly">
             {tarjetas.map((tarjeta, index) => (
               <div
                 key={index}
-                className="div_imagen_personas_matches position-relative mx-2 mt-2 mb-4 d-inline-block"
+                className="div_imagen_personas_matches position-relative p-0 mx-0 mt-2 mb-4"
               >
                 <div className="dropdown">
                   <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
@@ -116,8 +116,8 @@ const Matches = ({ userData }) => {
                       className="imagen_personas_matches rounded-2"
                       alt=""
                       src={`/images/${tarjeta.photo}`}
-                      width="115"
-                      height="115"
+                      width="120"
+                      height="120"
                     />
                   </button>
                   <ul className="dropdown-menu options-menu">
@@ -172,7 +172,7 @@ const Matches = ({ userData }) => {
         </Modal.Header>
         <Modal.Body>
            <img className="match_img" src={`/images/${dataMatch.photo}`} width='300' height='300' />
-           <p className="match_description">"{dataMatch.description}"</p>
+           <p className="match_description">"{!dataMatch.description ? 'Sin descripción':dataMatch.description}"</p>
            <h4>Especialidades</h4>
         </Modal.Body>
       </Modal> 
