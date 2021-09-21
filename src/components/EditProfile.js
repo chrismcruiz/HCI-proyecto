@@ -77,9 +77,10 @@ const EditProfile = ({ userData, idUser }) => {
             <div className="form-floating mb-2">
               <Field as='textarea'
                 id="description"
-                className="form-control"
+                className="form-control txt-area"
                 name="description"
                 placeholder="Añade una descripción breve de tí..."
+                style={{height: '6em'}}
               />
               <label className="label_inputs" htmlFor="description">
                 Añade una breve descripción tuya...

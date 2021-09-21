@@ -18,3 +18,7 @@
 .form_edit {
     text-align: center;
 }
+
+.txt-area {
+    resize: none;
+}
