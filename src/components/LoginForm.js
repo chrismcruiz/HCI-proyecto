@@ -6,6 +6,7 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { LoginFormValidation } from "../utils/FormValidation"
+import { Modal, Alert } from "react-bootstrap";
 import './Forms.css'
 
 const LoginForm = () => {
@@ -68,8 +69,9 @@ const LoginForm = () => {
               <div class="signin-form">
                 <h2 class="form-title h2-login-register">Ingreso</h2>
                 <Form>
-
-                  {signInError ? <p className="tool_tip">{signInError}</p> : null}
+                  {signInError ? (<Alert variant="danger">
+                    {signInError}
+                  </Alert>) : null}
                   <InputFieldVariation label="Correo" classes="zmdi-email" name="email" type="text" />
                   <InputFieldVariation label="Contraseña" classes="zmdi-lock" name="password" type="password" />
                   <div class="form-group form-button">
@@ -89,17 +91,6 @@ const LoginForm = () => {
           </div>
         </section>
       </Formik>
-      {/* <a href="#" className="a_hover_form_login_registro mt-4">
-        ¿Olvidaste tu contraseña?
-      </a>
-      <a href="/signup" className="a_hover_form_login_registro">
-        ¿No tienes una cuenta?{" "}
-        <strong
-          className="a_hover_registrarse"
-        >
-          Registrarse
-        </strong>
-      </a> */}
     </div>
   );
 };
