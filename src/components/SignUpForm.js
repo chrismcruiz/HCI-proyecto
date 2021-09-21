@@ -12,6 +12,7 @@ import { Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { SignUpFormValidation } from "../utils/FormValidation"
+import './Forms.css'
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
@@ -23,8 +24,8 @@ const SignupForm = () => {
   const handleCloseValid = () => {
     setShowValid(false)
     window.location = '/login'
-  }; 
-  
+  };
+
   const handleCloseInvalid = () => setShowInvalid(false); // Dejar de mostrar el modal de formulario inválido
 
   // Función para registrarse y almacenar los datos en la BD.
@@ -34,7 +35,7 @@ const SignupForm = () => {
 
     let formData = new FormData(); // formData es una estructura de datos (acepta archivos tipo file como imágenes)
 
-    for ( let key in values ) {
+    for (let key in values) {
       formData.append(key, values[key]);
     }
 
@@ -82,45 +83,59 @@ const SignupForm = () => {
       onSubmit={onSignUp}
     >
       {({ errors, touched, setFieldValue }) => (
-        <div>
-          <Form style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-            <InputField label="Nombre" name="name" type="text" />
-            <InputField label="Correo" name="email" type="text" />
-            <InputField label="Fecha de Nacimiento" name="birthday" type="date" />
-            <RadioButtons label="Género" name="gender" type="radio" options={generos} />
-            <SelectField label="Carrera" name="career" options={carreras} />
-       
-            <InputField label="Contraseña" name="password" type="password" />
-            <InputField label="Confirmar contraseña" name="confirmPassword" type="password" />
-            <div className="container mb-1">
-              <div className="row">
-                {/****************** Términos y condiciones ******************/}
-                <div className="col-11 form-group form-check">
-                  <Field id="terms" type="checkbox" name="terms" className={`form-check-input ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
-                  <label htmlFor="terms" className="form-check-label">Acepto los términos y condiciones</label>
-                  <ErrorMessage name="terms" component="div" className="invalid-feedback" />
+        <div className="">
+          <section className="signup">
+            <div className="container">
+              <div class="signup-content">
+                <div class="signup-form">
+                  <h2 class="form-title">Registro</h2>
+                  <Form className="register-form">
+                    <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
+                    <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
+                    <InputField label="Fecha de Nacimiento" classes="" name="birthday" type="date" />
+                    {/* <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} />
+                    <SelectField label="Carrera" classes="" name="career" options={carreras} /> */}
+
+                    <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
+                    <InputField label="Confirmar contraseña" classes="zmdi-lock-outline" name="confirmPassword" type="password" />
+                    <div className="container mb-1">
+                      <div className="row">
+                        {/****************** Términos y condiciones ******************/}
+                        <div className="form-group ms-4">
+                          <Field id="terms" type="checkbox" name="terms" className={`agree-term ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
+                          <label htmlFor="terms" className="label-agree-term">Acepto los <a href="#" class="term-service">términos y condiciones</a></label>
+                          <ErrorMessage name="terms" component="div" className="invalid-feedback" />
+                        </div>
+                        {/****************** Resetear formulario ******************/}
+                        <div className="d-flex justify-content-end col-3 ms-5">
+                          <Tooltip title="Limpiar Formulario" placement="left">
+                            <IconButton type="reset" className="resetForm" aria-label="reset form">
+                              <RefreshIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group form-button">
+                      <input type="submit" name="signup" id="signup" class="form-submit" value="Registrarme" />
+                    </div>
+                  </Form>
                 </div>
-                {/****************** Resetear formulario ******************/}
-                <div className="col-1">
-                  <Tooltip title="Limpiar Formulario" placement="left">
-                    <IconButton type="reset" className="resetForm" aria-label="reset form">
-                      <RefreshIcon />
-                    </IconButton>
-                  </Tooltip>
+                <div class="signup-image">
+                  <figure><img src="images/signup-image.jpg" alt="sing up image" /></figure>
+                  <a href="/login" class="signup-image-link">Ya estoy registrado</a>
                 </div>
               </div>
             </div>
-            <button type="submit">Registrarme</button>
-          </Form>
-
-          <a href="/login" className="a_hover_form_login_registro">
+          </section>
+          {/* <a href="/login" className="a_hover_form_login_registro">
             ¿Ya tienes una cuenta?
             <strong
               className="a_hover_registrarse"
             >
               Inicia sesión
             </strong>
-          </a>
+          </a> */}
           {/****************** Modal para el registro satisfactorio ******************/}
           <ModalForm show={showValid} success={true} title="!Correcto!" message="Registro realizado satisfactoriamente!" hide={handleCloseValid} />
           {/****************** Modal para el registro fallido ******************/}

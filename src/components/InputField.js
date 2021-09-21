@@ -1,20 +1,21 @@
 import React from 'react'
 import { ErrorMessage, useField } from 'formik'
+import './Forms.css'
 
-const InputField = ({ label, ...props }) => {
+const InputField = ({ label, classes, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className="form-floating mb-2">
+        <div className="form-group">
+            <label htmlFor={field.name}>
+                <i class={`zmdi ${classes}`}></i>
+            </label>
             <input
-                className={`form-control ${meta.touched ? meta.error ? 'is-invalid' : 'is-valid' : null}`}
+                className={`${meta.touched ? meta.error ? 'is-invalid' : 'is-valid' : null}`}
                 {...field} {...props}
-                placeholder={field.name}
+                placeholder={label}
                 autoComplete="off"
             />
-            <label className="label-color" htmlFor={field.name}>
-                {label}
-            </label>
-            <ErrorMessage component="div" name={field.name} className="invalid-feedback"/>
+            <ErrorMessage component="div" name={field.name} className="invalid-feedback" />
         </div>
     )
 }

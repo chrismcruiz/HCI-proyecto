@@ -6,6 +6,7 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { LoginFormValidation } from "../utils/FormValidation"
+import './Forms.css'
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
@@ -56,15 +57,39 @@ const LoginForm = () => {
         validationSchema={LoginFormValidation}
         onSubmit={onSignIn}
       >
-        <Form>
-          {signInError ? <p className="tool_tip">{signInError}</p> : null}
-          <InputFieldVariation label="Correo" name="email" type="text" />
-          <InputFieldVariation label="Contraseña" name="password" type="password" />
-          <button className="mt-3">Entrar</button>
-        </Form>
+        <section className="sign-in">
+          <div class="container">
+            <div class="signin-content">
+              <div class="signin-image">
+                <figure><img src="images/signin-image.jpg" alt="sing up image" /></figure>
+                <a href="/signup" class="signup-image-link">Crear una cuenta</a>
+              </div>
 
+              <div class="signin-form">
+                <h2 class="form-title">Ingreso</h2>
+                <Form>
+
+                  {signInError ? <p className="tool_tip">{signInError}</p> : null}
+                  <InputFieldVariation label="Correo" classes="zmdi-email" name="email" type="text" />
+                  <InputFieldVariation label="Contraseña" classes="zmdi-lock" name="password" type="password" />
+                  <div class="form-group form-button">
+                    <input type="submit" name="signin" id="signin" class="form-submit" value="Entrar" />
+                  </div>
+                </Form>
+                <div class="social-login">
+                  <span class="social-label">O inicia sesión con</span>
+                  <ul class="socials">
+                    <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                    <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                    <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </Formik>
-      <a href="#" className="a_hover_form_login_registro mt-4">
+      {/* <a href="#" className="a_hover_form_login_registro mt-4">
         ¿Olvidaste tu contraseña?
       </a>
       <a href="/signup" className="a_hover_form_login_registro">
@@ -74,7 +99,7 @@ const LoginForm = () => {
         >
           Registrarse
         </strong>
-      </a>
+      </a> */}
     </div>
   );
 };
