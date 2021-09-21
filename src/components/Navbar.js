@@ -3,6 +3,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import GroupIcon from '@material-ui/icons/Group';
 import SearchIcon from '@material-ui/icons/Search';
+import { Tooltip } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logOut } from "../utils/CloseSession";
 import './Navbar.css'
 
 const Navbar = () => {
@@ -19,19 +23,28 @@ const Navbar = () => {
                         <input type="search" class="form-control rounded" placeholder="Buscar..." aria-label="Search"
                             aria-describedby="search-addon" />
                         <span class="input-group-text border-0" id="search-addon">
-                        <IconButton size="small" className="navbar__icons__search icono">
-                            <SearchIcon className="icon__color" />
-                        </IconButton>
+                            <IconButton size="small" className="navbar__icons__search icono">
+                                <SearchIcon className="icon__color" />
+                            </IconButton>
                         </span>
                     </div>
                     <div className="navbar__icons">
-                    
-                        <IconButton size="small" className="navbar__icons__group icono">
+
+                        {/* <IconButton size="small" className="navbar__icons__group icono">
                             <GroupIcon className="icon__color" />
-                        </IconButton>
-                        <IconButton size="small" className="navbar__icons__chat icono">
-                            <ChatBubbleOutlineIcon className="icon__color" />
-                        </IconButton>
+                        </IconButton> */}
+
+                        <Tooltip title="Chats">
+                            <IconButton size="small" className="navbar__icons__chat icono">
+                                <ChatBubbleOutlineIcon className="icon__color" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Cerrar sesión">
+                            <IconButton size="small" className="navbar__icons__chat icono">
+                                <LogoutIcon onClick={logOut} className="icon__color" />
+                            </IconButton>
+                        </ Tooltip>
+
                     </div>
                 </div>
             </nav>

@@ -35,7 +35,7 @@ const Sidebar = ({ userData, idUser }) => {
           </div>
         </div>
       </div>
-      <div className="menu-abajo fondo-blanco rounded-3 p-3 h-100">
+      <div className="menu-abajo fondo-blanco rounded-3 p-3 pb-0 mb-0 h-100">
         {perfilShow ? (
           // Ventana de editar perfil
           <EditProfile userData={userData} idUser={idUser} />

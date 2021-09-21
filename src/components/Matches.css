@@ -1,9 +1,9 @@
-.shadow {
+/* .shadow {
     text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000,
       -1px -1px 0 #000;
     letter-spacing: 3px;
     box-shadow: none !important;
-  }
+  } */
   
   .div_imagen_personas_matches {
     /* width: 102px;
@@ -40,4 +40,23 @@
 .btn-close {
   position: absolute;
   right: 1em;
+}
+
+/* .nombre {
+  color: black;
+} */
+
+.text-tarjetas {
+  color: black;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+}
+
+.match_img {
+  float: left;
+  margin-right: 2em;
+}
+
+.match_description {
+  font-style: italic;
 }

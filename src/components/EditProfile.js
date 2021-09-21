@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import './EditProfile.css'
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
-import { logOut } from "../utils/CloseSession";
 import { EditFormValidation } from "../utils/FormValidation"
 import { carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import SelectField from "./SelectField"
 import InputFieldVariation from "./InputFieldVariation"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import IconButton from '@material-ui/core/IconButton';
+import { Tooltip } from '@material-ui/core';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 const EditProfile = ({ userData, idUser }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,9 +31,7 @@ const EditProfile = ({ userData, idUser }) => {
       .then((response) => {
         console.log(response)
         if (response.status === 200 && response.data.success) {
-          // onChange()
           window.location.reload()
-          setIsLoading(false);
         } else {
           setIsLoading(false);
         }
@@ -39,15 +41,6 @@ const EditProfile = ({ userData, idUser }) => {
         console.log(error);
       });
   };
-
-  // Si está cargando muestro el spinner
-  if (isLoading) {
-    return (
-      <div className="vertical-center">
-        <CircularProgress color="primary" size={40} />
-      </div>
-    );
-  }
 
   return (
     <div className="fondo-blanco rounded-3">
@@ -66,7 +59,7 @@ const EditProfile = ({ userData, idUser }) => {
         onSubmit={onEdit}
       >
         {({errors, touched, setFieldValue}) => (
-          <Form>
+          <Form className="form_edit">
             {/****************** Cambiar imagen ******************/}
             <div className="input-group mb-2">
               <input
@@ -104,18 +97,28 @@ const EditProfile = ({ userData, idUser }) => {
             <InputFieldVariation label="Fecha de Nacimiento" name="birthday" type="date" />
             <SelectField label="Carrera" name="career" options={carreras} />
 
-            <button type="submit">Guardar</button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              startIcon={<SaveIcon />}
+              variant="outlined"
+              color="success"
+              type="submit"
+            >
+              Guardar
+            </LoadingButton>
           </Form>
         )}
       </Formik>
       {/* Cerrar sesión */}
-      <div className="d-flex justify-content-center fondo-blanco pt-4">
-          <p
+      <div className="d-flex justify-content-center fondo-blanco mt-2">
+          {/* <p
             className="text-danger font-weight-bold h4 m-0 py-0 pointer"
             onClick={logOut}
           >
             Cerrar sesión
-          </p>
+          </p> */}
+    
         </div>
     </div>
   );

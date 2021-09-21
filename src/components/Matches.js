@@ -15,6 +15,7 @@ const Matches = ({ userData }) => {
   const [tarjetas, setTarjetas] = useState([])
   const [idMatch, setIdMatch] = useState('')
   const [lgShow, setLgShow] = useState(false);
+  const [dataMatch, setDataMatch] = useState({});
 
   // Esto podría no ser necesario!
   useEffect(async () => {
@@ -33,6 +34,11 @@ const Matches = ({ userData }) => {
     setShowInvalid(true)
   };
   const handleCloseInvalid = () => setShowInvalid(false);
+
+  const mostrarPerfil = (data) => {
+    setLgShow(true)
+    setDataMatch(data)
+  }
 
   const deleteUser = () => {
     axios.post("http://localhost:4000/app/deleteMatch", [idMatch, userData._id])
@@ -119,7 +125,7 @@ const Matches = ({ userData }) => {
                       <ChatIcon />
                     </ Tooltip>
                     <Tooltip title="Ver perfil">
-                      <VisibilityIcon onClick={() => setLgShow(true)} />
+                      <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />
                     </ Tooltip>
                     <Tooltip title="Eliminar match">
                       <DeleteOutlineIcon onClick={() => handleShowInvalid(tarjeta._id)} />
@@ -127,11 +133,12 @@ const Matches = ({ userData }) => {
                   </ul>
                 </div>
                 <div className="d-flex justify-content-center">
-                  <p className="label_nombre_matches text-tarjetas shadow fw-bold">
+                  <p className="label_nombre_matches text-tarjetas">
                     {tarjeta.name.split(" ")[0]}
                   </p>
                 </div>
               </div>
+
             ))}
           </div>
         </div>
@@ -152,7 +159,6 @@ const Matches = ({ userData }) => {
           <h6 className="mt-3">No hay grupos para mostrar</h6>
         </div>
       </div>
-      <ModalForm show={showInvalid} success={false} title="Advertencia" message={'¿Estás seguro que quieres eliminar este contacto?'} hide={handleCloseInvalid} btn_close={true} type="delete" delete={deleteUser} />
       <Modal
         size="lg"
         show={lgShow}
@@ -161,11 +167,16 @@ const Matches = ({ userData }) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Perfil de Usuario
+            Perfil de {dataMatch.name}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>...</Modal.Body>
+        <Modal.Body>
+           <img className="match_img" src={`/images/${dataMatch.photo}`} width='300' height='300' />
+           <p className="match_description">"{dataMatch.description}"</p>
+           <h4>Especialidades</h4>
+        </Modal.Body>
       </Modal> 
+      <ModalForm show={showInvalid} success={false} title="Advertencia" message={'¿Estás seguro que quieres eliminar este contacto?'} hide={handleCloseInvalid} btn_close={true} type="delete" delete={deleteUser} />
     </>
   );
 };
