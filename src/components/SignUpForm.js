@@ -85,10 +85,10 @@ const SignupForm = () => {
       {({ errors, touched, setFieldValue }) => (
         <div className="">
           <section className="signup">
-            <div className="container">
+            <div className="container-forms">
               <div class="signup-content">
                 <div class="signup-form">
-                  <h2 class="form-title">Registro</h2>
+                  <h2 class="form-title h2-login-register">Registro</h2>
                   <Form className="register-form">
                     <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
                     <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
@@ -122,7 +122,7 @@ const SignupForm = () => {
                   </Form>
                 </div>
                 <div class="signup-image">
-                  <figure><img src="images/signup-image.jpg" alt="sing up image" /></figure>
+                  <figure className="figure-login-register"><img className="img-login-register" src="images/signup-image.jpg" alt="sing up image" /></figure>
                   <a href="/login" class="signup-image-link">Ya estoy registrado</a>
                 </div>
               </div>

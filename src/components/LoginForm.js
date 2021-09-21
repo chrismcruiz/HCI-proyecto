@@ -58,15 +58,15 @@ const LoginForm = () => {
         onSubmit={onSignIn}
       >
         <section className="sign-in">
-          <div class="container">
+          <div class="container-forms">
             <div class="signin-content">
               <div class="signin-image">
-                <figure><img src="images/signin-image.jpg" alt="sing up image" /></figure>
-                <a href="/signup" class="signup-image-link">Crear una cuenta</a>
+                <figure className="figure-login-register"><img className="img-login-register" src="images/signin-image.jpg" alt="sing up image" /></figure>
+                <a href="/signup" className="signup-image-link">Crear una cuenta</a>
               </div>
 
               <div class="signin-form">
-                <h2 class="form-title">Ingreso</h2>
+                <h2 class="form-title h2-login-register">Ingreso</h2>
                 <Form>
 
                   {signInError ? <p className="tool_tip">{signInError}</p> : null}

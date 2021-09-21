@@ -1,10 +1,10 @@
 /* @extend display-flex; */
-display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+.display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
     display: flex;
     display: -webkit-flex; }
   
   /* @extend list-type-ulli; */
-  list-type-ulli, .socials {
+  .list-type-ulli, .socials {
     list-style-type: none;
     margin: 0;
     padding: 0; }
@@ -57,25 +57,25 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     -o-appearance: radio !important;
     -ms-appearance: radio !important; }
   
-  img {
+  .img-login-register {
     max-width: 100%;
     height: auto; }
   
-  figure {
+  .figure-login-register {
     margin: 0; }
   
-  p {
+  .p-login-register {
     margin-bottom: 0px;
     font-size: 15px;
     color: #777; }
   
-  h2 {
+  .h2-login-register {
     line-height: 1.66;
     margin: 0;
     padding: 0;
     font-weight: bold;
     color: #222;
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 36px; }
   
   .main {
@@ -85,15 +85,15 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   .clear {
     clear: both; }
   
-  body {
+  /* body {
     font-size: 13px;
     line-height: 1.8;
     color: #222;
     background: #f8f8f8;
     font-weight: 400;
     font-family: Poppins; }
-  
-  .container {
+   */
+  .container-forms {
     width: 900px;
     background: #fff;
     margin: 0 auto;
@@ -161,7 +161,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   .signup-image {
     margin-top: 45px; }
   
-  figure {
+  .figure-login-register {
     margin-bottom: 50px;
     text-align: center; }
   
@@ -409,11 +409,11 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     margin-top: 10px; }
   
   @media screen and (max-width: 1200px) {
-    .container {
+    .container-forms {
       width: calc( 100% - 30px);
       max-width: 100%; } }
   @media screen and (min-width: 1024px) {
-    .container {
+    .container-forms {
       max-width: 1200px; } }
   @media screen and (max-width: 768px) {
     .signup-content, .signin-content {
