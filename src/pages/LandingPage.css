@@ -14,3 +14,22 @@
 .content img {
 	vertical-align:middle;
 }
+
+.footer {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.icon_color {
+    color: white !important;
+}
+
+.icono {
+    margin: 0 1em !important; 
+}
+
+.footer__icons {
+    margin-right: 1em;
+}

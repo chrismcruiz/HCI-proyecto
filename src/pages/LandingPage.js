@@ -1,5 +1,13 @@
 import React from 'react'
 import './LandingPage.css'
+import IconButton from '@material-ui/core/IconButton';
+import GoogleIcon from '@mui/icons-material/Google';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import { Tooltip } from '@material-ui/core';
 
 // Todo va dentro del "div"
 // Entonces básicamente ud mete el html que quiera ahí dentro y le da clases para darle estilos sólo que en ves del atributo "class"
@@ -93,6 +101,66 @@ const LandingPage = () => {
                     </div>
                 </div>
                 <div></div>
+            </div>
+            <div class="container">
+                <div class="row footer fixed-bottom ">
+                    <div class="col">
+                        <img className="logo" src='/assets/logon.jpg' alt="" width="100" height="100" className="d-inline-block align-text-top" onClick={() => window.location.reload()} /> 
+                    </div>
+                    <div class="col-6">
+                        
+                        <div class="row justify-content-center p-4">
+                            <div class="col">
+                                <p>Síguenos en:</p>
+                            </div>
+                            <div class="col">
+                                <Tooltip title="Twitter">
+                            
+                                    <TwitterIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                            <div class="col">
+                                <Tooltip title="Facebook">
+                            
+                                    <FacebookIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                            <div class="col">
+                                <Tooltip title="YouTube">
+                            
+                                    <YouTubeIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                            <div class="col">
+                                <Tooltip title="LinkedIn">
+                            
+                                    <LinkedInIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                            <div class="col">
+                                <Tooltip title="Gmail">
+                            
+                                    <GoogleIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                            <div class="col">
+                                <Tooltip title="GitHub">
+                            
+                                    <GitHubIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                    </div>
+                </div>
             </div>
         </div>
     )
