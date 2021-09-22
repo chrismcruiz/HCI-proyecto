@@ -6,8 +6,8 @@ const InputField = ({ label, classes, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <div className="form-group">
-            <label htmlFor={field.name}>
-                <i class={`zmdi ${classes}`}></i>
+            <label className="labels" htmlFor={field.name}>
+                <i className={`zmdi ${classes}`}></i>
             </label>
             <input
                 className={`${meta.touched ? meta.error ? 'is-invalid' : 'is-valid' : null}`}

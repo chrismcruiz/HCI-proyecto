@@ -12,6 +12,7 @@ import { Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { SignUpFormValidation } from "../utils/FormValidation"
+import { DatePicker } from '@mui/lab';
 import './Forms.css'
 
 const SignupForm = () => {
@@ -93,31 +94,29 @@ const SignupForm = () => {
                     <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
                     <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
                     <InputField label="Fecha de Nacimiento" classes="" name="birthday" type="date" />
-                    {/* <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} />
-                    <SelectField label="Carrera" classes="" name="career" options={carreras} /> */}
-
+                    <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} />
+                    <SelectField label="Especialidad o intereses" classes="" name="career" options={carreras} />
+                  
                     <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
                     <InputField label="Confirmar contraseña" classes="zmdi-lock-outline" name="confirmPassword" type="password" />
-                    <div className="container mb-1">
-                      <div className="row">
-                        {/****************** Términos y condiciones ******************/}
-                        <div className="form-group ms-4">
-                          <Field id="terms" type="checkbox" name="terms" className={`agree-term ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
-                          <label htmlFor="terms" className="label-agree-term">Acepto los <a href="#" class="term-service">términos y condiciones</a></label>
-                          <ErrorMessage name="terms" component="div" className="invalid-feedback" />
-                        </div>
-                        {/****************** Resetear formulario ******************/}
-                        <div className="d-flex justify-content-end col-3 ms-5">
-                          <Tooltip title="Limpiar Formulario" placement="left">
-                            <IconButton type="reset" className="resetForm" aria-label="reset form">
-                              <RefreshIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </div>
-                      </div>
+
+                    {/****************** Términos y condiciones ******************/}
+                    <div className="form-group">
+                      <Field id="terms" type="checkbox" name="terms" className={`me-2 agree-term ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
+                      <label htmlFor="terms" className="label-agree-term">Acepto los <a href="#" class="term-service">términos y condiciones</a></label>
+                      <ErrorMessage name="terms" component="div" className="invalid-feedback" />
                     </div>
                     <div class="form-group form-button">
                       <input type="submit" name="signup" id="signup" class="form-submit" value="Registrarme" />
+
+                      {/****************** Resetear formulario ******************/}
+                      <div className="d-inline-flex justify-content-center align-items-center ms-5">
+                        <Tooltip title="Limpiar Formulario" placement="down">
+                          <IconButton type="reset" className="resetForm" aria-label="reset form">
+                            <RefreshIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
                     </div>
                   </Form>
                 </div>
