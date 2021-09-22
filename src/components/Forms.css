@@ -506,3 +506,111 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .gender-options {
   font-size: 0.8em;
 }
+
+
+/* signupform */
+/* Formulario de Logueo */
+
+/* Error Tool Tip Styles*/
+.tool_tip {
+  /* font */
+  font-family: Helvetica;
+  font-size: 13px;
+  font-weight: bold;
+  color: #cc0033;
+  line-height: 20px;
+  /* background */
+  background-color: #fce4e4;
+  border: 1px solid #fcc2c3;
+  border-radius: 7px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  /* positioning */
+  float: left;
+  position: relative;
+  padding: 7px 11px 4px;
+  /* margin-left: 10px; distance between error tip and element it points to */
+}
+
+/* Left Arrow Styles */
+/* .tool_tip:after, .tool_tip:before {
+  content: '';
+  border: 7px solid transparent;
+  position: absolute;
+  top: 10px;
+}
+.tool_tip:after {
+  border-right: 7px solid #fce4e4;
+  left: -14px;
+}
+.tool_tip:before {
+  border-right: 7px solid #fcc2c3;
+  left: -15px;
+} */
+
+
+/* Formulario de Registro */
+
+.a_hover_registrarse:hover {
+  color: rgb(0, 145, 62) !important;
+}
+
+.a_hover_form_login_registro:hover {
+  color: rgba(200, 200, 200, 0.8) !important;
+}
+
+.optional {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+
+.cool {
+  background-image: none !important;
+  /* padding-right: 0 !important; */
+}
+
+.resetForm {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.label-color {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.inputs_radius {
+  width: max-content !important;
+  height: auto !important;
+  margin-right: 5px;
+}
+
+.caja {
+  /* height: 3.5em !important; */
+  border: 0 !important;
+  border-bottom: 1px solid #999999 !important;
+  /* margin: 0 !important; */
+  margin-bottom: 23px;
+}
+
+.gender-icon {
+  margin-right: 2em;
+  color: black;
+  padding: 0;
+  margin: 0;
+}
+
+.is-invalid {
+  background-position: right calc(.375em + .1rem) top 0.6rem !important;
+}
+
+.gender-etiqueta {
+  padding: 0.8rem 0 !important;
+}
+
+.inputs-color {
+  color: #212529;
+}
+
+.gender-options {
+  font-size: 0.8em;
+}
