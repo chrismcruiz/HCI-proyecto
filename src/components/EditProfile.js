@@ -80,7 +80,7 @@ const EditProfile = ({ userData, idUser }) => {
                 className="form-control txt-area"
                 name="description"
                 placeholder="Añade una descripción breve de tí..."
-                style={{height: '6em'}}
+                style={{height: '8em'}}
               />
               <label className="label_inputs" htmlFor="description">
                 Añade una breve descripción tuya...
@@ -96,7 +96,7 @@ const EditProfile = ({ userData, idUser }) => {
               <ErrorMessage name="name" component="div" className="invalid-feedback" />
             </div>
             <InputFieldVariation label="Fecha de Nacimiento" name="birthday" type="date" />
-            <SelectField label="Carrera" name="career" options={carreras} />
+            <SelectField label="Especialidad o intereses" name="career" options={carreras} />
 
             <LoadingButton
               loading={isLoading}

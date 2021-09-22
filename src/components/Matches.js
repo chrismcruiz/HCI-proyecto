@@ -65,7 +65,7 @@ const Matches = ({ userData }) => {
             aria-controls="home"
             aria-selected="true"
           >
-            Matches
+            Contactos
           </button>
         </li>
         <li className="nav-item" role="presentation">
@@ -127,7 +127,7 @@ const Matches = ({ userData }) => {
                     <Tooltip title="Ver perfil">
                       <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />
                     </ Tooltip>
-                    <Tooltip title="Eliminar match">
+                    <Tooltip title="Eliminar contacto">
                       <DeleteOutlineIcon onClick={() => handleShowInvalid(tarjeta._id)} />
                     </ Tooltip>
                   </ul>
