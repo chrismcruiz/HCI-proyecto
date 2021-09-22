@@ -10,7 +10,7 @@ const InputField = ({ label, classes, ...props }) => {
                 <i className={`zmdi ${classes}`}></i>
             </label>
             <input
-                className={`${meta.touched ? meta.error ? 'is-invalid' : 'is-valid' : null}`}
+                className={`inputs-color ${meta.touched ? meta.error ? 'is-invalid' : 'is-valid' : null}`}
                 {...field} {...props}
                 placeholder={label}
                 autoComplete="off"
