@@ -2,3 +2,15 @@
     color: red;
     border: 5px solid;
 }
+
+.navbar{
+    background: linear-gradient(to bottom,#37FF00, white);
+}
+
+.altura{
+    height: 100vh;
+}
+
+.content img {
+	vertical-align:middle;
+}
