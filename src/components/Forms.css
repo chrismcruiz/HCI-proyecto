@@ -498,3 +498,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         position: absolute;
         left: 0;
 }
+
+.gender-label {
+  font-size: 1em;
+}
+
+.gender-options {
+  font-size: 0.8em;
+}
