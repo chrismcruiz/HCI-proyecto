@@ -14,6 +14,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import { SignUpFormValidation } from "../utils/FormValidation"
 import { DatePicker } from '@mui/lab';
 import './Forms.css'
+import Navbar2 from './Navbar2'
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
@@ -68,66 +69,68 @@ const SignupForm = () => {
   }
 
   return (
-    <Formik
-      initialValues={{
-        name: "",
-        email: "",
-        birthday: "",
-        gender: '',
-        career: "",
-        photo: "",
-        password: "",
-        confirmPassword: "",
-        terms: false,
-      }}
-      validationSchema={SignUpFormValidation}
-      onSubmit={onSignUp}
-    >
-      {({ errors, touched, setFieldValue }) => (
-        <div className="">
-          <section className="signup">
-            <div className="container-forms">
-              <div class="signup-content">
-                <div class="signup-form">
-                  <h2 class="form-title h2-login-register">Registro</h2>
-                  <Form className="register-form">
-                    <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
-                    <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
-                    <InputField label="Fecha de Nacimiento" classes="" name="birthday" type="date" />
-                    <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} />
-                    <SelectField label="Especialidad o intereses" classes="" name="career" options={carreras} />
-                  
-                    <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
-                    <InputField label="Confirmar contraseña" classes="zmdi-lock-outline" name="confirmPassword" type="password" />
+    <div>
+      <Navbar2 />
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          birthday: "",
+          gender: '',
+          career: "",
+          photo: "",
+          password: "",
+          confirmPassword: "",
+          terms: false,
+        }}
+        validationSchema={SignUpFormValidation}
+        onSubmit={onSignUp}
+      >
+        {({ errors, touched, setFieldValue }) => (
+          <div className="">
+            <section className="signup">
+              <div className="container-forms">
+                <div class="signup-content">
+                  <div class="signup-form">
+                    <h2 class="form-title h2-login-register">Registro</h2>
+                    <Form className="register-form">
+                      <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
+                      <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
+                      <InputField label="Fecha de Nacimiento" classes="" name="birthday" type="date" />
+                      <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} />
+                      <SelectField label="Especialidad o intereses" classes="" name="career" options={carreras} />
 
-                    {/****************** Términos y condiciones ******************/}
-                    <div className="form-group">
-                      <Field id="terms" type="checkbox" name="terms" className={`me-2 agree-term ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
-                      <label htmlFor="terms" className="label-agree-term">Acepto los <a href="#" class="term-service">términos y condiciones</a></label>
-                      <ErrorMessage name="terms" component="div" className="invalid-feedback" />
-                    </div>
-                    <div class="form-group form-button">
-                      <input type="submit" name="signup" id="signup" class="form-submit" value="Registrarme" />
+                      <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
+                      <InputField label="Confirmar contraseña" classes="zmdi-lock-outline" name="confirmPassword" type="password" />
 
-                      {/****************** Resetear formulario ******************/}
-                      <div className="d-inline-flex justify-content-center align-items-center ms-5">
-                        <Tooltip title="Limpiar Formulario" placement="down">
-                          <IconButton type="reset" className="resetForm" aria-label="reset form">
-                            <RefreshIcon />
-                          </IconButton>
-                        </Tooltip>
+                      {/****************** Términos y condiciones ******************/}
+                      <div className="form-group">
+                        <Field id="terms" type="checkbox" name="terms" className={`me-2 agree-term ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
+                        <label htmlFor="terms" className="label-agree-term">Acepto los <a href="#" class="term-service">términos y condiciones</a></label>
+                        <ErrorMessage name="terms" component="div" className="invalid-feedback" />
                       </div>
-                    </div>
-                  </Form>
-                </div>
-                <div class="signup-image">
-                  <figure className="figure-login-register"><img className="img-login-register" src="images/signup-image.jpg" alt="sing up image" /></figure>
-                  <a href="/login" class="signup-image-link">Ya estoy registrado</a>
+                      <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Registrarme" />
+
+                        {/****************** Resetear formulario ******************/}
+                        <div className="d-inline-flex justify-content-center align-items-center ms-5">
+                          <Tooltip title="Limpiar Formulario" placement="down">
+                            <IconButton type="reset" className="resetForm" aria-label="reset form">
+                              <RefreshIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </Form>
+                  </div>
+                  <div class="signup-image">
+                    <figure className="figure-login-register"><img className="img-login-register" src="images/signup-image.jpg" alt="sing up image" /></figure>
+                    <a href="/login" class="signup-image-link">Ya estoy registrado</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-          {/* <a href="/login" className="a_hover_form_login_registro">
+            </section>
+            {/* <a href="/login" className="a_hover_form_login_registro">
             ¿Ya tienes una cuenta?
             <strong
               className="a_hover_registrarse"
@@ -135,14 +138,14 @@ const SignupForm = () => {
               Inicia sesión
             </strong>
           </a> */}
-          {/****************** Modal para el registro satisfactorio ******************/}
-          <ModalForm show={showValid} success={true} title="!Correcto!" message="Registro realizado satisfactoriamente!" hide={handleCloseValid} />
-          {/****************** Modal para el registro fallido ******************/}
-          <ModalForm show={showInvalid} success={false} title="Ooops!" message={signUpError} hide={handleCloseInvalid} />
-        </div>
-      )}
-    </Formik>
-  );
+            {/****************** Modal para el registro satisfactorio ******************/}
+            <ModalForm show={showValid} success={true} title="!Correcto!" message="Registro realizado satisfactoriamente!" hide={handleCloseValid} />
+            {/****************** Modal para el registro fallido ******************/}
+            <ModalForm show={showInvalid} success={false} title="Ooops!" message={signUpError} hide={handleCloseInvalid} />
+          </div>
+        )}
+      </Formik>
+    </div>)
 };
 
 export default SignupForm

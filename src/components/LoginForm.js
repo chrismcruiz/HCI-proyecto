@@ -8,6 +8,7 @@ import { Formik, Form } from "formik";
 import { LoginFormValidation } from "../utils/FormValidation"
 import { Modal, Alert } from "react-bootstrap";
 import './Forms.css'
+import Navbar2 from './Navbar2'
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
@@ -50,6 +51,7 @@ const LoginForm = () => {
 
   return (
     <div>
+      <Navbar2 />
       <Formik
         initialValues={{
           email: "",
