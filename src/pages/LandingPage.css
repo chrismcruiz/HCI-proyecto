@@ -33,3 +33,13 @@
 .footer__icons {
     margin-right: 1em;
 }
+
+.guia {
+    color: black;
+}
+
+.entrar{
+    color: white !important;
+    text-decoration:  none !important;
+}
+

@@ -7,6 +7,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import { Tooltip } from '@material-ui/core';
 
 // Todo va dentro del "div"
@@ -15,12 +16,12 @@ import { Tooltip } from '@material-ui/core';
 const LandingPage = () => {
     return (
         <div>
-            <div style={{display: "flex", justifyContent:"flex-end"}}>
+            {/* <div style={{display: "flex", justifyContent:"flex-end"}}>
                     <a className="me-3 mt-2" href="/login">Entrar</a>
                     <a className="me-3 mt-2" href="/signup">Regístrarme</a>
-            </div>
-            <h1>Aquí va una landing page :D</h1>
-            <h2 className="lolcito">Viva el lolcito</h2>
+            </div> */}
+            {/* <h1>Aquí va una landing page :D</h1>
+            <h2 className="lolcito">Viva el lolcito</h2> */}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <a class="navbar-brand " href="#">
@@ -53,7 +54,7 @@ const LandingPage = () => {
                             </li>
                         </ul>
                         <form class="d-flex justify-content-around p-2">
-                            <button class="btn btn-success" type="submit" href="/login">Entrar</button>
+                            <button class="btn btn-success" type="submit"><a className="entrar" href="/login">Entrar</a></button>
                         </form>
                     </div>
                 </div>
@@ -70,22 +71,22 @@ const LandingPage = () => {
                         <div class="carousel-inner">
                             <div class="carousel-item active altura">
                                 <img src="/assets/image1.jpg" class="d-block w-100 h-100"  alt="..."></img>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Conoce</h5>
+                                <div class="carousel-caption d-none d-md-block carruselgrad">
+                                    <h1>Conoce</h1>
                                     <p>Encuentra y socializa con las personas que te ayudaran en tus proyectos ya sean propios o ajenos.</p>
                                 </div>
                             </div>
                             <div class="carousel-item altura">
                                 <img src="/assets/image2.jpg" class="d-block w-100 h-100"   alt="..."></img>
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>Trabaja</h5>
+                                    <h1>Trabaja</h1>
                                     <p>Muestra tus habilidades y gana reputación  para que los demás se fijen en tu trabajo.</p>
                                 </div>
                             </div>
                             <div class="carousel-item altura">
                                 <img src="/assets/image3.jpg" class="d-block w-100 h-100"  alt="..."></img>
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>Triunfa</h5>
+                                    <h1>Triunfa</h1>
                                     <p>Cumple tus sueños, encamina tu negocio y tu vida profesional al éxito.</p>
                                 </div>
                             </div>
@@ -102,6 +103,14 @@ const LandingPage = () => {
                 </div>
                 <div></div>
             </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a><br></br></a>
+                <a class="btn btn-primary btn-lg" href="/login" role="button">Inicia Sesión</a>
+                <a><br></br></a>
+                <a class="btn btn-primary btn-lg" href="/signup" role="button">Registrate</a>
+                <a><br></br></a>
+            </div>
+            <div className="footer" height="1000"><a><br></br><br></br><br></br><br></br><br></br><br></br></a></div>
             <div class="container">
                 <div class="row footer fixed-bottom ">
                     <div class="col">
@@ -109,9 +118,9 @@ const LandingPage = () => {
                     </div>
                     <div class="col-6">
                         
-                        <div class="row justify-content-center p-4">
+                        <div class="row justify-content-center p-2">
                             <div class="col">
-                                <p>Síguenos en:</p>
+                                <p>Síguenos:</p>
                             </div>
                             <div class="col">
                                 <Tooltip title="Twitter">
@@ -155,6 +164,19 @@ const LandingPage = () => {
                         
                                 </Tooltip>
                             </div>
+                            <div class="col">
+                                <Tooltip title="Instagram">
+                            
+                                    <InstagramIcon className="icon_color" />
+                        
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p>Contáctanos al 6363636 / o escríbenos a trade_ur_self@tu.com.co</p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p>© Todos los Derechos reservados 2021</p>
                         </div>
                     </div>
                     <div class="col">
