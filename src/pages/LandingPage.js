@@ -16,16 +16,26 @@ import Navbar2 from '../components/Navbar2'
 const LandingPage = () => {
     return (
         <div>
-            {/* <div style={{display: "flex", justifyContent:"flex-end"}}>
-                    <a className="me-3 mt-2" href="/login">Entrar</a>
-                    <a className="me-3 mt-2" href="/signup">Regístrarme</a>
-            </div> */}
-            {/* <h1>Aquí va una landing page :D</h1>
-            <h2 className="lolcito">Viva el lolcito</h2> */}
-            <Navbar2 />
-            <div class="row justify-content-center">
-                <div></div>
-                <div class="col-sm-8">
+            
+            {/* Header */}
+            <header id="header" className="header container-fluid">
+                <Navbar2 />
+                <div className="row">
+                    <div className="col-md-7">
+                        <h1 className="title">Encuentra nuevas oportunidades de trabajo</h1>
+                        <p className="motto">Pon a prueba tus habilidades y conocimientos para conformar equipos de trabajo.</p>
+                        <button className="btn btn-lg signup-button" type="button"><a className="iconos" href="/signup"><i class="fas fa-user-plus"></i> Regístrate</a></button>
+                    </div>
+                    <div className="col-md-5">
+                        <img className="header-img" src='/assets/work.png' />
+                    </div>
+                    
+                </div>
+            </header>
+
+            {/* Carrusel */}
+            <div id="carrusel" class="row justify-content-center carrusel">
+                <div class="col-md-10">
                     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -33,22 +43,22 @@ const LandingPage = () => {
                             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
-                            <div class="carousel-item active altura">
-                                <img src="/assets/image1.jpg" class="d-block w-100 h-100"  alt="..."></img>
+                            <div class="carousel-item active">
+                                <img src="/assets/image1.jpg" class="d-block w-100 carrusel-img"  alt="..."></img>
                                 <div class="carousel-caption d-none d-md-block carruselgrad">
                                     <h1>Conoce</h1>
                                     <p>Encuentra y socializa con las personas que te ayudaran en tus proyectos ya sean propios o ajenos.</p>
                                 </div>
                             </div>
-                            <div class="carousel-item altura">
-                                <img src="/assets/image2.jpg" class="d-block w-100 h-100"   alt="..."></img>
+                            <div class="carousel-item">
+                                <img src="/assets/image2.jpg" class="d-block w-100 carrusel-img"   alt="..."></img>
                                 <div class="carousel-caption d-none d-md-block">
                                     <h1>Trabaja</h1>
                                     <p>Muestra tus habilidades y gana reputación  para que los demás se fijen en tu trabajo.</p>
                                 </div>
                             </div>
-                            <div class="carousel-item altura">
-                                <img src="/assets/image3.jpg" class="d-block w-100 h-100"  alt="..."></img>
+                            <div class="carousel-item">
+                                <img src="/assets/image3.jpg" class="d-block w-100 carrusel-img"  alt="..."></img>
                                 <div class="carousel-caption d-none d-md-block">
                                     <h1>Triunfa</h1>
                                     <p>Cumple tus sueños, encamina tu negocio y tu vida profesional al éxito.</p>
@@ -67,16 +77,18 @@ const LandingPage = () => {
                 </div>
                 <div></div>
             </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
+            {/* <div class="d-grid gap-2 col-6 mx-auto">
                 <a><br></br></a>
                 <a class="btn btn-primary btn-lg" href="/login" role="button">Inicia Sesión</a>
                 <a><br></br></a>
                 <a class="btn btn-primary btn-lg" href="/signup" role="button">Registrate</a>
                 <a><br></br></a>
-            </div>
-            <div className="footer" height="1000"><a><br></br><br></br><br></br><br></br><br></br><br></br></a></div>
-            <div class="container">
-                <div class="row footer fixed-bottom ">
+            </div> */}
+
+          
+            {/* Footer */}
+            <footer class="container-fluid footer">
+                <div class="row">
                     <div class="col">
                         <img className="logo" src='/assets/logon.jpg' alt="" width="100" height="100" className="d-inline-block align-text-top" onClick={() => window.location.reload()} /> 
                     </div>
@@ -147,7 +159,7 @@ const LandingPage = () => {
 
                     </div>
                 </div>
-            </div>
+            </footer>
         </div>
     )
 }

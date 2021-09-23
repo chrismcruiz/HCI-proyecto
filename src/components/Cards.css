@@ -2,21 +2,12 @@
   overflow: hidden;
 } */
 
-.main-contenido {
-  height: 100%;
-  width: 100%;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: end; */
-  /* justify-content: space-evenly; */
-
-}
 
 .card__container {
-    display: flex;
-    justify-content: center;
-    margin-top: 12vh;
+  width: 90vw;
+  max-width: 260px;
+  height: 300px;
+  margin-top: 4rem;
 
     /* position: relative; */
   }
@@ -28,29 +19,26 @@
   }
 
 
-.card {
+  .card {
     position: relative;
     background-color: #fff;
-    width: 32vw;
-    height: 50vh;
-    padding: 20px;
-    max-width: 85vw;
-    min-height: 400px;
+    width: 80vw;
+    /* max-width: 260px; */
+    max-width: 290px;
+    /* height: 300px; */
+    height: 320px;
+    box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.0065);
-    /* display: flex; */
   }
   
-  .card > h3 {
-    color: white;
+  .card h3 {
     position: absolute;
-    bottom: 10px;
-    font-family: "Roboto", sans-serif;
-    letter-spacing: 3px;
+    bottom: 0;
+    margin: 10px;
+    color: #fff;
   }
-  
 
   
   .buttons-container {
@@ -59,11 +47,8 @@
   }
   
   .buttons {
+    margin: 35px;
     display: flex;
-    justify-content: center;
-    margin-top: 62%;
-    /* align-items: flex-end;
-    margin-bottom: 20vh; */
   }
   
   .buttons button:hover {
@@ -133,17 +118,16 @@
   }
 
   .text__information {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    color: #212529;
+    height: 28px;
+    justify-content: center;
+    display: flex;
+    color: #212259;
     animation-name: popup;
     animation-duration: 800ms;
-    padding: 1rem;
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-    text-align: center;
+
+    /* Pa aumentar el height de las columnas */
+    margin-bottom: 4rem;
   }
   
   @keyframes popup {
@@ -179,7 +163,7 @@
   font-family: "Dynalight", cursive;
   animation: reveal 1000ms ease-in-out forwards 200ms,
     glow 2000ms linear infinite 2000ms;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
   /* top: 38%;
   left: 50%; */
   /* position: absolute; */

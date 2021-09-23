@@ -33,13 +33,13 @@ const Cards = ({ userData, idUser }) => {
 
   const setMatch = (idUser, idPersonLiked) => {
     const body = [
-      { 
-        _id:idUser, 
-        liked:idPersonLiked 
-      }, 
-      { 
-        _id:idPersonLiked,  
-        liked:idUser
+      {
+        _id: idUser,
+        liked: idPersonLiked
+      },
+      {
+        _id: idPersonLiked,
+        liked: idUser
       }
     ];
     axios
@@ -116,7 +116,7 @@ const Cards = ({ userData, idUser }) => {
       (person) => !alreadyRemoved.includes(person._id)
     );
     if (cardsLeft.length) {
-      const currentCard = cardsLeft[cardsLeft.length - 1]._id; 
+      const currentCard = cardsLeft[cardsLeft.length - 1]._id;
       const index = db.map((person) => person._id).indexOf(currentCard);
       childRefs[index].current.onClick = () => console.log(`Clickaste la tarjeta número ${index}`)
     }
@@ -152,7 +152,7 @@ const Cards = ({ userData, idUser }) => {
 
   if (users.length === 0 && !matches) {
     return (
-      <div className="no-people align-bottom">
+      <div className="d-flex justify-content-center align-items-center vh-100 no-people align-bottom">
         No hay personas para mostrar...
       </div>
     );
@@ -161,7 +161,7 @@ const Cards = ({ userData, idUser }) => {
   if (matches) {
     return (
       <div>
-        <div className="alert_match">¡Match!</div>
+        <div className="d-flex justify-content-center align-items-center vh-100 alert_match">¡A trabajar!</div>
         {quitarMatch()}
       </div>
     );
@@ -169,19 +169,19 @@ const Cards = ({ userData, idUser }) => {
 
   if (isLoading) {
     return (
-      <div className="vertical-center">
+      <div className="d-flex justify-content-center align-items-center vh-100">
         <CircularProgress color="primary" size={60} />
       </div>
     );
   }
 
   return (
-    <div className="main-contenido">
+    <>
       <div className="card__container">
         {users.map((character, index) =>
           <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >
             <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
-              <h3>{character.name} - {calcularEdad(character.birthday).toString()}</h3>
+              <h3>{character.name}</h3>
             </div>
           </TinderCard>
         )}
@@ -199,7 +199,7 @@ const Cards = ({ userData, idUser }) => {
       <div className="info-container">
         {lastDirection ? <h2 key={lastDirection} className='text__information'>Deslizaste hacía la {lastDirection === 'left' ? 'izquierda' : 'derecha'}</h2> : <h2 className='text__information'>¡Desliza una tarjeta o presiona un botón para continuar!</h2>}
       </div>
-    </div>
+    </>
   );
 }
 

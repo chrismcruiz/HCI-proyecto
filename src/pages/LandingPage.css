@@ -1,25 +1,108 @@
-.lolcito {
-    color: red;
-    border: 5px solid;
+/* Header */
+
+.header {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #3D9368;
+    color: #fff;
+    padding: 3% 10%;
 }
 
-.navbar{
-    background: linear-gradient(to bottom,#37FF00, white);
+
+.header-img {
+    width: 90%;
+    margin-top: 10px;
 }
 
-.altura{
-    height: 100vh;
+.title {
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 1.5; 
+    /* padding-right: 45%; */
 }
+
+.motto {
+    font-size: 0.8rem;
+    padding-right: 30%;
+    color: #EEFDF4;
+    font-weight: 100;
+}
+
+/* Navbar */
+
+nav.nav-header {
+    padding: 0 0 4.5rem;
+}
+
+.home-brand {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-header-item {
+    padding: 0 18px;
+}
+
+.nav-header-link {
+    font-size: 1.2em;
+    font-weight: 100;
+}
+
+/* Botones */
+
+.signup-button {
+    margin-top: 5%;
+    color: #EEFDF4;
+    border-radius: 50px;
+    font-weight: 400;
+    /* background-color: #008EC2; */
+    background-color: #394B40;
+    /* width: 9rem; */
+}
+
+.login-button {
+    background-color: #394B40;
+    /* color: #EEFDF4; */
+    height: 2.5rem;
+    width: 8rem;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: 400;
+    padding: 0;
+}
+
+a.iconos {
+   text-decoration: none;
+   color: #EEFDF4;
+   /* margin-left: 5px; */
+}
+
+a.iconos:hover {
+    color:#212529;
+}
+
+/* Carrusel */
+
+.carrusel {
+    padding: 7% 5%;
+}
+
+.carrusel-img {
+    height: 650px;
+}
+
 
 .content img {
 	vertical-align:middle;
 }
 
+/* Footer */
+
 .footer {
-    width: 100%;
     background-color: black;
     color: white;
     text-align: center;
+    padding: 2%;
 }
 
 .icon_color {

@@ -43,8 +43,8 @@ const EditProfile = ({ userData, idUser }) => {
   };
 
   return (
-    <div className="fondo-blanco rounded-3">
-      <div className="div_imagen_edit_perfil mb-3">
+    <>
+      <div className="div_imagen_edit_perfil mt-3 mb-3">
         <img className="imagen_persona_perfil" alt="" src={`/images/${userData.photo}`} />
       </div>
       <Formik
@@ -121,7 +121,7 @@ const EditProfile = ({ userData, idUser }) => {
           </p> */}
     
         </div>
-    </div>
+    </>
   );
 };
 

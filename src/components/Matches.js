@@ -42,61 +42,63 @@ const Matches = ({ userData }) => {
 
   const deleteUser = () => {
     axios.post("http://localhost:4000/app/deleteMatch", [idMatch, userData._id])
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
     handleCloseInvalid()
   }
 
   return (
     <>
-      <ul
-        className="nav nav-tabs mb-3 d-flex justify-content-between"
-        id="myTab"
-        role="tablist"
-      >
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link active links_items"
-            id="home-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#home"
-            type="button"
-            role="tab"
-            aria-controls="home"
-            aria-selected="true"
-          >
-            Contactos
-          </button>
-        </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link links_items"
-            id="profile-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#profile"
-            type="button"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-          >
-            Grupos
-          </button>
-        </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link links_items"
-            id="contact-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#contact"
-            type="button"
-            role="tab"
-            aria-controls="contact"
-            aria-selected="false"
-          >
-            Mis Grupos
-          </button>
-        </li>
-      </ul>
+      <div class="mt-3">
+        <ul
+          className="nav nav-tabs mb-3 d-flex justify-content-between"
+          id="myTab"
+          role="tablist"
+        >
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link active links_items"
+              id="home-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#home"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Contactos
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link links_items"
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Grupos
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link links_items"
+              id="contact-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#contact"
+              type="button"
+              role="tab"
+              aria-controls="contact"
+              aria-selected="false"
+            >
+              Mis Grupos
+            </button>
+          </li>
+        </ul>
+      </div>
       <div className="tab-content" id="myTabContent">
         <div
           className="tab-pane fade show active"
@@ -116,8 +118,8 @@ const Matches = ({ userData }) => {
                       className="imagen_personas_matches rounded-2"
                       alt=""
                       src={`/images/${tarjeta.photo}`}
-                      width="120"
-                      height="120"
+                      width="110"
+                      height="110"
                     />
                   </button>
                   <ul className="dropdown-menu options-menu">
@@ -148,7 +150,41 @@ const Matches = ({ userData }) => {
           role="tabpanel"
           aria-labelledby="profile-tab"
         >
-          <h6 className="mt-3">No hay grupos para mostrar</h6>
+          {/* <h6 className="mt-3">
+            No hay grupos para mostrar
+            </h6> */}
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class ="d-flex gap-2 w-100 justify-content-between">
+              <div>
+              <h6 class ="mb-0">List group item heading</h6>
+              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+              </div>
+              <small class ="opacity-50 text-nowrap">now</small>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class ="d-flex gap-2 w-100 justify-content-between">
+              <div>
+              <h6 class ="mb-0">Another title here</h6>
+              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
+              </div>
+              <small class ="opacity-50 text-nowrap">3d</small>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class ="d-flex gap-2 w-100 justify-content-between">
+              <div>
+              <h6 class ="mb-0">Third heading</h6>
+              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+              </div>
+              <small class ="opacity-50 text-nowrap">1w</small>
+              </div>
+            </a>
+          </div>
         </div>
         <div
           className="tab-pane fade"
@@ -156,7 +192,39 @@ const Matches = ({ userData }) => {
           role="tabpanel"
           aria-labelledby="contact-tab"
         >
-          <h6 className="mt-3">No hay grupos para mostrar</h6>
+          {/* <h6 className="mt-3">No hay grupos para mostrar</h6> */}
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class ="d-flex gap-2 w-100 justify-content-between">
+              <div>
+              <h6 class ="mb-0">List group item heading</h6>
+              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+              </div>
+              <small class ="opacity-50 text-nowrap">now</small>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class ="d-flex gap-2 w-100 justify-content-between">
+              <div>
+              <h6 class ="mb-0">Another title here</h6>
+              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
+              </div>
+              <small class ="opacity-50 text-nowrap">3d</small>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class ="d-flex gap-2 w-100 justify-content-between">
+              <div>
+              <h6 class ="mb-0">Third heading</h6>
+              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+              </div>
+              <small class ="opacity-50 text-nowrap">1w</small>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
       <Modal
@@ -171,11 +239,11 @@ const Matches = ({ userData }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <img className="match_img" src={`/images/${dataMatch.photo}`} width='300' height='300' />
-           <p className="match_description">"{!dataMatch.description ? 'Sin descripción':dataMatch.description}"</p>
-           <h4>Especialidades</h4>
+          <img className="match_img" src={`/images/${dataMatch.photo}`} width='300' height='300' />
+          <p className="match_description">"{!dataMatch.description ? 'Sin descripción' : dataMatch.description}"</p>
+          <h4>Especialidades</h4>
         </Modal.Body>
-      </Modal> 
+      </Modal>
       <ModalForm show={showInvalid} success={false} title="Advertencia" message={'¿Estás seguro que quieres eliminar este contacto?'} hide={handleCloseInvalid} btn_close={true} type="delete" delete={deleteUser} />
     </>
   );

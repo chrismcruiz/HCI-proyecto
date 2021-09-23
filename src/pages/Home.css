@@ -14,24 +14,17 @@
   }
 
   
-.seccion_tarjetas {
-  height: 50em;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .bordes {
   border: 1px solid #dee2e6;
   border-radius: 5px;
 }
 
-.ancho_chr-3_5 {
-  /* width: 33.5% */
-  width: 33%;
+.contenido-principal {
+  padding: 2% 5%;
 }
 
-.ancho_chr-7_5 {
-  width: 62.5%;
+.col-izquierda {
+  margin-right: 2rem;
 }

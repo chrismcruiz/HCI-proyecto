@@ -10,22 +10,24 @@ const Home = ({ userData, idUser }) => {
     <div className="container-fluid">
       <div className="row">
         {/* Barra superior */}
-        <Navbar />
+        <div className="col">
+          <Navbar />
+        </div>
       </div>
-      <div className='container grid-row-inferior'>
-        <div className='row'>
-          <div className='px-0 bordes me-5 col col-lg-4'>
-            {/* Menú lateral */}
-            <Sidebar userData={userData} idUser={idUser} />
-          </div>
-          <div className='px-0 bordes col col-lg-7'>
-            <div className='seccion_tarjetas'>
-              {/* Tarjetas */}
-              <Cards idUser={idUser} userData={userData} />
-            </div>
+
+      <div className='row contenido-principal'>
+        <div className='bordes col-md-4 col-izquierda'>
+          {/* Menú lateral */}
+          <Sidebar userData={userData} idUser={idUser} />
+        </div>
+        <div className='bordes col-md-7'>
+          <div className='d-flex flex-column align-items-center text-center'>
+            {/* Tarjetas */}
+            <Cards idUser={idUser} userData={userData} />
           </div>
         </div>
       </div>
+
     </div>
 
   );

@@ -12,9 +12,9 @@ const Sidebar = ({ userData, idUser }) => {
   const handlePerfilShow = () => setPerfilShow(!perfilShow)
 
   return (
-    <div className="d-flex flex-column h-100">
-      <div className="menu_arriba border-bottom">
-        <div className="py-1 px-4 d-flex justify-content-between align-items-center">
+    <>
+      <div className="row border-bottom">
+        <div className="col-10 col-md-9 p-1">
           <div className="d-flex align-items-center">
             {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
             <img
@@ -22,20 +22,22 @@ const Sidebar = ({ userData, idUser }) => {
               alt=""
               src={`/images/${userData.photo}`}
             />
-            <p className="ms-3 m-0 text-titulos-1 texto-negro">{userData.name}</p>
-          </div>
-          <div>
-            <Tooltip title="Editar perfil">
-              <IconButton onClick={handlePerfilShow}>
-                <CreateIcon
-                ></CreateIcon>
-              </IconButton>
-            </Tooltip>
-            {/* <ExitToAppIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ExitToAppIcon> */}
+            <p className="m-0">{userData.name}</p>
           </div>
         </div>
+        <div className="col-2 col-md-3 d-flex align-items-center">
+          <Tooltip title="Editar perfil">
+            <IconButton onClick={handlePerfilShow}>
+              <CreateIcon
+              ></CreateIcon>
+            </IconButton>
+          </Tooltip>
+        </div>
+
+
+        {/* <ExitToAppIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ExitToAppIcon> */}
       </div>
-      <div className="menu-abajo fondo-blanco rounded-3 p-3 pb-0 mb-0">
+      <div className="row">
         {perfilShow ? (
           // Ventana de editar perfil
           <EditProfile userData={userData} idUser={idUser} />
@@ -44,7 +46,7 @@ const Sidebar = ({ userData, idUser }) => {
           <Matches userData={userData} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

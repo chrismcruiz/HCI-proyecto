@@ -57,8 +57,8 @@ const App = () => {
   // Si está cargando muestro el spinner
   if (isLoading) {
     return (
-      <div className="vertical-center">
-        <CircularProgress color="primary" size={60} />
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <CircularProgress color="primary" size={50} />
       </div>
     );
   }

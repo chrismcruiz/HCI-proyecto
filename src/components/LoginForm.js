@@ -43,7 +43,7 @@ const LoginForm = () => {
   // Si está cargando muestro el spinner
   if (isLoading) {
     return (
-      <div className="vertical-center">
+      <div className="d-flex justify-content-center align-items-center vh-100">
         <CircularProgress color="primary" size={60} />
       </div>
     );
@@ -51,7 +51,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <Navbar2 />
+      {/* <Navbar2 /> */}
       <Formik
         initialValues={{
           email: "",

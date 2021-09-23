@@ -70,7 +70,7 @@ const SignupForm = () => {
 
   return (
     <div>
-      <Navbar2 />
+      {/* <Navbar2 /> */}
       <Formik
         initialValues={{
           name: "",
