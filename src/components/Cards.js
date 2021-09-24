@@ -8,13 +8,11 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import "./Cards.css"
 import { calcularEdad } from "../utils/Utils";
 import { CircularProgress } from "@material-ui/core";
-// import Buttons from "../components/Buttons"
-
+import { toast } from 'react-toastify';
 
 const Cards = ({ userData, idUser }) => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [matches, setMatches] = useState(false);
 
   const filtrarUsuarios = (users) => {
     const usuarios = users.filter((user) => (user._id !== idUser && !user.admin && !userData.liked.includes(user._id)))
@@ -58,7 +56,9 @@ const Cards = ({ userData, idUser }) => {
     if (leGustan.includes(idUser)) match = true;
     if (match) {
       setMatch(idUser, idPersonLiked);
-      mostrarMatch();
+      console.log(userData.matches)
+
+      notify();
     }
   };
 
@@ -75,20 +75,6 @@ const Cards = ({ userData, idUser }) => {
         console.log(error);
       });
   };
-
-
-  const mostrarMatch = () => {
-    setTimeout(() => {
-      setMatches(true);
-    }, 1100);
-  };
-
-  const quitarMatch = () => {
-    setTimeout(() => {
-      setMatches(false);
-    }, 3500);
-  };
-
 
   // Mostrar tarjetas y funcionalidad de los botones
 
@@ -125,7 +111,7 @@ const Cards = ({ userData, idUser }) => {
   // Match
   const swiped = (direction, nameToDelete) => {
     if (direction === 'right') {
-      setTimeout(() => enviarLike(idUser, nameToDelete), 1000)
+      setTimeout(() => enviarLike(idUser, nameToDelete), 500)
     }
     console.log('removing: ' + nameToDelete)
     setLastDirection(direction)
@@ -150,7 +136,20 @@ const Cards = ({ userData, idUser }) => {
     }
   };
 
-  if (users.length === 0 && !matches) {
+
+  const notify = () => {
+    toast.info('¡Nuevo Contacto!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+  };
+
+  if (users.length === 0) {
     return (
       <div className="d-flex justify-content-center align-items-center vh-100 no-people align-bottom">
         No hay personas para mostrar...
@@ -158,19 +157,11 @@ const Cards = ({ userData, idUser }) => {
     );
   }
 
-  if (matches) {
-    return (
-      <div>
-        <div className="d-flex justify-content-center align-items-center vh-100 alert_match">¡A trabajar!</div>
-        {quitarMatch()}
-      </div>
-    );
-  }
 
   if (isLoading) {
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
-        <CircularProgress color="primary" size={60} />
+        <CircularProgress color="primary" size={50} />
       </div>
     );
   }
@@ -181,7 +172,7 @@ const Cards = ({ userData, idUser }) => {
         {users.map((character, index) =>
           <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >
             <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
-              <h3>{character.name}</h3>
+              <h3>{character.name.split(" ").slice(0, 2).join(' ')}</h3>
             </div>
           </TinderCard>
         )}

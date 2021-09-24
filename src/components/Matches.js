@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import 'bootstrap/dist/js/bootstrap.min.js'
 import axios from "axios";
 import './Matches.css'
@@ -8,6 +8,8 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { Tooltip } from '@material-ui/core';
 import ModalForm from "./ModalForm"
 import { Modal } from "react-bootstrap";
+import { toast } from 'react-toastify';
+
 
 const Matches = ({ userData }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
@@ -15,19 +17,25 @@ const Matches = ({ userData }) => {
   const [tarjetas, setTarjetas] = useState([])
   const [idMatch, setIdMatch] = useState('')
   const [lgShow, setLgShow] = useState(false);
+
+
   const [dataMatch, setDataMatch] = useState({});
 
   // Esto podría no ser necesario!
   useEffect(async () => {
-    const response = await axios.get("http://localhost:4000/app/matches?_id=" + userData._id);
+    const response = await axios.post("http://localhost:4000/app/getInfo", {
+      _id: userData._id,})
     // console.log(response.data.matches)
-    if (response.status === 200 && response.data.matches.length > 0) {
-      const request = await axios.post('http://localhost:4000/app/getInfoMatches', { ids: response.data.matches })
+    if (response.status === 200) {
+      console.log(response.data[0].matches)
+      const request = await axios.post('http://localhost:4000/app/getInfoMatches', { ids: response.data[0].matches })
       if (request.status === 200) {
         setTarjetas(request.data)
       }
     }
   }, [tarjetas]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // console.log(tarjetas.length)
 
   const handleShowInvalid = (id) => {
     setIdMatch(id)
@@ -45,7 +53,20 @@ const Matches = ({ userData }) => {
       .then(response => console.log(response))
       .catch(error => console.log(error))
     handleCloseInvalid()
+    notify_borrado()
   }
+
+  const notify_borrado = () => {
+    toast.success('¡Contacto borrado satisfactoriamente!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+  };
 
   return (
     <>
@@ -106,11 +127,14 @@ const Matches = ({ userData }) => {
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <div className="d-flex flex-wrap justify-content-evenly">
-            {tarjetas.map((tarjeta, index) => (
+          
+          <div className="row p-3 text-center">
+            {!tarjetas.length ? (<p className="me-auto">Todavía no tienes ningún contacto.</p>)
+            :
+            tarjetas.map((tarjeta, index) => (
               <div
                 key={index}
-                className="div_imagen_personas_matches position-relative p-0 mx-0 mt-2 mb-4"
+                className="div_imagen_personas_matches mt-2 mb-3 col-4 col-sm-6 col-md-6 col-lg-4"
               >
                 <div className="dropdown">
                   <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
@@ -141,7 +165,9 @@ const Matches = ({ userData }) => {
                 </div>
               </div>
 
-            ))}
+            ))
+            }
+            
           </div>
         </div>
         <div
@@ -156,32 +182,32 @@ const Matches = ({ userData }) => {
           <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class ="d-flex gap-2 w-100 justify-content-between">
-              <div>
-              <h6 class ="mb-0">List group item heading</h6>
-              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-              </div>
-              <small class ="opacity-50 text-nowrap">now</small>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class ="d-flex gap-2 w-100 justify-content-between">
-              <div>
-              <h6 class ="mb-0">Another title here</h6>
-              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
-              </div>
-              <small class ="opacity-50 text-nowrap">3d</small>
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">List group item heading</h6>
+                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">now</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class ="d-flex gap-2 w-100 justify-content-between">
-              <div>
-              <h6 class ="mb-0">Third heading</h6>
-              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">Another title here</h6>
+                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">3d</small>
               </div>
-              <small class ="opacity-50 text-nowrap">1w</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">Third heading</h6>
+                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">1w</small>
               </div>
             </a>
           </div>
@@ -196,32 +222,32 @@ const Matches = ({ userData }) => {
           <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class ="d-flex gap-2 w-100 justify-content-between">
-              <div>
-              <h6 class ="mb-0">List group item heading</h6>
-              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-              </div>
-              <small class ="opacity-50 text-nowrap">now</small>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class ="d-flex gap-2 w-100 justify-content-between">
-              <div>
-              <h6 class ="mb-0">Another title here</h6>
-              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
-              </div>
-              <small class ="opacity-50 text-nowrap">3d</small>
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">List group item heading</h6>
+                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">now</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class ="d-flex gap-2 w-100 justify-content-between">
-              <div>
-              <h6 class ="mb-0">Third heading</h6>
-              <p class ="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">Another title here</h6>
+                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">3d</small>
               </div>
-              <small class ="opacity-50 text-nowrap">1w</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">Third heading</h6>
+                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">1w</small>
               </div>
             </a>
           </div>

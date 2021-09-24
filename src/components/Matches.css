@@ -9,7 +9,7 @@
     /* width: 102px;
     height: 145px; */
     transition: transform 0.2s;
-    flex-basis: 110px;
+    /* flex-basis: 100px; */
   }
 
 .div_imagen_personas_matches:hover {
@@ -29,12 +29,12 @@
 }
 
 .dropdown-menu {
-  min-width: 7.4rem;
+  min-width: 6.8rem;
 }
 
 .dropdown-menu.show {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .btn-close {

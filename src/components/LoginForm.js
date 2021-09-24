@@ -9,10 +9,12 @@ import { LoginFormValidation } from "../utils/FormValidation"
 import { Modal, Alert } from "react-bootstrap";
 import './Forms.css'
 import Navbar2 from './Navbar2'
+import { toast } from 'react-toastify';
+
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
-  const [signInError, setSignInError] = useState("");
+  // const [signInError, setSignInError] = useState("");
 
   // Función para loguearse y crear un token en el LocalStorage
 
@@ -26,12 +28,12 @@ const LoginForm = () => {
             token: response.data.token,
             idUser: response.data.id_user,
           })
-          setSignInError("");
+          // setSignInError("");
           window.location = '/home'
           setIsLoading(false);
         } else {
-          setSignInError(response.data.message);
           setIsLoading(false);
+          notify_error(response.data.message)
         }
       })
       .catch((error) => {
@@ -48,6 +50,18 @@ const LoginForm = () => {
       </div>
     );
   }
+
+  const notify_error = (msg) => {
+    toast.error(msg, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+  };
 
   return (
     <div>
@@ -71,9 +85,6 @@ const LoginForm = () => {
               <div class="signin-form">
                 <h2 class="form-title h2-login-register">Ingreso</h2>
                 <Form>
-                  {signInError ? (<Alert variant="danger">
-                    {signInError}
-                  </Alert>) : null}
                   <InputFieldVariation label="Correo" classes="zmdi-email" name="email" type="text" />
                   <InputFieldVariation label="Contraseña" classes="zmdi-lock" name="password" type="password" />
                   <div class="form-group form-button">

@@ -6,6 +6,7 @@ import './Home.css'
 // import Footer from "../components/Footer"
 
 const Home = ({ userData, idUser }) => {
+  console.log(userData)
   return (
     <div className="container-fluid">
       <div className="row">
@@ -16,11 +17,11 @@ const Home = ({ userData, idUser }) => {
       </div>
 
       <div className='row contenido-principal'>
-        <div className='bordes col-md-4 col-izquierda'>
+        <div className='bordes col-sm-6 col-md-5 col-izquierda'>
           {/* Menú lateral */}
           <Sidebar userData={userData} idUser={idUser} />
         </div>
-        <div className='bordes col-md-7'>
+        <div className='bordes col-sm-5 col-md-6'>
           <div className='d-flex flex-column align-items-center text-center'>
             {/* Tarjetas */}
             <Cards idUser={idUser} userData={userData} />

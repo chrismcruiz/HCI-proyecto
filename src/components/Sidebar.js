@@ -14,7 +14,7 @@ const Sidebar = ({ userData, idUser }) => {
   return (
     <>
       <div className="row border-bottom">
-        <div className="col-10 col-md-9 p-1">
+        <div className="col-10 p-1">
           <div className="d-flex align-items-center">
             {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
             <img
@@ -25,7 +25,7 @@ const Sidebar = ({ userData, idUser }) => {
             <p className="m-0">{userData.name}</p>
           </div>
         </div>
-        <div className="col-2 col-md-3 d-flex align-items-center">
+        <div className="col-2 d-flex align-items-center">
           <Tooltip title="Editar perfil">
             <IconButton onClick={handlePerfilShow}>
               <CreateIcon

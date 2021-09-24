@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
-import LandingPage  from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage";
 import { getFromStorage } from "./utils/storage";
 import {
   BrowserRouter as Router,
@@ -15,6 +15,8 @@ import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import SignupForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +31,7 @@ const App = () => {
     if (obj && obj.token) { // si hay token verifico el token en la bd y luego obtengo la info del usuario
       const { token, idUser } = obj;
       // verify token
-      try{
+      try {
         const response = await axios.get("http://localhost:4000/app/verify?token=" + token)
         if (response.status === 200) {
           setTokencito(token);
@@ -66,6 +68,7 @@ const App = () => {
   // Si no está cargando y HAY token muestro la vista home o admin dependiendo del rol
   return (
     <>
+      <ToastContainer />
       <Router>
         <Switch>
           <Route path="/home">
@@ -75,7 +78,7 @@ const App = () => {
             {tokencito ? <Redirect to="/home" /> : <LoginForm />}
           </Route>
           <Route path="/signup">
-            {tokencito ? <Redirect to="/home" /> : <SignupForm />}     
+            {tokencito ? <Redirect to="/home" /> : <SignupForm />}
           </Route>
           <Route path="/admin">
             {!tokencito ? <Redirect to="/" /> : !user.admin ? <Redirect to="/home" /> : <Admin userData={user} idUser={idUsuario} />}
