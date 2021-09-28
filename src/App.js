@@ -17,6 +17,9 @@ import SignupForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from './components/Header'
+import Chats from './components/Chats'
+import ChatScreen from './components/ChatScreen'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -72,13 +75,32 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/home">
-            {!tokencito ? <Redirect to="/" /> : !user.admin ? <Home userData={user} idUser={idUsuario} /> : <Redirect to="/admin" />}
+            {!tokencito ? 
+              <Redirect to="/" /> 
+              : 
+              !user.admin ? 
+                <>
+                  <Header />
+                  <Home userData={user} idUser={idUsuario} />
+                </>
+                : 
+                <Redirect to="/admin" />}
+            {/* <Home userData={user} idUser={idUsuario} /> */}
           </Route>
           <Route path="/login">
             {tokencito ? <Redirect to="/home" /> : <LoginForm />}
           </Route>
           <Route path="/signup">
             {tokencito ? <Redirect to="/home" /> : <SignupForm />}
+          </Route>
+          <Route path="/chat/:person">
+              <Header />
+              <ChatScreen />
+           </Route> 
+          <Route path="/chats">
+            <Header />
+            {/* <h1>Chat page</h1> */}
+            <Chats />
           </Route>
           <Route path="/admin">
             {!tokencito ? <Redirect to="/" /> : !user.admin ? <Redirect to="/home" /> : <Admin userData={user} idUser={idUsuario} />}

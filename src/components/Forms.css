@@ -217,15 +217,7 @@
       margin-bottom: 0px; 
      
   }
-  
-  input {
-    width: 100%;
-    display: block;
-    border: none;
-    border-bottom: 1px solid #999;
-    padding: 6px 30px;
-    font-family: Poppins;
-    box-sizing: border-box; }
+
     input::-webkit-input-placeholder {
       color: #999; }
     input::-moz-placeholder {

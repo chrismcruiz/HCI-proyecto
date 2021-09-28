@@ -22,3 +22,14 @@
 .txt-area {
     resize: none;
 }
+
+
+.input-edit {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+    font-family: Poppins;
+    box-sizing: border-box; 
+}

@@ -7,11 +7,12 @@ import { Tooltip } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logOut } from "../utils/CloseSession";
-import './Navbar.css'
+import { Link } from "react-router-dom";
+import './Header.css'
 
 const Navbar = () => {
     return (
-        <>
+        <div>
             <nav className="navbar navbar-light bg-white borde_inferior">
                 <div className="container-fluid">
                     <a className="navbar-brand vertical-center" href="/home">
@@ -31,15 +32,12 @@ const Navbar = () => {
                         </span>
                     </div>
                     <div className="navbar__icons">
-
-                        {/* <IconButton size="small" className="navbar__icons__group icono">
-                            <GroupIcon className="icon__color" />
-                        </IconButton> */}
-
-                        <Tooltip title="Chats">
+                        <Tooltip title="Mensajes">
+                            <Link to="/chats">
                             <IconButton size="small" className="navbar__icons__chat icono">
                                 <ChatBubbleOutlineIcon className="icon__color" />
                             </IconButton>
+                            </Link>
                         </Tooltip>
                         <Tooltip title="Cerrar sesión">
                             <IconButton size="small" className="navbar__icons__chat icono">
@@ -50,7 +48,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-        </>
+        </div>
     )
 }
 

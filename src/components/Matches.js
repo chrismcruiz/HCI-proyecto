@@ -265,7 +265,7 @@ const Matches = ({ userData }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img className="match_img" src={`/images/${dataMatch.photo}`} width='300' height='300' />
+          <img className="match_img" src={`/images/${dataMatch.photo}`} width='200' height='200' />
           <p className="match_description">"{!dataMatch.description ? 'Sin descripción' : dataMatch.description}"</p>
           <h4>Especialidades</h4>
         </Modal.Body>

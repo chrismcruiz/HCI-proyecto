@@ -8,7 +8,7 @@ const SelectFields = ({ label, options, name }) => {
        <label className="labels" htmlFor={field.name}>
           <i className='zmdi zmdi-graduation-cap'></i>
         </label>
-      <Field type="text" className={`${meta.touched ? meta.error ? 'is-invalid' : 'is-valid cool' : null}`} name={name} list={name} placeholder={label} />
+      <Field type="text" className={`input-edit ${meta.touched ? meta.error ? 'is-invalid' : 'is-valid cool' : null}`} name={name} list={name} placeholder={label} />
         <datalist id={name}>
           {options.map((carrera, index) => (
             <option key={index} value={carrera}>

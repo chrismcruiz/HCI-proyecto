@@ -16,9 +16,8 @@ import Navbar2 from '../components/Navbar2'
 const LandingPage = () => {
     return (
         <div>
-            
             {/* Header */}
-            <header id="header" className="header container-fluid">
+            <header id="header" className="header">
                 <Navbar2 />
                 <div className="row">
                     <div className="col-md-7">

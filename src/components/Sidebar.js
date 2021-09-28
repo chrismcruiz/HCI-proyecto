@@ -4,6 +4,7 @@ import Matches from "./Matches";
 import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from "@material-ui/icons/Create";
 import { Tooltip } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar'
 import './Sidebar.css'
 
 const Sidebar = ({ userData, idUser }) => {
@@ -17,9 +18,9 @@ const Sidebar = ({ userData, idUser }) => {
         <div className="col-10 p-1">
           <div className="d-flex align-items-center">
             {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
-            <img
-              className="imagen_perfil"
-              alt=""
+            <Avatar 
+              // alt={userData.name}
+              className="avatar-profile"
               src={`/images/${userData.photo}`}
             />
             <p className="m-0">{userData.name}</p>

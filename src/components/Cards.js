@@ -168,7 +168,7 @@ const Cards = ({ userData, idUser }) => {
 
   return (
     <>
-      <div className="card__container">
+      <div className="card__container d-flex justify-content-center mx-auto">
         {users.map((character, index) =>
           <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >
             <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
@@ -178,7 +178,7 @@ const Cards = ({ userData, idUser }) => {
         )}
       </div>
       {/* Botones */}
-      <div className="buttons">
+      <div className="buttons d-flex justify-content-center">
         <IconButton onClick={() => swipe("left")}>
           <CloseIcon className="buttons__close" fontSize="large" />
         </IconButton>
@@ -188,7 +188,7 @@ const Cards = ({ userData, idUser }) => {
       </div>
       {/* {matches && (<div className="alert_match">¡Match!</div>)} */}
       <div className="info-container">
-        {lastDirection ? <h2 key={lastDirection} className='text__information'>Deslizaste hacía la {lastDirection === 'left' ? 'izquierda' : 'derecha'}</h2> : <h2 className='text__information'>¡Desliza una tarjeta o presiona un botón para continuar!</h2>}
+        {lastDirection ? <h2 key={lastDirection} className='text__information'>Deslizaste hacía la {lastDirection === 'left' ? 'izquierda' : 'derecha'}</h2> : <h2 className='text__information'>¡Desliza una tarjeta o presiona un botón para comenzar!</h2>}
       </div>
     </>
   );

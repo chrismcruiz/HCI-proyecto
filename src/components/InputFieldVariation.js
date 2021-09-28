@@ -11,7 +11,7 @@ const InputFieldVariation = ({ label, classes, ...props }) => {
             <i className={`zmdi ${classes}`}></i>
             </label>
             <input
-                className={`${meta.touched && meta.error && 'is-invalid'}`}
+                className={`input-edit ${meta.touched && meta.error && 'is-invalid'}`}
                 {...field} {...props}
                 placeholder={label}
                 autoComplete="off"
