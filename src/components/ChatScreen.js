@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import './ChatScreen.css'
 import Avatar from '@material-ui/core/Avatar'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import IconButton from '@material-ui/core/IconButton';
+import { Link } from "react-router-dom"
 
 const ChatScreen = () => {
+    const [input, setInput] = useState('')
     const [messages, setMessages] = useState([
         {
             name: 'Christian',
@@ -18,9 +22,25 @@ const ChatScreen = () => {
             message: '1v1 Yasuo con ignite'
         }
     ])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setMessages([...messages, {message: input}])
+        setInput('')
+    }
+
     return (
         <div className="chatScreen">
-            <p className="chatScreen__timestamp">CHRISTIAN SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
+            <div className="d-flex justify-content-center align-items-center">
+                <div className="me-auto ms-3">
+                    <Link to="/chats">
+                        <IconButton>
+                            <ArrowBackIosIcon />
+                        </IconButton>
+                    </Link>
+                </div>
+                <p className="chatScreen__timestamp me-auto my-auto">CHRISTIAN SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
+            </div>
             {messages.map((message) => (
                 message.name ?
                     (
@@ -41,10 +61,12 @@ const ChatScreen = () => {
 
             <form className="chatScreen__input container-fluid">
                 <input
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
                     placeholder="Escribe un mensaje..."
                     className="chatScreen__inputField"
                 />
-                <button className="chatScreen__inputButton">ENVIAR</button>
+                <button onClick={handleSubmit} type="submit" className="chatScreen__inputButton">ENVIAR</button>
             </form>
 
         </div>

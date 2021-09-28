@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const Chat = ({ name, message, profilePic, timestamp }) => {
     return (
-        <Link className="chat__link" to={`/chat/${name}`}>
+        <Link className="chat__link" to={`/chat/${name.toLowerCase()}`}>
             <div className="chat">
                 <Avatar className="chat__image" src={profilePic} />
                 <div className="chat__details">
