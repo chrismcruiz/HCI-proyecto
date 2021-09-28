@@ -26,23 +26,26 @@
 }
 
 .chatScreen__input {
-    display: flex;
+    /* display: flex; */
     padding: 5px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    background-color: white;
     border-top: 1px solid lightgray;
 }
 
 .chatScreen__inputField {
-    flex: 1;
+    display: inline;
+    /* flex: 1; */
     padding: 10px;
     border: none;
 }
 
 .chatScreen__inputButton {
+    display: inline;
     border: none;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     background-color: white;
     font-weight: bolder;
     color: #27996c;

@@ -30,7 +30,7 @@ const ChatScreen = () => {
     }
 
     return (
-        <div className="chatScreen">
+        <div className="chatScreen container-fluid">
             <div className="d-flex justify-content-center align-items-center">
                 <div className="me-auto ms-3">
                     <Link to="/chats">
@@ -39,7 +39,7 @@ const ChatScreen = () => {
                         </IconButton>
                     </Link>
                 </div>
-                <p className="chatScreen__timestamp me-auto my-auto">CHRISTIAN SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
+                <p className="chatScreen__timestamp me-auto my-auto pe-5">CHRISTIAN SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
             </div>
             {messages.map((message) => (
                 message.name ?
@@ -59,14 +59,14 @@ const ChatScreen = () => {
                     )
             ))}
 
-            <form className="chatScreen__input container-fluid">
+            <form className="chatScreen__input row pe-4 mx-0">
                 <input
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     placeholder="Escribe un mensaje..."
-                    className="chatScreen__inputField"
+                    className="chatScreen__inputField col-10"
                 />
-                <button onClick={handleSubmit} type="submit" className="chatScreen__inputButton">ENVIAR</button>
+                <button onClick={handleSubmit} type="submit" className="col-2 chatScreen__inputButton">ENVIAR</button>
             </form>
 
         </div>
