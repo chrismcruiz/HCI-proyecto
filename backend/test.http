@@ -1,3 +1,3 @@
-DELETE  http://localhost:4000/app/deletesessions
+DELETE  http://localhost:4000/app/deleteUsers
 
 Content-Type: application/json

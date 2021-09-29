@@ -26,6 +26,7 @@ const App = () => {
   const [tokencito, setTokencito] = useState("");
   const [idUsuario, setIdUsuario] = useState("");
   const [user, setUser] = useState({});
+  const [filtros, setFiltros] = useState([])
 
   // Revisar que estas peticiones estén bien hechas
   useEffect(async () => {
@@ -43,7 +44,10 @@ const App = () => {
             const dataUser = await axios.post("http://localhost:4000/app/getInfo", {
               _id: idUser,
             })
-            if (dataUser.status === 200) setUser(dataUser.data[0])
+            if (dataUser.status === 200) {
+              setUser(dataUser.data[0])
+              setFiltros(dataUser.data[0].filters)
+            }
             setIsLoading(false)
           } catch (err) {
             console.log(err)
@@ -68,22 +72,51 @@ const App = () => {
     );
   }
 
+
   // Si no está cargando y HAY token muestro la vista home o admin dependiendo del rol
+  const añadirFiltro = (filtro) => {
+    if (filtro && !filtros.includes(filtro)) {
+      const body = { idUsuario, filtro };
+      axios
+        .post("http://localhost:4000/app/addFilter", body)
+        .then((response) => {
+          if (response.status === 200) {
+            console.log(response.data.filtros)
+            setFiltros(response.data.filtros)
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+  }
+
+  const borrarFiltro = (filtro) => {
+    axios.post("http://localhost:4000/app/deleteFilter", [filtro, idUsuario])
+      .then(response => {
+        if (response.status === 200) {
+          console.log(response.data.filtros)
+          setFiltros(response.data.filtros)
+        }
+      })
+      .catch(error => console.log(error))
+  }
+
   return (
     <>
       <ToastContainer />
       <Router>
         <Switch>
           <Route path="/home">
-            {!tokencito ? 
-              <Redirect to="/" /> 
-              : 
-              !user.admin ? 
+            {!tokencito ?
+              <Redirect to="/" />
+              :
+              !user.admin ?
                 <>
-                  <Header />
-                  <Home userData={user} idUser={idUsuario} />
+                  <Header filtrar={añadirFiltro} />
+                  <Home userData={user} idUser={idUsuario} filtros={filtros} borrarFiltro={borrarFiltro} />
                 </>
-                : 
+                :
                 <Redirect to="/admin" />}
             {/* <Home userData={user} idUser={idUsuario} /> */}
           </Route>
@@ -94,9 +127,9 @@ const App = () => {
             {tokencito ? <Redirect to="/home" /> : <SignupForm />}
           </Route>
           <Route path="/chat/:person">
-              <Header />
-              <ChatScreen />
-           </Route> 
+            <Header />
+            <ChatScreen />
+          </Route>
           <Route path="/chats">
             <Header />
             {/* <h1>Chat page</h1> */}

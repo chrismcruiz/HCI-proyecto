@@ -7,7 +7,7 @@ import { Tooltip } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar'
 import './Sidebar.css'
 
-const Sidebar = ({ userData, idUser }) => {
+const Sidebar = ({ userData, idUser, idsMatches }) => {
   const [perfilShow, setPerfilShow] = useState(false);
 
   const handlePerfilShow = () => setPerfilShow(!perfilShow)
@@ -44,7 +44,7 @@ const Sidebar = ({ userData, idUser }) => {
           <EditProfile userData={userData} idUser={idUser} />
         ) : (
           // Ventana de Matches y Grupos
-          <Matches userData={userData} />
+          <Matches userData={userData} idsMatches={idsMatches} />
         )}
       </div>
     </>

@@ -5,7 +5,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom"
 
-const ChatScreen = () => {
+const ChatScreen = ({ name, img }) => {
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([
         {

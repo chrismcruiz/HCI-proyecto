@@ -1,0 +1,14 @@
+.filtro-container {
+    margin-bottom: 1rem;
+}
+.filtro {
+    margin: 0 !important;
+    color: #27996c;
+    border-color: #27996c;
+}
+
+.filtro:hover {
+    /* color: #27996c; */
+    /* background-color: transparent !important; */
+    background-color: #27996c;
+}

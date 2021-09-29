@@ -11,7 +11,7 @@ import { Modal } from "react-bootstrap";
 import { toast } from 'react-toastify';
 
 
-const Matches = ({ userData }) => {
+const Matches = ({ userData, idsMatches }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
   const [showInvalid, setShowInvalid] = useState(false);
   const [tarjetas, setTarjetas] = useState([])
@@ -24,16 +24,16 @@ const Matches = ({ userData }) => {
   // Esto podría no ser necesario!
   useEffect(async () => {
     const response = await axios.post("http://localhost:4000/app/getInfo", {
-      _id: userData._id,})
+      _id: userData._id,
+    })
     // console.log(response.data.matches)
     if (response.status === 200) {
-      console.log(response.data[0].matches)
       const request = await axios.post('http://localhost:4000/app/getInfoMatches', { ids: response.data[0].matches })
       if (request.status === 200) {
         setTarjetas(request.data)
       }
     }
-  }, [tarjetas]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [idsMatches]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // console.log(tarjetas.length)
 
@@ -48,16 +48,38 @@ const Matches = ({ userData }) => {
     setDataMatch(data)
   }
 
-  const deleteUser = () => {
-    axios.post("http://localhost:4000/app/deleteMatch", [idMatch, userData._id])
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
-    handleCloseInvalid()
-    notify_borrado()
+  const iniciarConversacion = (name, photo) => {
+    console.log('test')
   }
 
-  const notify_borrado = () => {
-    toast.success('¡Contacto borrado satisfactoriamente!', {
+  
+  const deleteUser = () => {
+    axios.post("http://localhost:4000/app/deleteMatch", [idMatch, userData._id])
+      .then(response => {
+        if (response.status === 200) {
+          axios
+          .post("http://localhost:4000/app/getInfoMatches", { ids: response.data.tarjetas })
+          .then((response) => {
+            if (response.status === 200) {
+              setTarjetas(response.data)
+              notify_borrado('¡Contacto borrado satisfactoriamente!')
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        notify_borrado(error)
+        }
+      )
+    handleCloseInvalid()
+  }
+
+  const notify_borrado = (msg) => {
+    toast.success(msg, {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -65,7 +87,7 @@ const Matches = ({ userData }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      });
+    });
   };
 
   return (
@@ -127,47 +149,47 @@ const Matches = ({ userData }) => {
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          
-          <div className="row p-3 text-center">
-            {!tarjetas.length ? (<p className="me-auto">Todavía no tienes ningún contacto.</p>)
-            :
-            tarjetas.map((tarjeta, index) => (
-              <div
-                key={index}
-                className="div_imagen_personas_matches mt-2 mb-3 col-4 col-sm-6 col-md-6 col-lg-4"
-              >
-                <div className="dropdown">
-                  <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img
-                      className="imagen_personas_matches rounded-2"
-                      alt=""
-                      src={`/images/${tarjeta.photo}`}
-                      width="110"
-                      height="110"
-                    />
-                  </button>
-                  <ul className="dropdown-menu options-menu">
-                    <Tooltip title="Iniciar una conversación">
-                      <ChatIcon />
-                    </ Tooltip>
-                    <Tooltip title="Ver perfil">
-                      <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />
-                    </ Tooltip>
-                    <Tooltip title="Eliminar contacto">
-                      <DeleteOutlineIcon onClick={() => handleShowInvalid(tarjeta._id)} />
-                    </ Tooltip>
-                  </ul>
-                </div>
-                <div className="d-flex justify-content-center">
-                  <p className="label_nombre_matches text-tarjetas">
-                    {tarjeta.name.split(" ")[0]}
-                  </p>
-                </div>
-              </div>
 
-            ))
+          <div className="row p-3">
+            {!tarjetas.length ? (<p className="me-auto">Todavía no tienes ningún contacto.</p>)
+              :
+              tarjetas.map((tarjeta, index) => (
+                <div
+                  key={index}
+                  className="div_imagen_personas_matches mt-2 mb-3 col-4 col-sm-6 col-lg-4"
+                >
+                  <div className="dropdown">
+                    <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img
+                        className="imagen_personas_matches rounded-2"
+                        alt=""
+                        src={`/images/${tarjeta.photo}`}
+                        width="110"
+                        height="110"
+                      />
+                    </button>
+                    <ul className="dropdown-menu options-menu">
+                      <Tooltip title="Iniciar una conversación">
+                        <ChatIcon onClick={() => iniciarConversacion(tarjeta.name, tarjeta.photo)} />
+                      </ Tooltip>
+                      <Tooltip title="Ver perfil">
+                        <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />
+                      </ Tooltip>
+                      <Tooltip title="Eliminar contacto">
+                        <DeleteOutlineIcon onClick={() => handleShowInvalid(tarjeta._id)} />
+                      </ Tooltip>
+                    </ul>
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <p className="label_nombre_matches text-tarjetas">
+                      {tarjeta.name.split(" ")[0]}
+                    </p>
+                  </div>
+                </div>
+
+              ))
             }
-            
+
           </div>
         </div>
         <div

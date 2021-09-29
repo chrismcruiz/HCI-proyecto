@@ -9,13 +9,20 @@ import "./Cards.css"
 import { calcularEdad } from "../utils/Utils";
 import { CircularProgress } from "@material-ui/core";
 import { toast } from 'react-toastify';
+import Filtros from './Filtros'
 
-const Cards = ({ userData, idUser }) => {
+const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  // const [myInfo, setMyInfo] = useState([])
+
+  // let myInfo = []
 
   const filtrarUsuarios = (users) => {
-    const usuarios = users.filter((user) => (user._id !== idUser && !user.admin && !userData.liked.includes(user._id)))
+    let usuarios = users.filter((user) => (user._id !== idUser && !user.admin && !userData.liked.includes(user._id)))
+    if (filtros.length > 0) {
+      usuarios = usuarios.filter(usuario => filtros.includes(usuario.career))
+    }
     return usuarios
   }
 
@@ -26,7 +33,8 @@ const Cards = ({ userData, idUser }) => {
       setUsers(filtrarUsuarios(req.data));
     }
     setIsLoading(false);
-  }, []);
+  }, [filtros]);  
+
 
 
   const setMatch = (idUser, idPersonLiked) => {
@@ -43,7 +51,7 @@ const Cards = ({ userData, idUser }) => {
     axios
       .post("http://localhost:4000/app/setmatch", body)
       .then((response) => {
-        console.log(response);
+        console.log(response)
       })
       .catch((error) => {
         console.log(error);
@@ -56,8 +64,7 @@ const Cards = ({ userData, idUser }) => {
     if (leGustan.includes(idUser)) match = true;
     if (match) {
       setMatch(idUser, idPersonLiked);
-      console.log(userData.matches)
-
+      getInfo(idUser)
       notify();
     }
   };
@@ -97,7 +104,6 @@ const Cards = ({ userData, idUser }) => {
   // Clickar tarjeta
 
   const clickTarjeta = () => {
-    console.log('a')
     const cardsLeft = users.filter(
       (person) => !alreadyRemoved.includes(person._id)
     );
@@ -151,8 +157,14 @@ const Cards = ({ userData, idUser }) => {
 
   if (users.length === 0) {
     return (
-      <div className="d-flex justify-content-center align-items-center vh-100 no-people align-bottom">
-        No hay personas para mostrar...
+      <div>
+          {/* Filtros */}
+        <div className="filtros">
+          {filtros.map((filtro) => <Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />)}
+        </div>
+        <div className="d-flex justify-content-center align-items-center vh-100 no-people align-bottom">
+          No hay personas para mostrar...
+        </div>
       </div>
     );
   }
@@ -168,6 +180,12 @@ const Cards = ({ userData, idUser }) => {
 
   return (
     <>
+      {/* Filtros */}
+      <div className="filtros">
+        {filtros.map((filtro) => <Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />)}
+      </div>
+
+      {/* Card */}
       <div className="card__container d-flex justify-content-center mx-auto">
         {users.map((character, index) =>
           <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >

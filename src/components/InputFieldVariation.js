@@ -6,7 +6,7 @@ import './Forms.css'
 const InputFieldVariation = ({ label, classes, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className="form-group">
+        <div className="form-group mb-2">
             <label className="labels" htmlFor={field.name}>
             <i className={`zmdi ${classes}`}></i>
             </label>

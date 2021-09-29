@@ -304,6 +304,34 @@ router.post("/liked", (req, res, next) => {
 });
 
 
+
+// users.findOneAndUpdate(
+//   {
+//     _id: idUser,
+//   },
+//   {
+//     $pull: {
+//       liked: idMatch,
+//       matches: idMatch
+//     },
+//   },
+//   {new: true},
+//   (err, usuario) => {
+//     if (err) {
+//       return res.send({
+//         sucess: false,
+//         message: "Error: Server error",
+//       });
+//     }
+//     return res.send({
+//       success: true,
+//       message: "Correcto",
+//       tarjetas: usuario.matches
+//     });
+//   }
+// );
+
+
 router.post("/setmatch", (req, res, next) => {
   const { body } = req;
   const peopleToUpdate = body;
@@ -431,8 +459,8 @@ router.post("/getInfo", (req, res) => {
 
   users.find(
     {
-      _id: { 
-        $in: _id 
+      _id: {
+        $in: _id
       },
     },
     (err, data) => {
@@ -453,8 +481,8 @@ router.post("/getInfoMatches", (req, res) => {
 
   users.find(
     {
-      _id: { 
-        $in: ids 
+      _id: {
+        $in: ids
       },
     },
     (err, data) => {
@@ -513,10 +541,10 @@ router.put("/update", upload.single("photo"), async (req, res) => {
 
 router.post("/deleteMatch", (req, res, next) => {
   const { body } = req;
-  const [ idMatch, idUser ] = body;
+  const [idMatch, idUser] = body;
 
 
-  users.updateOne(
+  users.findOneAndUpdate(
     {
       _id: idUser,
     },
@@ -526,8 +554,8 @@ router.post("/deleteMatch", (req, res, next) => {
         matches: idMatch
       },
     },
-    null,
-    (err, sessions) => {
+    { new: true },
+    (err, usuario) => {
       if (err) {
         return res.send({
           sucess: false,
@@ -537,20 +565,51 @@ router.post("/deleteMatch", (req, res, next) => {
       return res.send({
         success: true,
         message: "Correcto",
+        tarjetas: usuario.matches
       });
     }
   );
 });
 
-router.delete("/admin/deleteuser", (req, res, next) => {
+// router.delete("/admin/deleteuser", (req, res, next) => {
+//   const { body } = req;
+//   const { _id } = body;
+//   users.findOneAndDelete(
+//     {
+//       _id: _id,
+//     },
+//     {new: true},
+//     (err, user) => {
+//       if (err) {
+//         return res.send({
+//           sucess: false,
+//           message: "Error: Server error",
+//           tarjetas: user.matches
+//         });
+//       }
+//       return res.send({
+//         success: true,
+//         message: "Correcto",
+//       });
+//     }
+//   );
+// });
+
+router.post("/addFilter", (req, res, next) => {
   const { body } = req;
-  const { _id } = body;
-  users.deleteOne(
+  const { idUsuario, filtro } = body;
+
+  users.findOneAndUpdate(
     {
-      _id: _id,
+      _id: idUsuario,
     },
-    null,
-    (err, sessions) => {
+    {
+      $addToSet: {
+        filters: filtro,
+      },
+    },
+    { new: true },
+    (err, usuario) => {
       if (err) {
         return res.send({
           sucess: false,
@@ -560,7 +619,65 @@ router.delete("/admin/deleteuser", (req, res, next) => {
       return res.send({
         success: true,
         message: "Correcto",
+        filtros: usuario.filters,
       });
+    }
+  );
+});
+
+router.post("/deleteFilter", (req, res, next) => {
+  const { body } = req;
+  const [name, idUser] = body;
+
+
+  users.findOneAndUpdate(
+    {
+      _id: idUser,
+    },
+    {
+      $pull: {
+        filters: name,
+      },
+    },
+    { new: true },
+    (err, usuario) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correcto",
+        filtros: usuario.filters,
+      });
+    }
+  );
+});
+
+router.post("/getInfoTarjetas", (req, res, next) => {
+  const { body } = req;
+  const { idUser } = body;
+
+
+  users.find(
+    {
+      _id: idUser,
+    },
+    (err, user) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        tarjetas: user[0],
+      });
+
     }
   );
 });
