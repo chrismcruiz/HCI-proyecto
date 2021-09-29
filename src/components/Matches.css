@@ -61,3 +61,11 @@
 .match_description {
   font-style: italic;
 }
+
+.seccion {
+  width: 100%;
+}
+
+.matches-ventana {
+  height: 35rem;
+}

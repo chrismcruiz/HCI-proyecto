@@ -74,6 +74,15 @@ const EditProfile = ({ userData, idUser }) => {
                 Cambiar imagen
               </label>
             </div>
+            <div className="input-group mb-2">
+              <span className="input-group-text label_inputs">Nombre</span>
+              <Field
+                className={`form-control ${errors.name && touched.name ? 'is-invalid' : null}`}
+                type="name"
+                name="name"
+              />
+              <ErrorMessage name="name" component="div" className="invalid-feedback" />
+            </div>
             <div className="form-floating mb-2">
               <Field as='textarea'
                 id="description"
@@ -83,17 +92,8 @@ const EditProfile = ({ userData, idUser }) => {
                 style={{height: '8em'}}
               />
               <label className="label_inputs" htmlFor="description">
-                Añade una breve descripción tuya...
+                ¡Añade una breve descripción tuya, sé creativo!
               </label>
-            </div>
-            <div className="input-group mb-2">
-              <span className="input-group-text label_inputs">Nombre</span>
-              <Field
-                className={`form-control ${errors.name && touched.name ? 'is-invalid' : null}`}
-                type="name"
-                name="name"
-              />
-              <ErrorMessage name="name" component="div" className="invalid-feedback" />
             </div>
             <InputFieldVariation label="Fecha de Nacimiento" name="birthday" type="date" />
             <SelectField label="Especialidad o intereses" name="career" options={carreras} />

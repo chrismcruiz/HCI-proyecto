@@ -92,15 +92,15 @@ const Matches = ({ userData, idsMatches }) => {
 
   return (
     <>
-      <div class="mt-3">
+      <div class="m-0">
         <ul
-          className="nav nav-tabs mb-3 d-flex justify-content-between"
+          className="row nav nav-tabs"
           id="myTab"
           role="tablist"
         >
-          <li className="nav-item" role="presentation">
+          <li className="col-6 p-0 nav-item" role="presentation">
             <button
-              className="nav-link active links_items"
+              className="seccion nav-link active links_items"
               id="home-tab"
               data-bs-toggle="tab"
               data-bs-target="#home"
@@ -112,9 +112,9 @@ const Matches = ({ userData, idsMatches }) => {
               Contactos
             </button>
           </li>
-          <li className="nav-item" role="presentation">
+          <li className="col-6 p-0 nav-item" role="presentation">
             <button
-              className="nav-link links_items"
+              className="seccion nav-link links_items"
               id="profile-tab"
               data-bs-toggle="tab"
               data-bs-target="#profile"
@@ -124,20 +124,6 @@ const Matches = ({ userData, idsMatches }) => {
               aria-selected="false"
             >
               Grupos
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link links_items"
-              id="contact-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#contact"
-              type="button"
-              role="tab"
-              aria-controls="contact"
-              aria-selected="false"
-            >
-              Mis Grupos
             </button>
           </li>
         </ul>
@@ -156,7 +142,7 @@ const Matches = ({ userData, idsMatches }) => {
               tarjetas.map((tarjeta, index) => (
                 <div
                   key={index}
-                  className="div_imagen_personas_matches mt-2 mb-3 col-4 col-sm-6 col-lg-4"
+                  className="d-flex flex-column align-items-center justify-content-center div_imagen_personas_matches mt-2 mb-3 col-4"
                 >
                   <div className="dropdown">
                     <button type="button" className="tarjeta-border" data-bs-toggle="dropdown" aria-expanded="false">
@@ -201,75 +187,26 @@ const Matches = ({ userData, idsMatches }) => {
           {/* <h6 className="mt-3">
             No hay grupos para mostrar
             </h6> */}
-          <div class="list-group">
+          <div class="list-group row">
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <h6 class="mb-0">List group item heading</h6>
-                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                </div>
-                <small class="opacity-50 text-nowrap">now</small>
+              <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+                  <h6 class="mb-0">Diseño prototipo app</h6>
+                <small class="opacity-50 text-nowrap">ahora</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <h6 class="mb-0">Another title here</h6>
-                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
-                </div>
+              <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+                  <h6 class="mb-0">Tedijos PK</h6>
                 <small class="opacity-50 text-nowrap">3d</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <h6 class="mb-0">Third heading</h6>
-                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                </div>
-                <small class="opacity-50 text-nowrap">1w</small>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div
-          className="tab-pane fade"
-          id="contact"
-          role="tabpanel"
-          aria-labelledby="contact-tab"
-        >
-          {/* <h6 className="mt-3">No hay grupos para mostrar</h6> */}
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <h6 class="mb-0">List group item heading</h6>
-                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                </div>
-                <small class="opacity-50 text-nowrap">now</small>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <h6 class="mb-0">Another title here</h6>
-                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
-                </div>
-                <small class="opacity-50 text-nowrap">3d</small>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <h6 class="mb-0">Third heading</h6>
-                  <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                </div>
-                <small class="opacity-50 text-nowrap">1w</small>
+              <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+                  <h6 class="mb-0">Grupo trabajo IA</h6>
+                <small class="opacity-50 text-nowrap">1 semana</small>
               </div>
             </a>
           </div>

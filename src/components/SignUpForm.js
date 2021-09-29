@@ -62,7 +62,7 @@ const SignupForm = () => {
   // Si está cargando muestro el spinner
   if (isLoading) {
     return (
-      <div className="vertical-center">
+      <div className="d-flex justify-content-center align-items-center vh-100">
         <CircularProgress color="primary" size={60} />
       </div>
     );
