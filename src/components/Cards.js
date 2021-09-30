@@ -162,7 +162,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
         <div className="filtros">
           {filtros.map((filtro) => <Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />)}
         </div>
-        <div className="d-flex justify-content-center align-items-center vh-100 no-people align-bottom">
+        <div className="d-flex justify-content-center align-items-center no-people">
           No hay personas para mostrar...
         </div>
       </div>
@@ -182,7 +182,17 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
     <>
       {/* Filtros */}
       <div className="filtros">
-        {filtros.map((filtro) => <Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />)}
+
+        {filtros.length > 0 ? 
+          filtros.map((filtro) => (<Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />))
+          :
+          (
+            <div className="no-filtros">
+              <img className="varita" src="/assets/varita.png"></img>
+              <p>Puedes personalizar tu búsqueda añadidendo filtros</p>
+            </div>
+          )
+        }
       </div>
 
       {/* Card */}

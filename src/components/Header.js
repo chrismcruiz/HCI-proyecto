@@ -17,6 +17,10 @@ import './Header.css'
 const Navbar = ({ filtrar }) => {
     const [filtro, setFiltro] = useState(null)
  
+    const aplicarfiltro = () => {
+        filtrar(filtro)
+        setFiltro('')
+    }
     return (
         <div>
             <nav className="navbar navbar-light bg-white borde_inferior">
@@ -39,7 +43,7 @@ const Navbar = ({ filtrar }) => {
                         <span class="input-group-text border-0" id="search-addon">
                             <Tooltip title="Añadir">
                                 <IconButton size="small" className="navbar__icons__search icono">
-                                    <AddIcon className="icon__color" type="submit" onClick={() => filtrar(filtro)} />
+                                    <AddIcon className="icon__color" type="submit" onClick={aplicarfiltro} />
                                 </IconButton>
                             </Tooltip>
                         </span>

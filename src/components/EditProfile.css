@@ -10,8 +10,8 @@
 }
 
 .imagen_persona_perfil {
-    width: 65%;
-    height: 250px;
+    width: 50%;
+    height: 50%;
     object-fit: cover;
     border-radius: 100%;
   }

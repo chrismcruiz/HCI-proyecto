@@ -17,11 +17,11 @@ const Sidebar = ({ userData, idUser, idsMatches }) => {
     <div>
       {perfilShow ? (
         <div>
-          <div className="row border-bottom">
-            <div className="col-10 d-flex align-items-center">
+          <div className="row border-bottom menu-superior">
+            <div className="col-10 d-flex align-items-center p-3">
               <p className="m-0">Editar perfil</p>
             </div>
-            <div className="col-2">
+            <div className="col-2 d-flex align-items-center">
               <Tooltip title="Volver">
                 <IconButton onClick={handlePerfilShow}>
                   <ArrowBackIcon className=''></ArrowBackIcon>
@@ -36,7 +36,7 @@ const Sidebar = ({ userData, idUser, idsMatches }) => {
         // Ventana de editar perfil
       ) : (
         <div>
-          <div className="row border-bottom">
+          <div className="row border-bottom menu-superior">
             <div className="col-10 p-1">
               <div className="d-flex align-items-center">
                 {/* <ArrowBackIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ArrowBackIcon> */}
