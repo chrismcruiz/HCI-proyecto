@@ -9,6 +9,7 @@ import { Tooltip } from '@material-ui/core';
 import ModalForm from "./ModalForm"
 import { Modal } from "react-bootstrap";
 import { toast } from 'react-toastify';
+import { Link } from "react-router-dom"
 
 
 const Matches = ({ userData, idsMatches }) => {
@@ -156,7 +157,11 @@ const Matches = ({ userData, idsMatches }) => {
                     </button>
                     <ul className="dropdown-menu options-menu">
                       <Tooltip title="Iniciar una conversación">
-                        <ChatIcon onClick={() => iniciarConversacion(tarjeta.name, tarjeta.photo)} />
+                          <Link 
+                            to={{ pathname: `/chat/${tarjeta.name.toLowerCase()}`, state: {tarjeta} }}
+                          >
+                            <ChatIcon />
+                          </Link>
                       </ Tooltip>
                       <Tooltip title="Ver perfil">
                         <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />

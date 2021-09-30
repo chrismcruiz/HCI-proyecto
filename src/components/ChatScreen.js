@@ -4,18 +4,22 @@ import Avatar from '@material-ui/core/Avatar'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom"
+import { useLocation } from 'react-router-dom'
 
-const ChatScreen = ({ name, img }) => {
+const ChatScreen = () => {
+    const location = useLocation()
+    const { tarjeta } = location.state
+
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([
         {
-            name: 'Christian',
-            image: 'https://www.egames.news/__export/1628978961035/sites/debate/img/2021/08/14/dragon-ball-goku-es-lgbt-asexual.jpg_976912859.jpg',
+            name: tarjeta.name,
+            image: `/images/${tarjeta.photo}`,
             message: 'ké lo keh'
         },
         {
-            name: 'Christian',
-            image: 'https://www.egames.news/__export/1628978961035/sites/debate/img/2021/08/14/dragon-ball-goku-es-lgbt-asexual.jpg_976912859.jpg',
+            name: tarjeta.name,
+            image: `/images/${tarjeta.photo}`,
             message: '1v1 en lolcito'
         },
         {
@@ -39,7 +43,7 @@ const ChatScreen = ({ name, img }) => {
                         </IconButton>
                     </Link>
                 </div>
-                <p className="chatScreen__timestamp me-auto my-auto pe-5">CHRISTIAN SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
+                <p className="chatScreen__timestamp me-auto my-auto pe-5">{tarjeta.name.split(" ")[0].toUpperCase()} SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
             </div>
             {messages.map((message) => (
                 message.name ?
