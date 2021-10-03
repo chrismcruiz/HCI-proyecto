@@ -7,7 +7,8 @@ const Chat = ({ name, message, profilePic, timestamp }) => {
     const tarjeta = {name, photo:profilePic}
     return (
         <Link
-            to={{ pathname: `/chat/${name.toLowerCase()}`, state: { tarjeta } }}
+            to={{ pathname: `/chats/t/${tarjeta._id}`, state: { tarjeta } }}
+            className="link-chat"
         >
             <div className="chat">
                 <Avatar className="chat__image" src={profilePic} />

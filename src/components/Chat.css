@@ -18,7 +18,7 @@
 }
 
 .chat__details > h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 500;
 }
 
@@ -32,4 +32,9 @@
 
 .chat__image {
     margin-right: 20px;
+}
+
+.link-chat {
+    text-decoration: none;
+    color: inherit;
 }

@@ -12,14 +12,14 @@ import { toast } from 'react-toastify';
 import { Link } from "react-router-dom"
 
 
-const Matches = ({ userData, idsMatches }) => {
+const Matches = ({ userData, idsMatches, mostrarSpinner, quitarSpinner, socket }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
   const [showInvalid, setShowInvalid] = useState(false);
   const [tarjetas, setTarjetas] = useState([])
   const [idMatch, setIdMatch] = useState('')
   const [lgShow, setLgShow] = useState(false);
-
-
+  // const [conversationId, setConversationId] = useState(null)
+  const [infoRoom, setInfoRoom] = useState('') 
   const [dataMatch, setDataMatch] = useState({});
 
   // Esto podría no ser necesario!
@@ -53,28 +53,28 @@ const Matches = ({ userData, idsMatches }) => {
     console.log('test')
   }
 
-  
+
   const deleteUser = () => {
     axios.post("http://localhost:4000/app/deleteMatch", [idMatch, userData._id])
       .then(response => {
         if (response.status === 200) {
           axios
-          .post("http://localhost:4000/app/getInfoMatches", { ids: response.data.tarjetas })
-          .then((response) => {
-            if (response.status === 200) {
-              setTarjetas(response.data)
-              notify_borrado('¡Contacto borrado satisfactoriamente!')
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+            .post("http://localhost:4000/app/getInfoMatches", { ids: response.data.tarjetas })
+            .then((response) => {
+              if (response.status === 200) {
+                setTarjetas(response.data)
+                notify_borrado('¡Contacto borrado satisfactoriamente!')
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
       })
       .catch(error => {
         console.log(error)
         notify_borrado(error)
-        }
+      }
       )
     handleCloseInvalid()
   }
@@ -90,6 +90,21 @@ const Matches = ({ userData, idsMatches }) => {
       progress: undefined,
     });
   };
+
+  const createRoom = async (tarjeta) => {
+    mostrarSpinner()
+    try {
+      const response = await axios.post("http://localhost:4000/app/createConversation", [userData._id, tarjeta._id])
+      if (response.status === 200) {
+        // setInfoRoom(response.data.conversationId)
+        socket.emit("join_room", response.data.conversationId);
+        quitarSpinner()
+      }
+    } catch (err) {
+      console.log(err)
+      quitarSpinner()
+    }
+  }
 
   return (
     <>
@@ -157,11 +172,11 @@ const Matches = ({ userData, idsMatches }) => {
                     </button>
                     <ul className="dropdown-menu options-menu">
                       <Tooltip title="Iniciar una conversación">
-                          <Link 
-                            to={{ pathname: `/chat/${tarjeta.name.toLowerCase()}`, state: {tarjeta} }}
-                          >
-                            <ChatIcon />
-                          </Link>
+                        <Link
+                          to={{ pathname: `/chats/t/${tarjeta._id}` }}
+                        >
+                          <ChatIcon onClick={() => createRoom(tarjeta)} />
+                        </Link>
                       </ Tooltip>
                       <Tooltip title="Ver perfil">
                         <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />
@@ -196,21 +211,21 @@ const Matches = ({ userData, idsMatches }) => {
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
-                  <h6 class="mb-0">Diseño prototipo app</h6>
+                <h6 class="mb-0">Diseño prototipo app</h6>
                 <small class="opacity-50 text-nowrap">ahora</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
-                  <h6 class="mb-0">Tedijos PK</h6>
+                <h6 class="mb-0">Tedijos PK</h6>
                 <small class="opacity-50 text-nowrap">3d</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
-                  <h6 class="mb-0">Grupo trabajo IA</h6>
+                <h6 class="mb-0">Grupo trabajo IA</h6>
                 <small class="opacity-50 text-nowrap">1 semana</small>
               </div>
             </a>

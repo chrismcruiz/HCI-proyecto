@@ -5,6 +5,10 @@ const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const users = require("../models/SingUp");
 const UserSession = require("../models/SignIn");
+const conversations = require("../models/Conversation");
+const Chat = require("../models/Chat");
+
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -678,6 +682,87 @@ router.post("/getInfoTarjetas", (req, res, next) => {
         tarjetas: user[0],
       });
 
+    }
+  );
+});
+
+
+// Chats
+
+router.post("/createConversation", (req, res) => {
+  const { body } = req;
+  const [idA, idB] = body;
+
+  conversations.findOne(
+    {
+      participants: {
+        $all: [idA, idB]
+      } 
+    },
+    (err, conversation) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: "Error: Server error",
+        })
+      } else if (conversation) {
+        return res.send({
+          success: false,
+          conversationId: conversation._id,
+          message: "Ya existe está conversación",
+        })
+      }
+
+      const newConversation = new conversations();
+      newConversation.participants.push(idA, idB);
+      newConversation.save((err, conversation) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: "Error: Server error"
+          });
+        }
+        return res.send({
+          success: true,
+          message: "Conversación creada",
+          conversationId: conversation._id
+        });
+      })
+    }
+  )
+})
+
+router.get("/conversations/verify", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { idA, idB } = query;
+  // verify the token of one of a kind and its not deleted
+
+  conversations.find(
+    {
+      participants: {
+        $all: [idA, idB]
+      } 
+    },
+    (err, conversation) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      if (conversation.length != 1) {
+        return res.send({
+          sucess: false,
+          message: "Error: Invalido",
+        });
+      } else {
+        return res.send({
+          success: true,
+          message: "Correctito!",
+          idRoom: conversation[0]._id,
+        });
+      }
     }
   );
 });

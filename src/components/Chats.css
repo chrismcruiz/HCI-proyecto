@@ -1,4 +1,23 @@
-.chats {
+.chats-vista {
+    border: 1px solid #dee2e6;
     margin-top: 2rem;
 }
 
+.columna-altura {
+    height: 50rem;
+}
+
+.chats {
+    overflow-y: scroll;
+    margin-top: 2rem;
+    /* height: 100%; */
+}
+
+.buscar-chat {
+    width: 95%;
+}
+
+.columna-izquierda {
+
+    /* border-right: 1px solid; */
+}

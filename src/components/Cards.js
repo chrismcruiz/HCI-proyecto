@@ -12,8 +12,8 @@ import { toast } from 'react-toastify';
 import Filtros from './Filtros'
 
 const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
-  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState([]); // info tarjetas
   // const [myInfo, setMyInfo] = useState([])
 
   // let myInfo = []
