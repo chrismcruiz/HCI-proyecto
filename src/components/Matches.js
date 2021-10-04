@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { Link } from "react-router-dom"
 
 
-const Matches = ({ userData, idsMatches, mostrarSpinner, quitarSpinner, socket }) => {
+const Matches = ({ userData, idsMatches }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
   const [showInvalid, setShowInvalid] = useState(false);
   const [tarjetas, setTarjetas] = useState([])
@@ -91,21 +91,6 @@ const Matches = ({ userData, idsMatches, mostrarSpinner, quitarSpinner, socket }
     });
   };
 
-  const createRoom = async (tarjeta) => {
-    mostrarSpinner()
-    try {
-      const response = await axios.post("http://localhost:4000/app/createConversation", [userData._id, tarjeta._id])
-      if (response.status === 200) {
-        // setInfoRoom(response.data.conversationId)
-        socket.emit("join_room", response.data.conversationId);
-        quitarSpinner()
-      }
-    } catch (err) {
-      console.log(err)
-      quitarSpinner()
-    }
-  }
-
   return (
     <>
       <div class="m-0">
@@ -175,7 +160,7 @@ const Matches = ({ userData, idsMatches, mostrarSpinner, quitarSpinner, socket }
                         <Link
                           to={{ pathname: `/chats/t/${tarjeta._id}` }}
                         >
-                          <ChatIcon onClick={() => createRoom(tarjeta)} />
+                          <ChatIcon/>
                         </Link>
                       </ Tooltip>
                       <Tooltip title="Ver perfil">

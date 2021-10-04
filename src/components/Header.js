@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import { Tooltip } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -14,7 +14,7 @@ import axios from "axios";
 import './Header.css'
 
 
-const Navbar = ({ filtrar, type }) => {
+const Navbar = ({ userData, filtrar, type }) => {
     const [filtro, setFiltro] = useState(null)
 
     const aplicarfiltro = () => {
@@ -22,13 +22,18 @@ const Navbar = ({ filtrar, type }) => {
         setFiltro('')
     }
 
+    const getLastMessage = () => {
+        axios.get("http://localhost:4000/app/getLastMessage?_id=" + userData._id + "&name=" +  userData.name)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
 
     return (
         <div>
             <nav className="navbar navbar-light bg-white borde_inferior" >
                 <div className="container-fluid">
                     <a className="navbar-brand vertical-center" href="/home">
-                        <img className="logo" src='/assets/unknown.png' alt="" width="110" height="65" className="d-inline-block align-text-top" onClick={() => window.location.reload()} />
+                        <img className="logo" src='/assets/unknown.png' alt="" width="110" height="65" className="d-inline-block align-text-top" onClick={() => window.location.href = '/'} />
                         {/* <span className="brand">Trade Urself</span> */}
                     </a>
                     {type !== 'search' ?
@@ -56,8 +61,8 @@ const Navbar = ({ filtrar, type }) => {
                     }
                     <div className="navbar__icons">
                         <Tooltip title="Mensajes">
-                            <Link to='/chats/t/6154232469c92a0aacc0b3d5'>
-                                <IconButton size="small" className="navbar__icons__chat icono">
+                            <Link to={``}>
+                                <IconButton onClick={getLastMessage} size="small" className="navbar__icons__chat icono">
                                     <ChatBubbleOutlineIcon className="icon__color" />
                                 </IconButton>
                             </Link>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const ChatTemplate = new mongoose.Schema({
+const MessagesTemplate = new mongoose.Schema({
     sender: {
         type: String,
         default: ''
@@ -13,10 +13,10 @@ const ChatTemplate = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    conversationId: {
-        type: String,
-        default: ''
+    room: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "conversations"
     },
 })
 
-module.exports = mongoose.model('Chat', ChatTemplate)
+module.exports = mongoose.model('messages', MessagesTemplate)

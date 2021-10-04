@@ -8,8 +8,23 @@ import axios from "axios";
 import './Chats.css'
 
 const Chats = ({ userData, socket, usersData }) => {
+    const idTarjeta = window.location.pathname.split('/')[3]
+    const tarjeta = usersData.filter((user) => user._id === idTarjeta)[0]
+ 
+    useEffect(async () => {
+        try {
+          const response = await axios.post("http://localhost:4000/app/createConversation", [userData._id, idTarjeta])
+          if (response.status === 200) {
+            console.log(response)
+            socket.emit("join_room", response.data.conversationId);
+          }
+        } catch (err) {
+          console.log(err)
+        }
+    }, [])
+
     return (
-        <div className="container chats-vista">
+        <div className="container chats-vista columna-altura border">
             <div className="row">
                 <div className="col-4 columna-izquierda columna-altura pt-3">
                     <form className="input-group rounded buscar-chat">
@@ -24,7 +39,7 @@ const Chats = ({ userData, socket, usersData }) => {
                         </span>
                     </form>
                     <div className="chats">
-                        {/* <Chat
+                        <Chat
                             name="Christian"
                             message="Ké lo keh"
                             timestamp="35 minutes ago"
@@ -36,12 +51,12 @@ const Chats = ({ userData, socket, usersData }) => {
                             message="Ola ke ase"
                             timestamp="5 seconds ago"
                             profilePic="https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2019/05/16/5fa53bad6d530.jpeg"
-                        /> */}
-                         
+                        />
+
                     </div>
                 </div>
                 <div className="col-8 position-relative border-start">
-                    <ChatScreen userData={userData} socket={socket} usersData={usersData} />
+                    <ChatScreen userData={userData} socket={socket} tarjeta={tarjeta} />
                 </div>
             </div>
         </div>

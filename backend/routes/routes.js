@@ -6,9 +6,7 @@ let path = require("path");
 const users = require("../models/SingUp");
 const UserSession = require("../models/SignIn");
 const conversations = require("../models/Conversation");
-const Chat = require("../models/Chat");
-
-
+const messages = require("../models/Messages");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -697,7 +695,7 @@ router.post("/createConversation", (req, res) => {
     {
       participants: {
         $all: [idA, idB]
-      } 
+      }
     },
     (err, conversation) => {
       if (err) {
@@ -742,7 +740,7 @@ router.get("/conversations/verify", (req, res) => {
     {
       participants: {
         $all: [idA, idB]
-      } 
+      }
     },
     (err, conversation) => {
       if (err) {
@@ -766,5 +764,91 @@ router.get("/conversations/verify", (req, res) => {
     }
   );
 });
+
+
+// Guardar mensajes
+
+router.post("/storeMessages", (req, res) => {
+  const { body } = req;
+  const { sender, message, room } = body;
+
+  const newMessage = new messages();
+  newMessage.sender = sender
+  newMessage.message = message
+  newMessage.room = room
+  newMessage.save((err, message) => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Error: Server error"
+      });
+    }
+    return res.send({
+      success: true,
+      message: "Mensaje guardado"
+    });
+  })
+})
+
+
+router.get("/getMessages", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { _id } = query;
+  // verify the token of one of a kind and its not deleted
+
+  messages.find(
+    {
+      room: _id
+    },
+    (err, messages) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        messages: messages,
+      });
+
+    }
+  );
+});
+
+router.get("/getLastMessage", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { _id, name } = query;
+  // verify the token of one of a kind and its not deleted
+
+  messages.find(
+    {
+      sender: name
+    },
+    {
+      $expr: {
+        $gt: [{$arrayElemAt: ["$messages", -1]}]
+      }
+    },
+    (err, mensaje) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        messages: mensaje,
+      });
+
+    }
+  );
+});
+
 
 module.exports = router;

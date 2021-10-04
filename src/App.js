@@ -32,7 +32,6 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [filtros, setFiltros] = useState([])
-  const [currentChat, setCurrentChat] = useState({})
 
   // Revisar que estas peticiones estén bien hechas
   useEffect(async () => {
@@ -121,7 +120,7 @@ const App = () => {
               :
               !user.admin ?
                 <>
-                  <Header filtrar={añadirFiltro} type="filter" />
+                  <Header userData={user} filtrar={añadirFiltro} type="filter" />
                   <Home userData={user} idUser={idUsuario} filtros={filtros} borrarFiltro={borrarFiltro} mostrarSpinner={mostrarSpinner} quitarSpinner={quitarSpinner} socket={socket} />
                 </>
                 :
