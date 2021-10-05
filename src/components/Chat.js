@@ -3,11 +3,11 @@ import './Chat.css'
 import Avatar from '@material-ui/core/Avatar'
 import { Link } from "react-router-dom"
 
-const Chat = ({ name, message, profilePic, timestamp }) => {
-    const tarjeta = {name, photo:profilePic}
+const Chat = ({ id, name, message, profilePic, timestamp }) => {
+    // const tarjeta = {name, photo:profilePic}
     return (
         <Link
-            to={{ pathname: `/chats/t/${tarjeta._id}`, state: { tarjeta } }}
+            to={`/chats/t/${id}`}
             className="link-chat"
         >
             <div className="chat">

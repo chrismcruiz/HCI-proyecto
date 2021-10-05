@@ -137,6 +137,10 @@ const App = () => {
             <Header />
             <ChatScreen />
           </Route> */}
+           <Route path="/chats">
+            <Header type='search' />
+            <Chats userData={user} socket={socket} usersData={users} />
+          </Route>
           <Route path="/chats/t/:id">
             <Header type='search' />
             <Chats userData={user} socket={socket} usersData={users} />

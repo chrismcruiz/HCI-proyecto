@@ -27,7 +27,7 @@ const Home = ({ userData, idUser, filtros, borrarFiltro, mostrarSpinner, quitarS
 
   return (
     <div className="container-fluid">
-      <div className='row contenido-principal'>
+      <div className='row contenido-principal mb-5'>
         <div className='bordes col-sm-6 col-md-4 col-izquierda'>
           {/* Menú lateral */}
           <Sidebar userData={userData} idUser={idUser} idsMatches={info} mostrarSpinner={mostrarSpinner} quitarSpinner={quitarSpinner} socket={socket} />

@@ -16,16 +16,25 @@ import './Header.css'
 
 const Navbar = ({ userData, filtrar, type }) => {
     const [filtro, setFiltro] = useState(null)
+    const [currentChat, setCurrentChat] = useState('')
 
     const aplicarfiltro = () => {
         filtrar(filtro)
         setFiltro('')
     }
 
-    const getLastMessage = () => {
-        axios.get("http://localhost:4000/app/getLastMessage?_id=" + userData._id + "&name=" +  userData.name)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+    const getLastMessage = async () => {
+        try {
+            const response = await axios.get("http://localhost:4000/app/getLastMessage?name=" + userData.name)
+            if (response.status === 200 && response.data.mensajes.length > 0) {
+                const request = await axios.get("http://localhost:4000/app/getParticipants?room=" + response.data.mensajes[response.data.mensajes.length - 1].room)
+                if (request.status === 200) {
+                    window.location.href = `/chats/t/${request.data.participants[0].participants.filter(user => user !== userData._id)[0]}`
+                } else console.log(request)
+            } else window.location.href = '/chats'
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
@@ -61,18 +70,15 @@ const Navbar = ({ userData, filtrar, type }) => {
                     }
                     <div className="navbar__icons">
                         <Tooltip title="Mensajes">
-                            <Link to={``}>
-                                <IconButton onClick={getLastMessage} size="small" className="navbar__icons__chat icono">
-                                    <ChatBubbleOutlineIcon className="icon__color" />
-                                </IconButton>
-                            </Link>
+                            <IconButton onClick={getLastMessage} size="small" className="navbar__icons__chat icono">
+                                <ChatBubbleOutlineIcon className="icon__color" />
+                            </IconButton>
                         </Tooltip>
                         <Tooltip title="Cerrar sesión">
                             <IconButton size="small" className="navbar__icons__chat icono">
                                 <LogoutIcon onClick={logOut} className="icon__color" />
                             </IconButton>
                         </ Tooltip>
-
                     </div>
                 </div>
             </nav>

@@ -4,12 +4,14 @@ import Avatar from '@material-ui/core/Avatar'
 import axios from "axios";
 import { css } from '@emotion/react';
 import ScrollToBottom from "react-scroll-to-bottom";
+// import { useLocation } from "react-router-dom"
 
-const ChatScreen = ({ userData, socket, tarjeta }) => {
+const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes }) => {
 
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([])
     const [idRoom, setIdRoom] = useState('')
+
 
     useEffect(async () => {
         try {
@@ -18,9 +20,10 @@ const ChatScreen = ({ userData, socket, tarjeta }) => {
                 setIdRoom(response.data.idRoom)
                 try {
                     const request = await axios.get("http://localhost:4000/app/getMessages?_id=" + response.data.idRoom)
-                    if (request.status === 200) {
-                        console.log(request.data.messages)
+                    if (request.status === 200 && request.data.messages.length > 0) {
                         setMessages(request.data.messages)
+                    } else {
+                        console.log(response)
                     }
                 } catch (err) {
                     console.log(err)
@@ -34,7 +37,7 @@ const ChatScreen = ({ userData, socket, tarjeta }) => {
         socket.on("receive_message", (data) => {
             setMessages((list) => [...list, data]);
         });
-    }, [socket]);
+    }, [socket, location]);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -51,6 +54,7 @@ const ChatScreen = ({ userData, socket, tarjeta }) => {
                 if (response.status === 200) {
                     console.log(response.data)
                     setMessages((list) => [...list, messageData]);
+                    actualizarMensajes()
                 } else {
                     console.log(response)
                 }
@@ -63,9 +67,16 @@ const ChatScreen = ({ userData, socket, tarjeta }) => {
 
     return (
         <div className="chatScreen">
-            <div className="d-flex justify-content-center align-items-center">
-                <p className="chatScreen__timestamp">{tarjeta.name.split(' ')[0].toUpperCase()} SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
-            </div>
+                {tarjeta !== undefined ?
+                    (
+                        <div className="d-flex flex-column justify-content-center align-items-center">
+                            <Avatar className="mt-3" alt="" src={`/images/${tarjeta.photo}`} />
+                            <p className="chatScreen__timestamp pt-2">{tarjeta.name.split(' ')[0].toUpperCase()} SE AÑADIÓ A TUS CONTACTOS EL 10/06/21</p>
+                        </div>
+                    )
+                    :
+                    <h5 className="text-center">Aún no tienes ningún mensaje</h5>
+                }
             <ScrollToBottom className='message-container' >
                 {messages.map((message) => (
                     message.sender !== userData.name ?
@@ -75,6 +86,7 @@ const ChatScreen = ({ userData, socket, tarjeta }) => {
                                     className="chatScreen__image"
                                     alt={message.sender}
                                     src={`/images/${tarjeta.photo}`}
+                                    key={message.photo}
                                 />
                                 <p className="chatScreen__text">{message.message}</p>
                             </div>

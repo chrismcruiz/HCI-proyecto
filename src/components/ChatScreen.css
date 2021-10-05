@@ -67,7 +67,7 @@
     overflow-x: hidden;
     overflow-wrap: break-word;
     word-break: break-word;
-    height: 41rem;
+    height: 40rem;
 }
   
 .message-container::-webkit-scrollbar {

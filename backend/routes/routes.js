@@ -766,6 +766,61 @@ router.get("/conversations/verify", (req, res) => {
 });
 
 
+router.get("/getConversations", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { _id } = query;
+  // verify the token of one of a kind and its not deleted
+
+  conversations.find(
+    {
+      participants: {
+        $in: [_id]
+      }
+    },
+    (err, conversations) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        conversations: conversations
+      });
+    }
+  );
+});
+
+router.get("/getParticipants", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { room } = query;
+  // verify the token of one of a kind and its not deleted
+
+  conversations.find(
+    {
+      _id: room
+    },
+    (err, participants) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        participants: participants
+      });
+    }
+  );
+});
+
+
 // Guardar mensajes
 
 router.post("/storeMessages", (req, res) => {
@@ -821,17 +876,12 @@ router.get("/getMessages", (req, res) => {
 router.get("/getLastMessage", (req, res) => {
   //get the token
   const { query } = req;
-  const { _id, name } = query;
+  const { name } = query;
   // verify the token of one of a kind and its not deleted
 
   messages.find(
     {
       sender: name
-    },
-    {
-      $expr: {
-        $gt: [{$arrayElemAt: ["$messages", -1]}]
-      }
     },
     (err, mensaje) => {
       if (err) {
@@ -843,11 +893,42 @@ router.get("/getLastMessage", (req, res) => {
       return res.send({
         success: true,
         message: "Correctito!",
-        messages: mensaje,
+        mensajes: mensaje,
       });
 
     }
   );
+});
+
+
+router.get("/getLastMessages", (req, res) => {
+  //get the token
+  const { body } = req;
+
+  // verify the token of one of a kind and its not deleted
+  messages.aggregate([
+    {
+      $group: { 
+        _id: "$room",
+        timestamp: { $last: "$timestamp"},
+        ultimo: { $last: "$message"},
+      }
+    }
+  ]).exec((err, post) => {
+    console.log(post)
+    if (err) {
+      return res.send({
+        sucess: false,
+        message: "Error: Server error",
+      });
+    }
+    return res.send({
+      success: true,
+      message: "Correctito!",
+      mensajes: post
+    });
+
+  });
 });
 
 
