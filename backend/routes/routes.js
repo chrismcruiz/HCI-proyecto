@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const users = require("../models/SingUp");
 const UserSession = require("../models/SignIn");
+const matches = require("../models/Match");
 const conversations = require("../models/Conversation");
 const messages = require("../models/Messages");
 
@@ -30,7 +31,7 @@ let upload = multer({ storage, fileFilter });
 
 router.post("/signup", upload.single("photo"), async (req, res) => {
   const { body, file } = req;
-  const { name, email, birthday, gender, career, password } = body;
+  const { name, email, birthday, career, password } = body;
 
   let photo = file
 
@@ -52,12 +53,12 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
       message: "La fecha de nacimiento no puede ir en blanco.",
     });
   }
-  if (!gender) {
-    return res.send({
-      success: false,
-      message: "El género no puede ir en blanco.",
-    });
-  }
+  // if (!gender) {
+  //   return res.send({
+  //     success: false,
+  //     message: "El género no puede ir en blanco.",
+  //   });
+  // }
   if (!career) {
     return res.send({
       success: false,
@@ -98,10 +99,11 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
 
       newUser.email = email;
       newUser.name = name;
-      newUser.gender = gender;
+      // newUser.gender = gender;
       newUser.career = career;
       newUser.birthday = birthday;
-      newUser.photo = photo ? photo.filename : gender === 'masculino' ? 'male_icon.png' : gender === 'femenino' ? 'female_icon.png' : 'user_icon.png';
+      // newUser.photo = photo ? photo.filename : gender === 'masculino' ? 'male_icon.png' : gender === 'femenino' ? 'female_icon.png' : 'user_icon.png';
+      newUser.photo = 'user_icon.png';
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
         if (err) {

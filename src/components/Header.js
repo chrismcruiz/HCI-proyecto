@@ -12,11 +12,12 @@ import { Link } from "react-router-dom";
 import { carreras } from "../utils/dataForm";
 import axios from "axios";
 import './Header.css'
-
+import { Modal, Button } from "react-bootstrap";
 
 const Navbar = ({ userData, filtrar, type }) => {
     const [filtro, setFiltro] = useState(null)
     const [currentChat, setCurrentChat] = useState('')
+    const [mdShow, setMdShow] = useState(false)
 
     const aplicarfiltro = () => {
         filtrar(filtro)
@@ -76,12 +77,35 @@ const Navbar = ({ userData, filtrar, type }) => {
                         </Tooltip>
                         <Tooltip title="Cerrar sesión">
                             <IconButton size="small" className="navbar__icons__chat icono">
-                                <LogoutIcon onClick={logOut} className="icon__color" />
+                                <LogoutIcon onClick={() => setMdShow(true)} className="icon__color" />
                             </IconButton>
                         </ Tooltip>
                     </div>
                 </div>
             </nav>
+            <Modal
+                size="md"
+                centered
+                show={mdShow}
+                onHide={() => setMdShow(false)}
+                aria-labelledby="example-modal-sizes-title-md"
+            >
+                <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-md">
+                    ¿Salir de TradeU?
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="d-grid gap-2 justify-content-center p-4">
+                        <Button className="btn-close-session" onClick={() => logOut()} variant="success" size="lg">
+                            Cerrar sesión
+                        </Button>
+                        <Button className="btn-close-session" onClick={() => setMdShow(false)} variant="secondary" size="lg">
+                            Cancelar
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     )
 }

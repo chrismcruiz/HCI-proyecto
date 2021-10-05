@@ -57,7 +57,7 @@ const Chats = ({ userData, socket, usersData }) => {
                 })
             })
             const usuarios = usersData.filter((user) => counterPartUsers.includes(user._id))
-            usuarios.reverse().map((user, index) => {
+            usuarios.map((user, index) => {
                 dataConvers[index]._id = user._id
                 dataConvers[index].name = user.name
                 dataConvers[index].photo = user.photo

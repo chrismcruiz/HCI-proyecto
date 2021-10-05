@@ -27,9 +27,17 @@
 }
 
 .buscar {
-    width: 20em;
+    width: 21em;
 }
 
+.btn-close-session {
+    width: 20rem;
+    border-radius: 20px;
+}
+
+.salir {
+    background: #27996c;
+}
 /* .tooltip-logout {
     padding: 0 !important;
 } */

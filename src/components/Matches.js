@@ -19,7 +19,7 @@ const Matches = ({ userData, idsMatches }) => {
   const [idMatch, setIdMatch] = useState('')
   const [lgShow, setLgShow] = useState(false);
   // const [conversationId, setConversationId] = useState(null)
-  const [infoRoom, setInfoRoom] = useState('') 
+  const [infoRoom, setInfoRoom] = useState('')
   const [dataMatch, setDataMatch] = useState({});
 
   // Esto podría no ser necesario!
@@ -160,14 +160,14 @@ const Matches = ({ userData, idsMatches }) => {
                         <Link
                           to={{ pathname: `/chats/t/${tarjeta._id}` }}
                         >
-                          <ChatIcon/>
+                          <ChatIcon color="primary" />
                         </Link>
                       </ Tooltip>
                       <Tooltip title="Ver perfil">
-                        <VisibilityIcon onClick={() => mostrarPerfil(tarjeta)} />
+                        <VisibilityIcon className="text-succes" onClick={() => mostrarPerfil(tarjeta)} />
                       </ Tooltip>
                       <Tooltip title="Eliminar contacto">
-                        <DeleteOutlineIcon onClick={() => handleShowInvalid(tarjeta._id)} />
+                        <DeleteOutlineIcon color="error" onClick={() => handleShowInvalid(tarjeta._id)} />
                       </ Tooltip>
                     </ul>
                   </div>
@@ -197,21 +197,21 @@ const Matches = ({ userData, idsMatches }) => {
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
                 <h6 class="mb-0">Diseño prototipo app</h6>
-                <small class="opacity-50 text-nowrap">ahora</small>
+                <small class="opacity-50 text-nowrap">12 integrantes</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
                 <h6 class="mb-0">Tedijos PK</h6>
-                <small class="opacity-50 text-nowrap">3d</small>
+                <small class="opacity-50 text-nowrap">3 integrantes</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
               <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
                 <h6 class="mb-0">Grupo trabajo IA</h6>
-                <small class="opacity-50 text-nowrap">1 semana</small>
+                <small class="opacity-50 text-nowrap">5 integrantes</small>
               </div>
             </a>
           </div>
@@ -232,6 +232,9 @@ const Matches = ({ userData, idsMatches }) => {
           <img className="match_img" src={`/images/${dataMatch.photo}`} width='200' height='200' />
           <p className="match_description">"{!dataMatch.description ? 'Sin descripción' : dataMatch.description}"</p>
           <h4>Especialidades</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at enim nec libero auctor placerat nec sed sapien. Aenean id fermentum lectus. Aenean id quam vehicula lectus euismod placerat vel et urna. Duis eget tincidunt ex, eget pulvinar ligula. Aenean eros sem, porta vel ligula sit amet, iaculis tempor ligula. Etiam ex risus, efficitur eu sagittis vel, faucibus vel magna. Curabitur commodo mattis dui. Morbi vel tellus felis. Nulla libero arcu, euismod eu vestibulum non, sollicitudin eget quam. </p>
+          <p>
+            Suspendisse dictum eget augue eu aliquam. Nullam pharetra, lectus eu imperdiet condimentum, sem tortor vehicula purus, et varius nulla justo et dui. Proin vitae pulvinar lacus. Curabitur faucibus suscipit ullamcorper. Sed ullamcorper scelerisque convallis. Phasellus laoreet diam velit, ut pretium turpis rhoncus faucibus. In quis facilisis orci. Nam et quam eget nisl hendrerit cursus vel convallis ligula.</p>
         </Modal.Body>
       </Modal>
       <ModalForm show={showInvalid} success={false} title="Advertencia" message={'¿Estás seguro que quieres eliminar este contacto?'} hide={handleCloseInvalid} btn_close={true} type="delete" delete={deleteUser} />

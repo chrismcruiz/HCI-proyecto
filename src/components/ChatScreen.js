@@ -75,7 +75,7 @@ const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes })
                         </div>
                     )
                     :
-                    <h5 className="text-center">Aún no tienes ningún mensaje</h5>
+                    null
                 }
             <ScrollToBottom className='message-container' >
                 {messages.map((message) => (

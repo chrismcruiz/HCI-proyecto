@@ -116,7 +116,7 @@ const App = () => {
         <Switch>
           <Route path="/home">
             {!tokencito ?
-              <Redirect to="/chats/t/:id" />
+              <Redirect to="/" />
               :
               !user.admin ?
                 <>
@@ -133,10 +133,6 @@ const App = () => {
           <Route path="/signup">
             {tokencito ? <Redirect to="/home" /> : <SignupForm />}
           </Route>
-          {/* <Route path="/chat/:person">
-            <Header />
-            <ChatScreen />
-          </Route> */}
            <Route path="/chats">
             <Header type='search' />
             <Chats userData={user} socket={socket} usersData={users} />
