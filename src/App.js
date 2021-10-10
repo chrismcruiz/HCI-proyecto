@@ -111,7 +111,9 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        newestOnTop
+      />
       <Router>
         <Switch>
           <Route path="/home">

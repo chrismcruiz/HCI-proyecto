@@ -7,6 +7,26 @@ import SearchIcon from '@material-ui/icons/Search';
 import axios from "axios";
 import './Chats.css'
 import { useLocation } from "react-router-dom"
+import moment from 'moment'
+
+moment.locale('es', {
+    relativeTime : {
+        future : 'dentro de %s',
+        past : 'hace %s',
+        s : 'algunos segundos',
+        m : 'un minuto',
+        mm : '%d minutos',
+        h : 'una hora',
+        hh : '%d horas',
+        d : 'un día',
+        dd : '%d días',
+        M : 'un mes',
+        MM : '%d meses',
+        y : 'un año',
+        yy : '%d años'
+    }
+});
+
 
 const Chats = ({ userData, socket, usersData }) => {
     const idTarjeta = window.location.pathname.split('/')[3]
@@ -15,6 +35,7 @@ const Chats = ({ userData, socket, usersData }) => {
     const location = useLocation()
     const [search, setSearch] = useState([])
     const [enviado, toggleEnviado] = useState(false)
+    const [contador, setContador] = useState(0)
 
     useEffect(async () => {
         try {
@@ -32,11 +53,19 @@ const Chats = ({ userData, socket, usersData }) => {
         }
         try {
             const req = await axios.get("http://localhost:4000/app/getConversations?_id=" + userData._id)
+            const conversaciones = req.data.conversations
+            console.log('Mis conversaciones: ')
+            console.log(conversaciones)
+
             const dataConvers = []
             const idsConvers = []
             let ultimosMensajes = []
-            const counterPartUsers = req.data.conversations.map((conversation) => conversation.participants.filter(participant => participant !== userData._id).toString())
-            req.data.conversations.map((conversation) => {
+            const counterPartUsers = conversaciones.map((conversation) => conversation.participants.filter(participant => participant !== userData._id).toString())
+            console.log('Mi id: ' + userData._id)
+            console.log('Ids usuarios con los que tengo conversaciones:')
+            console.log(counterPartUsers)
+
+            conversaciones.map((conversation) => {
                 dataConvers.push({
                     room: conversation._id,
                 })
@@ -44,32 +73,55 @@ const Chats = ({ userData, socket, usersData }) => {
             })
             try {
                 ultimosMensajes = await axios.get("http://localhost:4000/app/getLastMessages")
-                console.log(ultimosMensajes.data)
+                console.log("últimos mensajes: ")
+                console.log(ultimosMensajes.data.mensajes)
             } catch (err) {
                 console.log(err)
             }
+
             ultimosMensajes.data.mensajes.map((msj) => {
                 dataConvers.map((obj) => {
+                    // console.log(obj.room, msj._id)
                     if (obj.room === msj._id) {
                         obj.ultimo = msj.ultimo
                         obj.timestamp = msj.timestamp
                     }
                 })
             })
+
+            // Información completa de los usuarios con los que tengo conversaciones
             const usuarios = usersData.filter((user) => counterPartUsers.includes(user._id))
-            usuarios.map((user, index) => {
-                dataConvers[index]._id = user._id
-                dataConvers[index].name = user.name
-                dataConvers[index].photo = user.photo
+
+            // acá ya tengo room, último y timestamp
+            conversaciones.map((conversation) => {
+                dataConvers.map((obj) => {
+                    console.log(obj)
+                    if (obj.room === conversation._id) {
+                        const idUser = conversation.participants.filter(participant => participant !== userData._id)[0]
+                        // console.log(idUser)
+                        const usuarioData = usuarios.filter(user => user._id === idUser)[0]
+                        obj['_id'] = usuarioData._id
+                        obj['name'] = usuarioData.name
+                        obj['photo'] = usuarioData.photo
+                    }
+                })
             })
-            console.log(counterPartUsers)
-            console.log(dataConvers)
+            
+            dataConvers.map((conver, index) => {
+                console.log(conver)
+                if (!conver.ultimo) {
+                    dataConvers.splice(index, 1)
+                }
+            })
+            
+            dataConvers.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+
             setChats(dataConvers)
             setSearch(dataConvers)
         } catch (err) {
             console.log(err)
         }
-    }, [location.key, enviado])
+    }, [location.key, enviado, contador])
 
     const handleInputChange = (e) => {
         let str= e.target.value.toString().toLowerCase()
@@ -82,43 +134,9 @@ const Chats = ({ userData, socket, usersData }) => {
     }
 
     const actualizarMensajesIzquierda = () => toggleEnviado(!enviado)
-
-    const timeDifference = (current, previous) => {
-        console.log(current)
-        const anterior = new Date(previous)
-        console.log(anterior)
-
-        let msPerMinute = 60 * 1000;
-        let msPerHour = msPerMinute * 60;
-        let msPerDay = msPerHour * 24;
-        let msPerMonth = msPerDay * 30;
-        let msPerYear = msPerDay * 365;
-    
-        let elapsed = current - anterior;
-    
-        if (elapsed < msPerMinute) {
-             return 'Hace ' + Math.round(elapsed/1000) + ' segundos';   
-        }
-    
-        else if (elapsed < msPerHour) {
-             return 'Hace ' + Math.round(elapsed/msPerMinute) + ' minutos';   
-        }
-    
-        else if (elapsed < msPerDay ) {
-             return 'Hace ' + Math.round(elapsed/msPerHour ) + ' hora(s)';   
-        }
-    
-        else if (elapsed < msPerMonth) {
-            return 'Hace aproximadamente ' + Math.round(elapsed/msPerDay) + ' días';   
-        }
-    
-        else if (elapsed < msPerYear) {
-            return 'Hace aproximadamente '  + Math.round(elapsed/msPerMonth) + ' meses';   
-        }
-    
-        else {
-            return 'Hace aproximadamente ' + Math.round(elapsed/msPerYear ) + ' años';   
-        }
+    const actualizarContador = (num) => {
+        console.log(num)
+        setContador(num)
     }
 
     return (
@@ -146,7 +164,7 @@ const Chats = ({ userData, socket, usersData }) => {
                                     name={chat.name.split(' ')[0]}
                                     message={chat.ultimo}
                                     profilePic={`/images/${chat.photo}`}
-                                    timestamp={timeDifference(new Date(), chat.timestamp)}
+                                    timestamp={moment(chat.timestamp).fromNow()}
                                 />
                             ))
 
@@ -156,7 +174,7 @@ const Chats = ({ userData, socket, usersData }) => {
                     </div>
                 </div>
                 <div className="col-8 position-relative border-start">
-                    <ChatScreen userData={userData} socket={socket} tarjeta={tarjeta} location={location.key} actualizarMensajes={actualizarMensajesIzquierda}/>
+                    <ChatScreen userData={userData} socket={socket} tarjeta={tarjeta} location={location.key} actualizarMensajes={actualizarMensajesIzquierda} enviado={enviado} actualizarContador={actualizarContador} />
                 </div>
             </div>
         </div>

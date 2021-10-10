@@ -33,7 +33,7 @@ const io = new Server(server, {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"],
     },
-});
+})
 
 io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);

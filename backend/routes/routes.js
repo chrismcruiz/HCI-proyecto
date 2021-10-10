@@ -827,12 +827,13 @@ router.get("/getParticipants", (req, res) => {
 
 router.post("/storeMessages", (req, res) => {
   const { body } = req;
-  const { sender, message, room } = body;
+  const { sender, message, room, timestamp } = body;
 
   const newMessage = new messages();
   newMessage.sender = sender
   newMessage.message = message
   newMessage.room = room
+  newMessage.timestamp = timestamp
   newMessage.save((err, message) => {
     if (err) {
       return res.send({
@@ -854,25 +855,44 @@ router.get("/getMessages", (req, res) => {
   const { _id } = query;
   // verify the token of one of a kind and its not deleted
 
-  messages.find(
-    {
-      room: _id
-    },
-    (err, messages) => {
-      if (err) {
+  if (_id !== '') {
+    messages.find(
+      {
+        room: _id
+      },
+      (err, messages) => {
+        if (err) {
+          return res.send({
+            sucess: false,
+            message: "Error: Server error",
+          });
+        }
         return res.send({
-          sucess: false,
-          message: "Error: Server error",
+          success: true,
+          message: "Correctito!",
+          messages: messages,
+        });
+  
+      }
+    );
+  } else {
+    messages.find(
+      (err, messages) => {
+        if (err) {
+          return res.send({
+            sucess: false,
+            message: "Error: Server error",
+          });
+        }
+        return res.send({
+          success: true,
+          message: "Correctito!",
+          messages: messages,
         });
       }
-      return res.send({
-        success: true,
-        message: "Correctito!",
-        messages: messages,
-      });
-
-    }
-  );
+    );
+  }
+  
 });
 
 router.get("/getLastMessage", (req, res) => {
@@ -917,7 +937,7 @@ router.get("/getLastMessages", (req, res) => {
       }
     }
   ]).exec((err, post) => {
-    console.log(post)
+    // console.log(post)
     if (err) {
       return res.send({
         sucess: false,

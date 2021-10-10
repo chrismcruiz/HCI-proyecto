@@ -6,29 +6,39 @@ import { css } from '@emotion/react';
 import ScrollToBottom from "react-scroll-to-bottom";
 // import { useLocation } from "react-router-dom"
 
-const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes }) => {
+const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes, enviado, actualizarContador }) => {
 
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([])
     const [idRoom, setIdRoom] = useState('')
 
-
     useEffect(async () => {
         try {
+            const messagesCount = await axios.get("http://localhost:4000/app/getMessages?_id=" + '')
+            actualizarContador(messagesCount.data.messages.length)
+        } catch (err) {
+            console.log(err)
+        }
+        try {
             const response = await axios.get("http://localhost:4000/app/conversations/verify?idA=" + userData._id + "&idB=" + tarjeta._id)
-            if (response.status === 200) {
+            // console.log(response.data)
+            if (response.status === 200 && response.data.success) {
                 setIdRoom(response.data.idRoom)
                 try {
                     const request = await axios.get("http://localhost:4000/app/getMessages?_id=" + response.data.idRoom)
                     if (request.status === 200 && request.data.messages.length > 0) {
+                        console.log(request.data.messages)
                         setMessages(request.data.messages)
                     } else {
+                        console.log('No tienes mensajes con esta persona')
+                        setMessages([])
                         console.log(response)
                     }
                 } catch (err) {
                     console.log(err)
                 }
             } else {
+                console.log('La conversación no existe')
                 console.log(response)
             }
         } catch (err) {
@@ -36,8 +46,9 @@ const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes })
         }
         socket.on("receive_message", (data) => {
             setMessages((list) => [...list, data]);
+            actualizarMensajes()
         });
-    }, [socket, location]);
+    }, [socket, location, enviado]);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -45,7 +56,8 @@ const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes })
             const messageData = {
                 sender: userData.name,
                 message: input,
-                room: idRoom
+                room: idRoom,
+                timestamp: Date.now()
             }
 
             await socket.emit("send_message", messageData);
