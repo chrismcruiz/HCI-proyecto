@@ -6,12 +6,11 @@ import { css } from '@emotion/react';
 import ScrollToBottom from "react-scroll-to-bottom";
 // import { useLocation } from "react-router-dom"
 
-const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes, enviado, actualizarContador }) => {
-
+const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes, enviado, actualizarContador, idRoom }) => {
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([])
-    const [idRoom, setIdRoom] = useState('')
 
+    console.log(idRoom)
     useEffect(async () => {
         try {
             const messagesCount = await axios.get("http://localhost:4000/app/getMessages?_id=" + '')
@@ -23,7 +22,7 @@ const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes, e
             const response = await axios.get("http://localhost:4000/app/conversations/verify?idA=" + userData._id + "&idB=" + tarjeta._id)
             // console.log(response.data)
             if (response.status === 200 && response.data.success) {
-                setIdRoom(response.data.idRoom)
+                // setIdRoom(response.data.idRoom)
                 try {
                     const request = await axios.get("http://localhost:4000/app/getMessages?_id=" + response.data.idRoom)
                     if (request.status === 200 && request.data.messages.length > 0) {
@@ -94,17 +93,15 @@ const ChatScreen = ({ userData, socket, tarjeta, location, actualizarMensajes, e
                     message.sender !== userData.name ?
                         (
                             <div className="chatScreen__message">
-                                <Avatar
-                                    className="chatScreen__image"
-                                    alt={message.sender}
-                                    src={`/images/${tarjeta.photo}`}
-                                    key={message.photo}
-                                />
-                                <p className="chatScreen__text">{message.message}</p>
+                                <p className="chatScreen__text">{message.message} <span className="hora">{new Date(message.timestamp).getHours() +
+          ":" +
+          new Date(message.timestamp).getMinutes()}</span></p>
                             </div>
                         ) : (
                             <div className="chatScreen__message">
-                                <p className="chatScreen__textUser">{message.message}</p>
+                                <p className="chatScreen__textUser">{message.message} <span className="hora">{new Date(message.timestamp).getHours() +
+          ":" +
+          new Date(message.timestamp).getMinutes()}</span></p>
                             </div>
                         )
                 ))}

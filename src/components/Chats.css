@@ -10,13 +10,12 @@
 }
 
 .chats {
-    overflow-y: scroll;
     margin-top: 2rem;
     /* height: 100%; */
 }
 
 .buscar-chat {
-    width: 95%;
+    width: 100%;
 }
 
 .columna-izquierda {
@@ -26,4 +25,11 @@
 
 .chat-columna {
     height: 40rem;
+}
+
+.empty-chats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
 }

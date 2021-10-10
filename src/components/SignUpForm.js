@@ -23,7 +23,7 @@ const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
   const [signUpError, setSignUpError] = useState(""); // Identificar si hubo errores en la validación del servidor al enviar el formulario
   const [showInvalid, setShowInvalid] = useState(false); // Mostrar o ocultar el modal de registro exitoso
-  const [mdShow, setMdShow] = useState(false); // Mostrar o ocultar el modal de registro fallido
+  const [mdShow, setMdShow] = useState(true); // Mostrar o ocultar el modal de registro fallido
 
   // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
   // const handleCloseValid = () => {

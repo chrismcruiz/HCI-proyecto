@@ -8,16 +8,19 @@ import axios from "axios";
 import './Chats.css'
 import { useLocation } from "react-router-dom"
 import moment from 'moment'
+import { CircularProgress } from "@material-ui/core";
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 moment.locale('es', {
     relativeTime : {
         future : 'dentro de %s',
-        past : 'hace %s',
-        s : 'algunos segundos',
-        m : 'un minuto',
-        mm : '%d minutos',
-        h : 'una hora',
-        hh : '%d horas',
+        past : '%s',
+        s : '1m',
+        m : '1m',
+        mm : '%dm',
+        h : '1h',
+        hh : '%d h',
         d : 'un día',
         dd : '%d días',
         M : 'un mes',
@@ -36,28 +39,33 @@ const Chats = ({ userData, socket, usersData }) => {
     const [search, setSearch] = useState([])
     const [enviado, toggleEnviado] = useState(false)
     const [contador, setContador] = useState(0)
+    const [idRoom, setIdRoom] = useState('')
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(async () => {
         try {
             if (idTarjeta) {
                 const response = await axios.post("http://localhost:4000/app/createConversation", [userData._id, idTarjeta])
+                console.log(response)
                 if (response.status === 200) {
                     socket.emit("join_room", response.data.conversationId);
+                    setIdRoom(response.data.conversationId)
                     if (!response.data.success) {
                         console.log('conversación ya creada')
                     }
                 } 
-            } else return
+            } else setIsLoading(false)
         } catch (err) {
             console.log(err)
         }
+        // setIsLoading(false)
         try {
             const req = await axios.get("http://localhost:4000/app/getConversations?_id=" + userData._id)
             const conversaciones = req.data.conversations
             console.log('Mis conversaciones: ')
             console.log(conversaciones)
 
-            const dataConvers = []
+            let dataConvers = []
             const idsConvers = []
             let ultimosMensajes = []
             const counterPartUsers = conversaciones.map((conversation) => conversation.participants.filter(participant => participant !== userData._id).toString())
@@ -107,17 +115,12 @@ const Chats = ({ userData, socket, usersData }) => {
                 })
             })
             
-            dataConvers.map((conver, index) => {
-                console.log(conver)
-                if (!conver.ultimo) {
-                    dataConvers.splice(index, 1)
-                }
-            })
-            
+            dataConvers = dataConvers.filter((conver) => conver.ultimo)
             dataConvers.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
 
             setChats(dataConvers)
             setSearch(dataConvers)
+            setIsLoading(false)
         } catch (err) {
             console.log(err)
         }
@@ -139,6 +142,14 @@ const Chats = ({ userData, socket, usersData }) => {
         setContador(num)
     }
 
+    if (isLoading) {
+        return (
+          <div className="d-flex justify-content-center align-items-center vh-100">
+            <CircularProgress color="primary" size={50} />
+          </div>
+        );
+    }
+
     return (
         <div className="container chats-vista columna-altura border">
             <div className="row">
@@ -155,26 +166,30 @@ const Chats = ({ userData, socket, usersData }) => {
                         </span>
                     </form>
                     <div className="chats">
-                        {chats.length > 0 ?
+                        <SimpleBar>
+                            {chats.length > 0 ?
 
-                            chats.map((chat) => (
-                                <Chat
-                                    key={chat._id}
-                                    id={chat._id}
-                                    name={chat.name.split(' ')[0]}
-                                    message={chat.ultimo}
-                                    profilePic={`/images/${chat.photo}`}
-                                    timestamp={moment(chat.timestamp).fromNow()}
-                                />
-                            ))
+                                chats.map((chat) => (
+                                    <Chat
+                                        key={chat._id}
+                                        id={chat._id}
+                                        name={chat.name}
+                                        message={chat.ultimo}
+                                        profilePic={`/images/${chat.photo}`}
+                                        timestamp={moment(chat.timestamp).fromNow()}
+                                    />
+                                ))
 
-                            :
-                            (<h5>No tienes chats</h5>)
-                        }
+                                :
+                                <div className="text-center empty-chats">
+                                    <img height="180" width="180" src='/assets/sinmensajes2.png' />
+                                </div>
+                            }
+                        </SimpleBar>
                     </div>
                 </div>
                 <div className="col-8 position-relative border-start">
-                    <ChatScreen userData={userData} socket={socket} tarjeta={tarjeta} location={location.key} actualizarMensajes={actualizarMensajesIzquierda} enviado={enviado} actualizarContador={actualizarContador} />
+                    <ChatScreen userData={userData} socket={socket} tarjeta={tarjeta} location={location.key} actualizarMensajes={actualizarMensajesIzquierda} enviado={enviado} actualizarContador={actualizarContador} idRoom={idRoom} />
                 </div>
             </div>
         </div>

@@ -13,6 +13,8 @@
     background-color: lightgray;
     padding: 15px;
     border-radius: 20px;
+    position: relative;
+    min-width: 3.9rem;
 }
 
 .chatScreen__timestamp {
@@ -27,6 +29,16 @@
     padding: 15px;
     border-radius: 20px;
     color: white;
+    position: relative;
+    min-width: 3.9rem;
+    height: 3.7rem;
+}
+
+.hora {
+    font-size: 0.65rem;
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
 }
 
 .chatScreen__input {
