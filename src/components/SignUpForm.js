@@ -17,13 +17,13 @@ import './Forms.css'
 import Navbar2 from './Navbar2'
 import { Modal, Button } from "react-bootstrap";
 import { setInStorage } from "../utils/storage";
-import { Pagination } from '@mui/material';
+import Questions from './Questions'
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
   const [signUpError, setSignUpError] = useState(""); // Identificar si hubo errores en la validación del servidor al enviar el formulario
   const [showInvalid, setShowInvalid] = useState(false); // Mostrar o ocultar el modal de registro exitoso
-  const [mdShow, setMdShow] = useState(true); // Mostrar o ocultar el modal de registro fallido
+  const [mdShow, setMdShow] = useState(false); // Mostrar o ocultar el modal de registro fallido
 
   // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
   // const handleCloseValid = () => {
@@ -168,20 +168,8 @@ const SignupForm = () => {
                   <p className="tellus">Ahora cuéntanos tus intereses</p>
                 </Modal.Title>
               </Modal.Header>
-              <Modal.Body className="pb-0 d-flex flex-column align-items-center justify-content-center">
-                <h6 id="primera">¿Buscas unirte a un emprendimiento?</h6>
-                <h6 id="primera">¿Deseas conformar un equipo de trabajo?</h6>
-                <h6 id="primera">¿Es tu primer acercamiento a la vida laboral?</h6>
-                
-                <div>
-                  <Button className="btn-questions afirmative" onClick={() => console.log('a')} variant="success" size="lg">
-                    Sí
-                  </Button>
-                  <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">
-                    No
-                  </Button>
-                </div>
-                <Pagination className="mt-5" count={3} />
+              <Modal.Body className="d-flex justify-content-center mx-auto pb-1">
+                <Questions setMdShow={setMdShow} />
               </Modal.Body>
               <Modal.Footer>
                 <a href="/home">Omitir</a>
