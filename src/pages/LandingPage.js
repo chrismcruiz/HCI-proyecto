@@ -26,14 +26,17 @@ const LandingPage = () => {
                         <button className="btn btn-lg signup-button" type="button"><a className="iconos" href="/signup"><i class="fas fa-user-plus"></i> Regístrate</a></button>
                     </div>
                     <div className="col-md-5">
-                        <img className="header-img" src='/assets/work.png' />
+                        <img className="header-img" src='/assets/work1.png' />
                     </div>
                     
                 </div>
-            </header>
+            
 
+            </header>
+            <div id="header2" className="header2">
+            </div>
             {/* Carrusel */}
-            <div id="carrusel" class="row justify-content-center carrusel">
+            {/*<div id="carrusel" class="row justify-content-center carrusel">
                 <div class="col-md-10">
                     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators">
@@ -83,8 +86,47 @@ const LandingPage = () => {
                 <a class="btn btn-primary btn-lg" href="/signup" role="button">Registrate</a>
                 <a><br></br></a>
             </div> */}
-
-          
+            <div  class="row justify-content-center">
+            <div class="col-md-10">
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <carousel >
+                    <input type="radio" id="page1cb" checked name="pages" />
+                    <input type="radio" id="page2cb" name="pages" />
+                    <input type="radio" id="page3cb" name="pages" />
+                    <input type="radio" id="page4cb" name="pages" />
+                    <input type="radio" id="page5cb" name="pages" />
+                    <page id="page1">
+                        <div>Page One!</div>
+                        <label for="page2cb" title="Start"><b>START</b></label>
+                    </page>
+                    <page id="page2">
+                        <div>Page Two!</div>
+                        <label for="page3cb" title="Next"><b>NEXT</b></label>
+                    </page>
+                    <page id="page3">
+                        <div>Page Three!</div>
+                        <label for="page4cb" title="Next"><b>NEXT</b></label>
+                    </page>
+                    <page id="page4">
+                        <div>Page Four!</div>
+                        <label for="page5cb" title="Next"><b>NEXT</b></label>
+                    </page>
+                    <page id="page5">
+                        <div>Page Five!</div>
+                        <label for="page1cb" title="That's all folks!"><b>START AGAIN?</b></label>
+                    </page>
+                </carousel>
+            </div>
+            </div>
             {/* Footer */}
             <footer class="container-fluid footer">
                 <div class="row">

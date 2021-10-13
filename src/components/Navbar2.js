@@ -5,7 +5,7 @@ const Navbar2 = () => {
         <>
             <nav class="navbar navbar-expand-lg navbar-dark nav-header">
                 <a class="navbar-brand home-brand" href="/">
-                    {/* <img className="logo" src='/assets/unknown.png' alt="" width="100" height="100" className="d-inline-block align-text-top" onClick={() => window.location.reload()} /> */}
+                    { <img className="logo" src='/assets/logofinal.png' alt="" width="150" height="100" className="d-inline-block ms-auto" onClick={() => window.location.reload()} /> }
                     trade urself
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
