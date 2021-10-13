@@ -8,7 +8,7 @@ import { Tooltip } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar'
 import './Sidebar.css'
 
-const Sidebar = ({ userData, idUser, idsMatches }) => {
+const Sidebar = ({ userData, idUser, idsMatches, mostrarSpinner, quitarSpinner, socket }) => {
   const [perfilShow, setPerfilShow] = useState(false);
 
   const handlePerfilShow = () => setPerfilShow(!perfilShow)
@@ -57,7 +57,7 @@ const Sidebar = ({ userData, idUser, idsMatches }) => {
               </Tooltip>
             </div>
           </div>
-          <Matches className="" userData={userData} idsMatches={idsMatches} />
+          <Matches className="" userData={userData} idsMatches={idsMatches} mostrarSpinner={mostrarSpinner} quitarSpinner={quitarSpinner} socket={socket} />
           {/* <ExitToAppIcon className='mr-2 texto-blanco' onClick={handlePerfilBack}></ExitToAppIcon> */}
         </div>
       )}

@@ -1,4 +1,35 @@
-.chats {
+.chats-vista {
+    border: 1px solid #dee2e6;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+
 }
 
+.columna-altura {
+    height: 50rem;
+}
+
+.chats {
+    margin-top: 2rem;
+    /* height: 100%; */
+}
+
+.buscar-chat {
+    width: 100%;
+}
+
+.columna-izquierda {
+
+    /* border-right: 1px solid; */
+}
+
+.chat-columna {
+    height: 40rem;
+}
+
+.empty-chats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+}

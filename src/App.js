@@ -20,11 +20,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header'
 import Chats from './components/Chats'
 import ChatScreen from './components/ChatScreen'
+import io from "socket.io-client";
+
+
+const socket = io.connect("http://localhost:3001");
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [tokencito, setTokencito] = useState("");
   const [idUsuario, setIdUsuario] = useState("");
+  const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [filtros, setFiltros] = useState([])
 
@@ -41,12 +46,11 @@ const App = () => {
           setTokencito(token);
           setIdUsuario(idUser);
           try {
-            const dataUser = await axios.post("http://localhost:4000/app/getInfo", {
-              _id: idUser,
-            })
-            if (dataUser.status === 200) {
-              setUser(dataUser.data[0])
-              setFiltros(dataUser.data[0].filters)
+            const dataUsers = await axios.get("http://localhost:4000/app/users")
+            if (dataUsers.status === 200) {
+              setUsers(dataUsers.data)
+              setUser(dataUsers.data.filter((user) => user._id === idUser)[0])
+              setFiltros(dataUsers.data.filter((user) => user._id === idUser)[0].filters)
             }
             setIsLoading(false)
           } catch (err) {
@@ -81,7 +85,7 @@ const App = () => {
         .post("http://localhost:4000/app/addFilter", body)
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data.filtros)
+            // console.log(response.data.filtros)
             setFiltros(response.data.filtros)
           }
         })
@@ -102,9 +106,14 @@ const App = () => {
       .catch(error => console.log(error))
   }
 
+  const mostrarSpinner = () => setIsLoading(true)
+  const quitarSpinner = () => setIsLoading(false)
+
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        newestOnTop
+      />
       <Router>
         <Switch>
           <Route path="/home">
@@ -113,8 +122,8 @@ const App = () => {
               :
               !user.admin ?
                 <>
-                  <Header filtrar={añadirFiltro} />
-                  <Home userData={user} idUser={idUsuario} filtros={filtros} borrarFiltro={borrarFiltro} />
+                  <Header userData={user} filtrar={añadirFiltro} type="filter" />
+                  <Home userData={user} idUser={idUsuario} filtros={filtros} borrarFiltro={borrarFiltro} mostrarSpinner={mostrarSpinner} quitarSpinner={quitarSpinner} socket={socket} />
                 </>
                 :
                 <Redirect to="/admin" />}
@@ -126,14 +135,13 @@ const App = () => {
           <Route path="/signup">
             {tokencito ? <Redirect to="/home" /> : <SignupForm />}
           </Route>
-          <Route path="/chat/:person">
-            <Header />
-            <ChatScreen />
+           <Route path="/chats">
+            <Header type='search' />
+            <Chats userData={user} socket={socket} usersData={users} mostrarSpinner={mostrarSpinner} quitarSpinner={quitarSpinner} />
           </Route>
-          <Route path="/chats">
-            <Header />
-            {/* <h1>Chat page</h1> */}
-            <Chats />
+          <Route path="/chats/t/:id">
+            <Header type='search' />
+            <Chats userData={user} socket={socket} usersData={users} />
           </Route>
           <Route path="/admin">
             {!tokencito ? <Redirect to="/" /> : !user.admin ? <Redirect to="/home" /> : <Admin userData={user} idUser={idUsuario} />}

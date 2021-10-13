@@ -4,7 +4,7 @@ export const SignUpFormValidation = yup.object().shape({
   name: yup.string().min(2, 'El nombre debe contener al menos 2 caracteres').max(30, 'El nombre debe contener máximo 30 caracteres').required("Rellena este campo"),
   email: yup.string().email("Correo inválido").required("Rellena este campo"),
   birthday: yup.date().required("Rellena este campo"),
-  gender: yup.string().required("Rellena este campo"),
+  // gender: yup.string().required("Rellena este campo"),
   career: yup.string().required("Rellena este campo"),
   photo: yup.mixed(),
   password: yup

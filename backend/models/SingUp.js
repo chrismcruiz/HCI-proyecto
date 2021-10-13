@@ -20,7 +20,7 @@ const signUpTemplate = new mongoose.Schema({
     gender: {
         type: String,
         default: '',
-        required: true
+        required: false
     },
     career: {
         type: String,

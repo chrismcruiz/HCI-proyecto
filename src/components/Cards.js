@@ -12,8 +12,8 @@ import { toast } from 'react-toastify';
 import Filtros from './Filtros'
 
 const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
-  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState([]); // info tarjetas
   // const [myInfo, setMyInfo] = useState([])
 
   // let myInfo = []
@@ -33,7 +33,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       setUsers(filtrarUsuarios(req.data));
     }
     setIsLoading(false);
-  }, [filtros]);  
+  }, [filtros]);
 
 
 
@@ -152,13 +152,13 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      });
+    });
   };
 
   if (users.length === 0) {
     return (
       <div>
-          {/* Filtros */}
+        {/* Filtros */}
         <div className="filtros">
           {filtros.map((filtro) => <Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />)}
         </div>
@@ -183,7 +183,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       {/* Filtros */}
       <div className="filtros">
 
-        {filtros.length > 0 ? 
+        {filtros.length > 0 ?
           filtros.map((filtro) => (<Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />))
           :
           (
@@ -199,8 +199,59 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       <div className="card__container d-flex justify-content-center mx-auto">
         {users.map((character, index) =>
           <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >
-            <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
+            {/* <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
               <h3>{character.name.split(" ").slice(0, 2).join(' ')}</h3>
+            </div> */}
+            <div class="card green d-flex justify-content-center">
+              <div class="additional">
+                <div class="user-card">
+                  <div class="level center">
+                    Level 13
+                  </div>
+                  <div class="points center">
+                    5,312 Points
+                  </div>
+                  <img className="pic" alt="" width="150" heigth="150" src={`/images/${character.photo}`} />
+                </div>
+                <div class="more-info">
+                  <h1>{character.name}</h1>
+                  <div class="coords">
+                    <span>Group Name</span>
+                    <span>Joined January 2019</span>
+                  </div>
+                  <div class="coords">
+                    <span>Position/Role</span>
+                    <span>City, Country</span>
+                  </div>
+                  <div class="stats">
+                    <div>
+                      <div class="title">Awards</div>
+                      <i class="fa fa-trophy"></i>
+                      <div class="value">2</div>
+                    </div>
+                    <div>
+                      <div class="title">Matches</div>
+                      <i class="fa fa-gamepad"></i>
+                      <div class="value">27</div>
+                    </div>
+                    <div>
+                      <div class="title">Pals</div>
+                      <i class="fa fa-group"></i>
+                      <div class="value">123</div>
+                    </div>
+                    <div>
+                      <div class="title">Coffee</div>
+                      <i class="fa fa-coffee"></i>
+                      <div class="value infinity">∞</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="general">
+                <h1>{character.name}</h1>
+                <p>{character.description}</p>
+                {/* <span class="more">Mouse over the card for more info</span> */}
+              </div>
             </div>
           </TinderCard>
         )}

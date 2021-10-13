@@ -15,25 +15,32 @@ import { SignUpFormValidation } from "../utils/FormValidation"
 import { DatePicker } from '@mui/lab';
 import './Forms.css'
 import Navbar2 from './Navbar2'
+import { Modal, Button } from "react-bootstrap";
+import { setInStorage } from "../utils/storage";
+import Questions from './Questions'
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
   const [signUpError, setSignUpError] = useState(""); // Identificar si hubo errores en la validación del servidor al enviar el formulario
-  const [showValid, setShowValid] = useState(false); // Mostrar o ocultar el modal de registro exitoso
-  const [showInvalid, setShowInvalid] = useState(false); // Mostrar o ocultar el modal de registro fallido
+  const [showInvalid, setShowInvalid] = useState(false); // Mostrar o ocultar el modal de registro exitoso
+  const [mdShow, setMdShow] = useState(false); // Mostrar o ocultar el modal de registro fallido
 
   // Dejar de mostrar el modal de formulario válido y cambiar al formulario de Login
-  const handleCloseValid = () => {
-    setShowValid(false)
-    window.location = '/login'
-  };
+  // const handleCloseValid = () => {
+  //   setShowValid(false)
+  //   window.location = '/login'
+  // };
 
   const handleCloseInvalid = () => setShowInvalid(false); // Dejar de mostrar el modal de formulario inválido
 
   // Función para registrarse y almacenar los datos en la BD.
-  const onSignUp = (values) => {
-    console.log(values)
+  const onSignUp = async (values) => {
     setIsLoading(true);
+
+    const valuesToSignIn = {
+      email: values.email,
+      password: values.password,
+    }
 
     let formData = new FormData(); // formData es una estructura de datos (acepta archivos tipo file como imágenes)
 
@@ -41,22 +48,31 @@ const SignupForm = () => {
       formData.append(key, values[key]);
     }
 
-    axios
-      .post("http://localhost:4000/app/signup/", formData)
-      .then((response) => {
-        if (response.status === 200 && response.data.success) {
-          setIsLoading(false);
-          setShowValid(true);
-        } else {
-          setSignUpError(response.data.message);
-          setIsLoading(false);
-          setShowInvalid(true);
+    
+    try {
+      const request = await axios.post("http://localhost:4000/app/signup/", formData)
+      if (request.status === 200 && request.data.success) {
+        try {
+          const response = await axios.post('http://localhost:4000/app/signin/', valuesToSignIn)
+          if (response.status === 200 && response.data.success) {
+            setInStorage("the_main_app", {
+              token: response.data.token,
+              idUser: response.data.id_user,
+            })
+            // setSignInError("");
+            setIsLoading(false);
+            setMdShow(true);
+          } else {
+            console.log(response)
+            setIsLoading(false);
+          }
+        } catch (err) {
+          console.log(err)
         }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.log(error);
-      });
+      }
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   // Si está cargando muestro el spinner
@@ -76,7 +92,6 @@ const SignupForm = () => {
           name: "",
           email: "",
           birthday: "",
-          gender: '',
           career: "",
           photo: "",
           password: "",
@@ -97,7 +112,7 @@ const SignupForm = () => {
                       <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
                       <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
                       <InputField label="Fecha de Nacimiento" classes="" name="birthday" type="date" />
-                      <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} />
+                      {/* <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} /> */}
                       <SelectField label="Especialidad o intereses" classes="" name="career" options={carreras} />
 
                       <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
@@ -139,7 +154,27 @@ const SignupForm = () => {
             </strong>
           </a> */}
             {/****************** Modal para el registro satisfactorio ******************/}
-            <ModalForm show={showValid} success={true} title="!Correcto!" message="Registro realizado satisfactoriamente!" hide={handleCloseValid} />
+            <Modal
+              className="text-center"
+              size="lg"
+              centered
+              show={mdShow}
+              onHide={() => setMdShow(false)}
+              aria-labelledby="example-modal-sizes-title-md"
+            >
+              <Modal.Header className="d-flex justify-content-center">
+                <Modal.Title id="example-modal-sizes-title-lg">
+                  <h2 className="almost-title">!Ya casi terminas!</h2>
+                  <p className="tellus">Ahora cuéntanos tus intereses</p>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="d-flex justify-content-center mx-auto pb-1">
+                <Questions setMdShow={setMdShow} />
+              </Modal.Body>
+              <Modal.Footer>
+                <a href="/home">Omitir</a>
+              </Modal.Footer>
+            </Modal>
             {/****************** Modal para el registro fallido ******************/}
             <ModalForm show={showInvalid} success={false} title="Ooops!" message={signUpError} hide={handleCloseInvalid} />
           </div>

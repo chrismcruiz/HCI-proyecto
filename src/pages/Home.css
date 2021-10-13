@@ -1,31 +1,17 @@
-/* .grid-home {
-    display: grid;
-    grid-template-rows: 5.5% 1fr;
-  }
-  
-  .grid-row-superior {
-    grid-row: 1 / 2;
-  } */
-  
-  .grid-row-inferior {
-    margin-top: 3.6vh;
-    margin-bottom: 3.6vh;
-    /* grid-row: 2 / -1; */
-  }
-
-  
-
-
 .bordes {
   border: 1px solid #dee2e6;
   border-radius: 5px;
 }
 
+/* .altura-contenedor {
+  height: 100vh;
+} */
+
 .contenido-principal {
   padding: 2% 5%;
-  height: 90vh;
 }
 
-.col-izquierda {
+
+.margen-derecho {
   margin-right: 2rem;
 }

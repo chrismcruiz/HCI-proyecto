@@ -5,6 +5,9 @@ const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const users = require("../models/SingUp");
 const UserSession = require("../models/SignIn");
+const matches = require("../models/Match");
+const conversations = require("../models/Conversation");
+const messages = require("../models/Messages");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -28,7 +31,7 @@ let upload = multer({ storage, fileFilter });
 
 router.post("/signup", upload.single("photo"), async (req, res) => {
   const { body, file } = req;
-  const { name, email, birthday, gender, career, password } = body;
+  const { name, email, birthday, career, password } = body;
 
   let photo = file
 
@@ -50,12 +53,12 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
       message: "La fecha de nacimiento no puede ir en blanco.",
     });
   }
-  if (!gender) {
-    return res.send({
-      success: false,
-      message: "El género no puede ir en blanco.",
-    });
-  }
+  // if (!gender) {
+  //   return res.send({
+  //     success: false,
+  //     message: "El género no puede ir en blanco.",
+  //   });
+  // }
   if (!career) {
     return res.send({
       success: false,
@@ -96,10 +99,11 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
 
       newUser.email = email;
       newUser.name = name;
-      newUser.gender = gender;
+      // newUser.gender = gender;
       newUser.career = career;
       newUser.birthday = birthday;
-      newUser.photo = photo ? photo.filename : gender === 'masculino' ? 'male_icon.png' : gender === 'femenino' ? 'female_icon.png' : 'user_icon.png';
+      // newUser.photo = photo ? photo.filename : gender === 'masculino' ? 'male_icon.png' : gender === 'femenino' ? 'female_icon.png' : 'user_icon.png';
+      newUser.photo = 'user_icon.png';
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
         if (err) {
@@ -681,5 +685,273 @@ router.post("/getInfoTarjetas", (req, res, next) => {
     }
   );
 });
+
+
+// Chats
+
+router.post("/createConversation", (req, res) => {
+  const { body } = req;
+  const [idA, idB] = body;
+
+  conversations.findOne(
+    {
+      participants: {
+        $all: [idA, idB]
+      }
+    },
+    (err, conversation) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: "Error: Server error",
+        })
+      } else if (conversation) {
+        return res.send({
+          success: false,
+          conversationId: conversation._id,
+          message: "Ya existe está conversación",
+        })
+      }
+
+      const newConversation = new conversations();
+      newConversation.participants.push(idA, idB);
+      newConversation.save((err, conversation) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: "Error: Server error"
+          });
+        }
+        return res.send({
+          success: true,
+          message: "Conversación creada",
+          conversationId: conversation._id
+        });
+      })
+    }
+  )
+})
+
+router.get("/conversations/verify", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { idA, idB } = query;
+  // verify the token of one of a kind and its not deleted
+
+  conversations.find(
+    {
+      participants: {
+        $all: [idA, idB]
+      }
+    },
+    (err, conversation) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      if (conversation.length != 1) {
+        return res.send({
+          sucess: false,
+          message: "Error: Invalido",
+        });
+      } else {
+        return res.send({
+          success: true,
+          message: "Correctito!",
+          idRoom: conversation[0]._id,
+        });
+      }
+    }
+  );
+});
+
+
+router.get("/getConversations", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { _id } = query;
+  // verify the token of one of a kind and its not deleted
+
+  conversations.find(
+    {
+      participants: {
+        $in: [_id]
+      }
+    },
+    (err, conversations) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        conversations: conversations
+      });
+    }
+  );
+});
+
+router.get("/getParticipants", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { room } = query;
+  // verify the token of one of a kind and its not deleted
+
+  conversations.find(
+    {
+      _id: room
+    },
+    (err, participants) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        participants: participants
+      });
+    }
+  );
+});
+
+
+// Guardar mensajes
+
+router.post("/storeMessages", (req, res) => {
+  const { body } = req;
+  const { sender, message, room, timestamp } = body;
+
+  const newMessage = new messages();
+  newMessage.sender = sender
+  newMessage.message = message
+  newMessage.room = room
+  newMessage.timestamp = timestamp
+  newMessage.save((err, message) => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Error: Server error"
+      });
+    }
+    return res.send({
+      success: true,
+      message: "Mensaje guardado"
+    });
+  })
+})
+
+
+router.get("/getMessages", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { _id } = query;
+  // verify the token of one of a kind and its not deleted
+
+  if (_id !== '') {
+    messages.find(
+      {
+        room: _id
+      },
+      (err, messages) => {
+        if (err) {
+          return res.send({
+            sucess: false,
+            message: "Error: Server error",
+          });
+        }
+        return res.send({
+          success: true,
+          message: "Correctito!",
+          messages: messages,
+        });
+  
+      }
+    );
+  } else {
+    messages.find(
+      (err, messages) => {
+        if (err) {
+          return res.send({
+            sucess: false,
+            message: "Error: Server error",
+          });
+        }
+        return res.send({
+          success: true,
+          message: "Correctito!",
+          messages: messages,
+        });
+      }
+    );
+  }
+  
+});
+
+router.get("/getLastMessage", (req, res) => {
+  //get the token
+  const { query } = req;
+  const { name } = query;
+  // verify the token of one of a kind and its not deleted
+
+  messages.find(
+    {
+      sender: name
+    },
+    (err, mensaje) => {
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        mensajes: mensaje,
+      });
+
+    }
+  );
+});
+
+
+router.get("/getLastMessages", (req, res) => {
+  //get the token
+  const { body } = req;
+
+  // verify the token of one of a kind and its not deleted
+  messages.aggregate([
+    {
+      $group: { 
+        _id: "$room",
+        timestamp: { $last: "$timestamp"},
+        ultimo: { $last: "$message"},
+      }
+    }
+  ]).exec((err, post) => {
+    // console.log(post)
+    if (err) {
+      return res.send({
+        sucess: false,
+        message: "Error: Server error",
+      });
+    }
+    return res.send({
+      success: true,
+      message: "Correctito!",
+      mensajes: post
+    });
+
+  });
+});
+
 
 module.exports = router;
