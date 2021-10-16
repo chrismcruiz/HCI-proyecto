@@ -86,8 +86,8 @@ const LandingPage = () => {
                 <a class="btn btn-primary btn-lg" href="/signup" role="button">Registrate</a>
                 <a><br></br></a>
             </div> */}
-            <div  class="row justify-content-center">
-            <div class="col-md-10">
+            <div id="carrusel" className="row justify-content-center">
+            <div className="col-md-10">
                 <br></br>
                 <br></br>
                 <br></br>
@@ -98,41 +98,173 @@ const LandingPage = () => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <carousel >
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                
+                <carousel>
                     <input type="radio" id="page1cb" checked name="pages" />
                     <input type="radio" id="page2cb" name="pages" />
                     <input type="radio" id="page3cb" name="pages" />
                     <input type="radio" id="page4cb" name="pages" />
                     <input type="radio" id="page5cb" name="pages" />
                     <page id="page1">
-                        <div>Page One!</div>
-                        <label for="page2cb" title="Start"><b>START</b></label>
+                    <div className="izq">
+                        <div className="ubic"><b >Ponte a prueba</b></div>
+                        <p className="letrap">Quieres mostrarte al mundo con tus <br></br>
+                        habilidades, compartalas para que <br></br>
+                        la gente se pueda interesar en tus<br></br>
+                        virtudes y cualidades que te describen <br></br>
+                        como buena persona y todo un profesional. </p></div>
+                    <div className="der">
+                        <label for="page2cb" title="Start"><img src="/assets/carruselimage1.png" className="pequeña"></img></label>
+                    </div>   
+                        
                     </page>
                     <page id="page2">
-                        <div>Page Two!</div>
-                        <label for="page3cb" title="Next"><b>NEXT</b></label>
+                    
+                    <div className="izq">
+                    <div className="ubic"><b >Conoce personas</b></div>
+                        <p className="letrap">Quieres conocer a tu jefe o a las personas <br></br>
+                        que te ayudaran en tu emprendimiento en tu vida  <br></br>
+                        o tambien colegas con los que compartes habilidades<br></br>
+                        laboral, y tambien puedas aprender de ello o  <br></br>
+                        ellos de ti, empieza a explorar el mundo de  <br></br>
+                        posibilidades que aca te ofrecemos.</p></div>
+                    <div className="der">
+                        <label for="page3cb" title="Next"><img src="/assets/carruselimage2.png" className="pequeña"></img></label>
+                    </div>
                     </page>
                     <page id="page3">
-                        <div>Page Three!</div>
-                        <label for="page4cb" title="Next"><b>NEXT</b></label>
+                    <div className="izq">
+                        <div className="ubic"><b >Valora a los demás</b></div>
+                        <p className="letrap">Comparte tus experiencias con <br></br>
+                        las demás personas por medio  <br></br>
+                        de las calificaciones y opiniones<br></br>
+                        que tienes de su trabajo por medio  <br></br>
+                        de estrellas, trata de dar 5 estrellas,  <br></br>
+                        ayudémonos entre todos.</p></div>
+                    <div className="der">
+                        <label for="page4cb" title="Next"><img src="/assets/carruselimage3.png" className="pequeña"></img></label>
+                    </div>
                     </page>
                     <page id="page4">
-                        <div>Page Four!</div>
-                        <label for="page5cb" title="Next"><b>NEXT</b></label>
+                    <div className="izq">
+                        <div className="ubic"><b >Comunícate con tus contactos</b></div>
+                        <p className="letrap">Utiliza los chats que en Trade Urself <br></br>
+                        ofrecemos para que no pierdas la <br></br>
+                        comunicación con tus compañeros de<br></br>
+                        trabajo y puedas expresar las ideas<br></br>
+                        que ayuden al emprendimiento. </p></div>
+                    <div className="der">
+                        <label for="page5cb" title="Next"><img src="/assets/carruselimage4.png" className="pequeña"></img></label>
+                    </div>
                     </page>
                     <page id="page5">
-                        <div>Page Five!</div>
-                        <label for="page1cb" title="That's all folks!"><b>START AGAIN?</b></label>
+                    <div className="izq">
+                        <div className="ubic"><b>Lleva un orden en tus contactos</b></div>
+                        <p className="letrap">En Trade Urself puedes ver tus <br></br>
+                        contactos y administrarlos a tu <br></br>
+                        gusto, también puedes ver los grupos <br></br>
+                        en donde trabajas y administrarlos mas <br></br>
+                        fácilmente. </p></div>
+                    <div className="der">
+                        <label for="page1cb" title="That's all folks!"><img src="/assets/carruselimage5.png" className="pequeña"></img></label>
+                    </div>
                     </page>
                 </carousel>
             </div>
             </div>
+            <center>
+            <div>
+                <br></br>
+                <br></br>
+                
+                <h1 id="calificaciones">RESEÑAS</h1>
+                
+                <br></br>
+                <br></br>
+                
+                </div>
+            <div class="container">
+                <div className="row ">
+                    <div class="col-lg-4">
+                        
+                    <img src="/assets/come1.png" className="pequeña"></img>
+
+                        <h2>Jeank P</h2>
+                        <p>Pude llevar adelante mis sueños y conocí gente increible.</p>
+                        <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                        
+                    </div>
+                    <div class="col-lg-4">
+                    <img src="/assets/come2.png" className="pequeña"></img>
+                    <h2>Kevin D</h2>
+                        <p>Fácil de usar y buen concepto</p>
+                        <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                    </div>
+                    <div class="col-lg-4">
+                    <img src="/assets/come3.png" className="pequeña"></img>
+                        <h2>Christian R</h2>
+                    <p>Pude demostrar mis habilidades a las demas personas</p>
+                        <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                    </div>
+                
+                </div>
+                <div className="row ">
+                    <div class="col-lg-4">
+                    <img src="/assets/come4.png" className="pequeña"></img>
+
+                        <h2>Paula H</h2>
+                        <p>No me canso de recomendarla a los demas es una maravilla</p>
+                        <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                        
+                    </div>
+                    <div class="col-lg-4">
+                    <img src="/assets/come5.png" className="pequeña"></img>
+
+                    <h2>Joseph B</h2>
+                        <p>Estaba buscando un empleo y esta pagina me sirvio para encontrarlo</p>
+                        <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                    </div>
+                    <div class="col-lg-4">
+                        
+                    <img src="/assets/come6.png" className="pequeña"></img>
+                        <h2>Cristian S</h2>
+                    <p>Mi proyecto personal pudo llevarse a cabo y encontre gente que me pudo ayudar</p>
+                        <p><a class="btn btn-secondary" href="#">View details »</a></p>
+                    </div>
+                
+                </div>
+            </div>
+            </center>
+            
+            <div id="footer2" className="footer2">
+            </div>
             {/* Footer */}
             <footer class="container-fluid footer">
-                <div class="row">
-                    <div class="col">
-                        <img className="logo" src='/assets/logon.jpg' alt="" width="100" height="100" className="d-inline-block align-text-top" onClick={() => window.location.reload()} /> 
-                    </div>
+                <center>
+                <div>
+                
+                        <img src='/assets/logol.png' height="200" width="-20" alt=""  onClick={() => window.location.reload()} /> 
+                </div>
+                <div class="hr">
+                </div>
                     <div class="col-6">
                         
                         <div class="row justify-content-center p-2">
@@ -192,14 +324,27 @@ const LandingPage = () => {
                         <div class="row justify-content-center">
                             <p>Contáctanos al 6363636 / o escríbenos a trade_ur_self@tu.com.co</p>
                         </div>
+                     </div>
+                        <div class="hr">
+                        </div>
                         <div class="row justify-content-center">
                             <p>© Todos los Derechos reservados 2021</p>
                         </div>
+                        <div class="row justify-content-center">
+                            <div class="col-4">
+                            Privacidad
+                            </div>
+                            <div class="col-4">
+                            Terminos de servicio
+                        </div>
+                        <div class="row justify-content-center">
+                         <br></br>   </div>
                     </div>
+                    
                     <div class="col">
 
                     </div>
-                </div>
+                </center>
             </footer>
         </div>
     )

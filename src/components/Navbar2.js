@@ -14,20 +14,19 @@ const Navbar2 = () => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item nav-header-item">
-                            <a class="nav-link nav-header-link" aria-current="page" href="#">Calificanos</a>
+                            <a class="nav-link nav-header-link" aria-current="page" href="#calificaciones">Calificanos</a>
                         </li>
                         <li class="nav-item nav-header-item">
-                            <a class="nav-link nav-header-link" href="#">Conocenos</a>
+                            <a class="nav-link nav-header-link" href="#carrusel">Conocenos</a>
                         </li>
                         <li class="nav-item dropdown nav-header-item">
                             <a class="nav-link dropdown-toggl e nav-header-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Soporte
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Informanos un problema</a></li>
-                                <li><a class="dropdown-item" href="#">Solicitar un asesor via web</a></li>
-                                <li><hr class="dropdown-divider"></hr></li>
-                                <li><a class="dropdown-item" href="#">Preguntas frecuentes</a></li>
+                                 <li><a class="dropdown-item" href="#footer2">Telefono</a></li>
+                                <li><a class="dropdown-item" href="#footer2">Correo electronico</a></li>
+                                 <li><a class="dropdown-item" href="#footer2">Redes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item nav-header-item">
