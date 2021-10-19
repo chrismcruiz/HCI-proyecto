@@ -22,8 +22,8 @@ export const SignUpFormValidation = yup.object().shape({
 });
 // Esquema de validación formulario de logueo
 export const LoginFormValidation = yup.object().shape({
-  email: yup.string().email("Correo inválido"),
-  password: yup.string()
+  email: yup.string().email("Correo inválido").required("Rellena este campo"),
+  password: yup.string().required("Rellena este campo")
 });
 // Esquema de validación formulario de editar perfil
 export const EditFormValidation = yup.object().shape({

@@ -54,9 +54,10 @@ const Chats = ({ userData, socket, usersData }) => {
                         console.log('conversación ya creada')
                     }
                 } 
-            } else setIsLoading(false)
+            } else console.log('no hay id de tarjeta')
         } catch (err) {
             console.log(err)
+            setIsLoading(false)
         }
         // setIsLoading(false)
         try {
@@ -123,6 +124,7 @@ const Chats = ({ userData, socket, usersData }) => {
             setIsLoading(false)
         } catch (err) {
             console.log(err)
+            setIsLoading(false)
         }
     }, [location.key, enviado, contador])
 
@@ -137,11 +139,8 @@ const Chats = ({ userData, socket, usersData }) => {
     }
 
     const actualizarMensajesIzquierda = () => toggleEnviado(!enviado)
-    const actualizarContador = (num) => {
-        console.log(num)
-        setContador(num)
-    }
-
+    const actualizarContador = (num) => setContador(num)
+    
     if (isLoading) {
         return (
           <div className="d-flex justify-content-center align-items-center vh-100">

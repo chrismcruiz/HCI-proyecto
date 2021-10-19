@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import "./LoginForm.css";
-import InputFieldVariation from "./InputFieldVariation"
 import { setInStorage } from "../utils/storage";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
@@ -10,6 +9,7 @@ import { Modal, Alert } from "react-bootstrap";
 import './Forms.css'
 import Navbar2 from './Navbar2'
 import { toast } from 'react-toastify';
+import InputField from "./InputField";
 
 
 const LoginForm = () => {
@@ -85,8 +85,8 @@ const LoginForm = () => {
               <div class="signin-form">
                 <h2 class="form-title h2-login-register">Ingreso</h2>
                 <Form>
-                  <InputFieldVariation label="Correo" classes="zmdi-email" name="email" type="text" />
-                  <InputFieldVariation label="Contraseña" classes="zmdi-lock" name="password" type="password" />
+                  <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
+                  <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
                   <div class="form-group form-button">
                     <input type="submit" name="signin" id="signin" class="form-submit" value="Entrar" />
                   </div>

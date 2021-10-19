@@ -43,7 +43,7 @@
   }
   
   .buttons {
-    margin: 9rem 35px 0;
+    margin: 12rem 35px 0;
     display: flex;
   }
   
@@ -208,15 +208,15 @@
   transform: translate(-50%, -50%);
 } */
 
+/* Tarjetas */
+
 .card {
-  width: 650px;
-  height: 340px;
-  background-color: #fff;
-  background: linear-gradient(#f8f8f8, #fff);
+  width: 800px;
+  height: 390px;
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
   border-radius: 6px;
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
   margin: 1.5rem;
 }
 
@@ -224,18 +224,24 @@
   text-align: center;
 }
 
+.user-details {
+  color: #FFF;
+  font-family: "Montserrat";
+  font-weight: bold;
+  /* letter-spacing: 1px; */
+}
+
 .card .additional {
   position: absolute;
-  width: 180px;
+  width: 220px;
   height: 100%;
-  background: linear-gradient(#dE685E, #EE786E);
   transition: width 0.4s;
   overflow: hidden;
   /* z-index: 1; */
 }
 
 .card.green .additional {
-  background: linear-gradient(#27996c, #A2CCB6);
+  background: #0DBA7B;
 }
 
 
@@ -245,9 +251,9 @@
 }
 
 .card .additional .user-card {
-  width: 180px;
+  width: 220px;
   height: 100%;
-  position: relative;
+  /* position: relative; */
   float: left;
 }
 
@@ -283,10 +289,10 @@
 }
 
 .card .additional .more-info {
-  width: 440px;
+  width: 580px;
   float: left;
   position: absolute;
-  left: 208px;
+  left: 220px;
   height: 100%;
 }
 
@@ -354,13 +360,13 @@
 }
 
 .card .general {
-  width: 440px;
+  width: 580px;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
   /* z-index: 1; */
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   padding: 1rem;
   padding-top: 0;
 }
@@ -374,4 +380,18 @@
 
 .pic {
   border-radius: 100%;
+}
+
+.general p {
+  text-align: justify;
+  padding: 2rem;
+}
+
+
+/* Puntuation */
+
+.fa-star, .fa-star-half-alt {
+  color: #FFE779;
+  margin: 0 3px;
+  font-size: 1.2rem;
 }

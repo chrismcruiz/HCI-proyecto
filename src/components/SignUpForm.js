@@ -1,21 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./SignUpForm.css";
 import InputField from "./InputField"
-import RadioButtons from "./RadioButtons"
 import SelectField from "./SelectField"
 import ModalForm from "./ModalForm"
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
-import { generos, carreras } from "../utils/dataForm";
+import { carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { SignUpFormValidation } from "../utils/FormValidation"
-import { DatePicker } from '@mui/lab';
 import './Forms.css'
-import Navbar2 from './Navbar2'
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { setInStorage } from "../utils/storage";
 import Questions from './Questions'
 

@@ -204,25 +204,37 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
             </div> */}
             <div class="card green d-flex justify-content-center">
               <div class="additional">
-                <div class="user-card">
-                  <div class="level center">
+                <div class="user-card mt-4">
+                  {/* <div class="level center">
                     Level 13
-                  </div>
-                  <div class="points center">
+                  </div> */}
+                  {/* <div class="points center">
                     5,312 Points
+                  </div> */}
+                  <img className="pic" alt="" width="170" heigth="170" src={`/images/${character.photo}`} />
+                  <div className="puntuation mt-3">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                  <div className="user-details mt-3">
+                    <p>{calcularEdad(character.birthday)}</p>
+                    <p>{character.career}</p>
+                    <p>Bucaramanga</p>
                   </div>
-                  <img className="pic" alt="" width="150" heigth="150" src={`/images/${character.photo}`} />
                 </div>
                 <div class="more-info">
-                  <h1>{character.name}</h1>
-                  <div class="coords">
+                  <h1 className="mt-2">{character.name}</h1>
+                  {/* <div class="coords">
                     <span>Group Name</span>
                     <span>Joined January 2019</span>
                   </div>
                   <div class="coords">
                     <span>Position/Role</span>
                     <span>City, Country</span>
-                  </div>
+                  </div> */}
                   <div class="stats">
                     <div>
                       <div class="title">Awards</div>
@@ -248,8 +260,9 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                 </div>
               </div>
               <div className="general">
-                <h1>{character.name}</h1>
-                <p>{character.description}</p>
+                <h1 className="mt-2">{character.name}</h1>
+                {/* <p>{character.description}</p> */}
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse s urna. Morbi eu quam ante. Ut fermentum mauris vel mauris commodo consectetur. Donec a euismod tortor. Integer non mi urna. Morbi varius nulla eget mi imperdiet mollis.</p>
                 {/* <span class="more">Mouse over the card for more info</span> */}
               </div>
             </div>
