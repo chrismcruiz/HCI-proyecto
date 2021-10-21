@@ -107,7 +107,7 @@ const EditProfile = ({ userData, idUser }) => {
                 className="invalid-feedback"
               />
             </div>
-            <div className="form-floating mb-2">
+            <div className="form-floating mb-3">
               <Field
                 as="textarea"
                 id="description"
@@ -120,12 +120,14 @@ const EditProfile = ({ userData, idUser }) => {
                 ¡Añade una breve descripción tuya, sé creativo!
               </label>
             </div>
-            <InputFieldVariation
-              label="Fecha de Nacimiento"
-              name="birthday"
-              type="date"
-            />
-            <div className="editarLocation mb-3">
+            <div className="mb-4">
+              <InputFieldVariation
+                label="Fecha de Nacimiento"
+                name="birthday"
+                type="date"
+              />
+            </div>
+            <div className="editarLocation">
               <CityField name="location" />
             </div>
             <SelectField

@@ -39,7 +39,7 @@
 }
 
 .buttons {
-  margin: 12rem 35px 0;
+  margin: 13rem 35px 0;
   display: flex;
 }
 
@@ -217,7 +217,7 @@
   /* width: 800px; */
   width: 50vw;
   /* width: 50vw; */
-  height: 390px;
+  height: 410px;
   box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
   overflow: hidden;
@@ -255,6 +255,7 @@
 .card:hover .additional {
   width: 100%;
   border-radius: 0 5px 5px 0;
+  z-index: 10;
 }
 
 .card .additional .user-card {
@@ -391,14 +392,14 @@
 
 .pic {
   border-radius: 100%;
-  height: 180px;
-  width: 180px;
-
+  height: 190px;
+  width: 190px;
 }
 
 .general p {
   text-align: justify;
   padding: 2rem;
+  z-index: -1;
   /* width: 7%; */
 }
 
@@ -409,4 +410,20 @@
   color: #ffe779;
   margin: 0 3px;
   font-size: 1.2rem;
+}
+
+.img-reseñas {
+  height: 60px;
+  width: 60px;
+  /* z-index: 20; */
+}
+
+.reseña {
+  width: 50%;
+  margin: 0.8em;
+}
+
+.reseña > blockquote {
+  text-align: justify;
+  padding: 0.8em;
 }
