@@ -203,8 +203,10 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
           ))
         ) : (
           <div className="no-filtros">
-            <img className="varita" src="/assets/varita.png"></img>
-            <p>Puedes personalizar tu búsqueda añadidendo filtros</p>
+            <div className="varita">
+              <i class="fas fa-magic fa-2x"></i>
+              <p>Puedes personalizar tu búsqueda añadidendo filtros</p>
+            </div>
           </div>
         )}
       </div>

@@ -193,6 +193,7 @@
   height: 3.5rem;
   /* height: 100px; */
   color: #a9a9a9;
+  flex-direction: column;
 }
 
 .no-filtros > p {
