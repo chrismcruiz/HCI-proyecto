@@ -16,14 +16,14 @@ import { Modal } from "react-bootstrap";
 import { setInStorage } from "../utils/storage";
 import Questions from "./Questions";
 import CityField from "./CityField";
-import Navbar2 from './Navbar2';
-import GoogleIcon from '@mui/icons-material/Google';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import Navbar3 from "./Navbar3";
+import GoogleIcon from "@mui/icons-material/Google";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
@@ -102,10 +102,7 @@ const SignupForm = () => {
 
   return (
     <div>
-       <header className="headers">
-      { <Navbar2 /> }     
-      </header>
-      <div className="headers2"></div>
+      <Navbar3 type="signup" />
       <Formik
         initialValues={{
           name: "",
@@ -276,97 +273,81 @@ const SignupForm = () => {
           </div>
         )}
       </Formik>
-      <div className="footers2">
-      </div>
-      <footer class="container-fluid footers">
-                <center>
-                <div>
-                
-                        <img src='/assets/logol.png' height="200" width="-20" alt=""  onClick={() => window.location.reload()} /> 
-                </div>
-                <div class="hr">
-                </div>
-                    <div class="col-6">
-                        
-                        <div class="row justify-content-center p-2">
-                            <div class="col">
-                                <p>Síguenos:</p>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="Twitter">
-                            
-                                    <TwitterIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="Facebook">
-                            
-                                    <FacebookIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="YouTube">
-                            
-                                    <YouTubeIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="LinkedIn">
-                            
-                                    <LinkedInIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="Gmail">
-                            
-                                    <GoogleIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="GitHub">
-                            
-                                    <GitHubIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                            <div class="col">
-                                <Tooltip title="Instagram">
-                            
-                                    <InstagramIcon className="icon_color" />
-                        
-                                </Tooltip>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <p>Contáctanos al 6363636 / o escríbenos a trade_ur_self@tu.com.co</p>
-                        </div>
-                     </div>
-                        <div class="hr">
-                        </div>
-                        <div class="row justify-content-center">
-                            <p>© Todos los Derechos reservados 2021</p>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-4">
-                            Privacidad
-                            </div>
-                            <div class="col-4">
-                            Terminos de servicio
-                        </div>
-                        <div class="row justify-content-center">
-                         <br></br>   </div>
-                    </div>
-                    
-                    <div class="col">
+      <div className="footerl2"></div>
+      <footer id="footer" className="container-fluid footerl">
+        <center>
+          <div>
+            <img
+              src="/assets/logol.png"
+              height="200"
+              width="-20"
+              alt=""
+              onClick={() => window.location.reload()}
+            />
+          </div>
+          <div class="hr"></div>
+          <div class="col-6">
+            <div class="row justify-content-center p-2">
+              <div class="col">
+                <p>Síguenos:</p>
+              </div>
+              <div class="col">
+                <Tooltip title="Twitter">
+                  <TwitterIcon className="icon_color" />
+                </Tooltip>
+              </div>
+              <div class="col">
+                <Tooltip title="Facebook">
+                  <FacebookIcon className="icon_color" />
+                </Tooltip>
+              </div>
+              <div class="col">
+                <Tooltip title="YouTube">
+                  <YouTubeIcon className="icon_color" />
+                </Tooltip>
+              </div>
+              <div class="col">
+                <Tooltip title="LinkedIn">
+                  <LinkedInIcon className="icon_color" />
+                </Tooltip>
+              </div>
+              <div class="col">
+                <Tooltip title="Gmail">
+                  <GoogleIcon className="icon_color" />
+                </Tooltip>
+              </div>
+              <div class="col">
+                <Tooltip title="GitHub">
+                  <GitHubIcon className="icon_color" />
+                </Tooltip>
+              </div>
+              <div class="col">
+                <Tooltip title="Instagram">
+                  <InstagramIcon className="icon_color" />
+                </Tooltip>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <p>
+                Contáctanos al 6363636 / o escríbenos a trade_ur_self@tu.com.co
+              </p>
+            </div>
+          </div>
+          <div class="hr"></div>
+          <div class="row justify-content-center">
+            <p>© Todos los Derechos reservados 2021</p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-4">Privacidad</div>
+            <div class="col-4">Terminos de servicio</div>
+            <div class="row justify-content-center">
+              <br></br>{" "}
+            </div>
+          </div>
 
-                    </div>
-                </center>
-            </footer>
+          <div class="col"></div>
+        </center>
+      </footer>
     </div>
   );
 };

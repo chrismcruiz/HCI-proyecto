@@ -340,7 +340,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                 </div>
                 <div className="mt-3 d-flex justify-content-center align-items-center">
                   <i class="fas fa-envelope-square me-1"></i>
-                  user@gmail.com
+                  {character.email}
                 </div>
                 {/* <span class="more">Mouse over the card for more info</span> */}
               </div>
