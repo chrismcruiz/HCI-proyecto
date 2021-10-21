@@ -256,7 +256,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                   </div>
                 </div>
                 <div class="more-info">
-                  <h1 className="mt-2">{character.name}</h1>
+                  <h1 className="my-2">{character.name}</h1>
                   {/* <div class="coords">
                     <span>Group Name</span>
                     <span>Joined January 2019</span>
@@ -265,6 +265,32 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                     <span>Position/Role</span>
                     <span>City, Country</span>
                   </div> */}
+                  <div className="reseñas mb-4 d-flex">
+                    <div className="reseña mb-3">
+                      <img
+                        src="/assets/come1.png"
+                        className="img-reseñas mb-2"
+                        alt=""
+                      />
+                      <h6 className="d-inline-block">Jean Carlos Portilla</h6>
+                      <blockquote>
+                        "Un pelao serio. Muy acomedido y con ganas de salir
+                        adelante".
+                      </blockquote>
+                    </div>
+                    <div className="reseña">
+                      <img
+                        src="/assets/come4.png"
+                        className="img-reseñas mb-2"
+                        alt=""
+                      />
+                      <h6 className="d-inline-block">Paula Hernández</h6>
+                      <blockquote>
+                        "Me gustó mucho su forma de trabajar. Sin duda lo tendré
+                        en cuenta para futuros trabajos".
+                      </blockquote>
+                    </div>
+                  </div>
                   <div class="stats">
                     <div>
                       <div class="title">Premios</div>
@@ -300,9 +326,21 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                   mollis.
                 </p>
                 {/* <FontAwesomeIcon icon="fa-brands fa-github" /> */}
-                <div className="icons">
-                  <i class="fa-brands fa-github"></i>
-                  <i class="fa-brands fa-accessible-icon"></i>
+                <div className="icons d-flex justify-content-evenly align-items-center">
+                  {/* <i class="fa-brands fa-github"></i> */}
+                  <div className="d-flex align-items-center">
+                    <i className="fab fa-github fa-2x me-1"></i>
+                    @username
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <i className="fab fa-pinterest fa-2x me-1"></i>
+                    @username
+                  </div>
+                  {/* <i class="fa-brands fa-accessible-icon"></i> */}
+                </div>
+                <div className="mt-3 d-flex justify-content-center align-items-center">
+                  <i class="fas fa-envelope-square me-1"></i>
+                  user@gmail.com
                 </div>
                 {/* <span class="more">Mouse over the card for more info</span> */}
               </div>
