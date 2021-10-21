@@ -40,10 +40,10 @@ const Navbar = ({ userData, filtrar, type }) => {
 
     return (
         <div>
-            <nav className="navbar navbar-light bg-white borde_inferior" >
+            <nav className="navbar navbar-light fondo_linear" >
                 <div className="container-fluid">
                     <a className="navbar-brand vertical-center" href="/home">
-                        <img className="logo" src='/assets/unknown.png' alt="" width="110" height="65" className="d-inline-block align-text-top" onClick={() => window.location.href = '/'} />
+                        <img className="logo" src='/assets/logol.png' alt="" width="110" height="65" className="d-inline-block align-text-top" onClick={() => window.location.href = '/'} />
                         {/* <span className="brand">Trade Urself</span> */}
                     </a>
                     {type !== 'search' ?
@@ -83,6 +83,8 @@ const Navbar = ({ userData, filtrar, type }) => {
                     </div>
                 </div>
             </nav>
+            <div className="header3">
+            </div>
             <Modal
                 size="md"
                 centered
@@ -106,7 +108,9 @@ const Navbar = ({ userData, filtrar, type }) => {
                     </div>
                 </Modal.Body>
             </Modal>
+            
         </div>
+
     )
 }
 
