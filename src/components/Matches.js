@@ -197,21 +197,21 @@ const Matches = ({ userData, idsMatches }) => {
             </h6> */}
           <div class="list-group row">
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <img src="/assets/image-grupo1.png" alt="twbs" width="48" height="48" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
                 <h6 class="mb-0">Diseño prototipo app</h6>
                 <small class="opacity-50 text-nowrap">12 integrantes</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <img src="/assets/image-grupo2.jpg" alt="twbs" width="48" height="48" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
                 <h6 class="mb-0">Tedijos PK</h6>
                 <small class="opacity-50 text-nowrap">3 integrantes</small>
               </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-              <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+              <img src="/assets/image-grupo3.jpg" alt="twbs" width="48" height="48" class="rounded-circle flex-shrink-0" />
               <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
                 <h6 class="mb-0">Grupo trabajo IA</h6>
                 <small class="opacity-50 text-nowrap">5 integrantes</small>
