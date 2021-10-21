@@ -5,9 +5,9 @@ import { Pagination } from '@mui/material';
 const Questions = ({ setMdShow }) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState({
-    user: {},
-    profile: {},
-    settings: {}
+    trabajador: false,
+    emprendedor: false,
+    experiencia: false
   });
 
   function goNextPage() {
@@ -32,7 +32,7 @@ const Questions = ({ setMdShow }) => {
       <div>
           <h6 id="primera">¿Buscas unirte a un emprendimiento?</h6>
           <div>
-          <Button className="btn-questions afirmative" onClick={() => console.log('a')} variant="success" size="lg">
+          <Button className="btn-questions afirmative" onClick={goNextPage} variant="success" size="lg">
               Sí
           </Button>
           <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">
@@ -48,7 +48,7 @@ const Questions = ({ setMdShow }) => {
       <div>
           <h6 id="primera">¿Deseas conformar un equipo de trabajo?</h6>
           <div>
-          <Button className="btn-questions afirmative" onClick={() => console.log('a')} variant="success" size="lg">
+          <Button className="btn-questions afirmative" onClick={goNextPage} variant="success" size="lg">
               Sí
           </Button>
           <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">
@@ -64,7 +64,7 @@ const Questions = ({ setMdShow }) => {
           <div>
               <h6 id="primera">¿Es tu primer acercamiento a la vida laboral?</h6>
               <div>
-              <Button className="btn-questions afirmative" onClick={() => console.log('a')} variant="success" size="lg">
+              <Button className="btn-questions afirmative" onClick={goNextPage} variant="success" size="lg">
                   Sí
               </Button>
               <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">

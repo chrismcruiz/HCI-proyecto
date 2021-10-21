@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import "./SignUpForm.css";
-import InputField from "./InputField"
-import SelectField from "./SelectField"
-import ModalForm from "./ModalForm"
+import InputField from "./InputField";
+import SelectField from "./SelectField";
+import ModalForm from "./ModalForm";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import { carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Tooltip } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import { SignUpFormValidation } from "../utils/FormValidation"
-import './Forms.css'
+import { Tooltip } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import { SignUpFormValidation } from "../utils/FormValidation";
+import "./Forms.css";
 import { Modal } from "react-bootstrap";
 import { setInStorage } from "../utils/storage";
-import Questions from './Questions'
+import Questions from "./Questions";
+import CityField from "./CityField";
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Para controlar cuándo está cargando la página
@@ -32,43 +33,53 @@ const SignupForm = () => {
 
   // Función para registrarse y almacenar los datos en la BD.
   const onSignUp = async (values) => {
+    console.log(values);
     setIsLoading(true);
 
     const valuesToSignIn = {
       email: values.email,
       password: values.password,
-    }
+    };
 
     let formData = new FormData(); // formData es una estructura de datos (acepta archivos tipo file como imágenes)
 
     for (let key in values) {
-      formData.append(key, values[key]);
+      if (key === "location") {
+        formData.append(key, JSON.stringify(values[key]));
+      } else {
+        formData.append(key, values[key]);
+      }
     }
 
-    
     try {
-      const request = await axios.post("http://localhost:4000/app/signup/", formData)
+      const request = await axios.post(
+        "http://localhost:4000/app/signup/",
+        formData
+      );
       if (request.status === 200 && request.data.success) {
         try {
-          const response = await axios.post('http://localhost:4000/app/signin/', valuesToSignIn)
+          const response = await axios.post(
+            "http://localhost:4000/app/signin/",
+            valuesToSignIn
+          );
           if (response.status === 200 && response.data.success) {
             setInStorage("the_main_app", {
               token: response.data.token,
               idUser: response.data.id_user,
-            })
+            });
             // setSignInError("");
             setIsLoading(false);
             setMdShow(true);
           } else {
-            console.log(response)
+            console.log(response);
             setIsLoading(false);
           }
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -89,6 +100,10 @@ const SignupForm = () => {
           name: "",
           email: "",
           birthday: "",
+          location: {
+            department: "",
+            city: "",
+          },
           career: "",
           photo: "",
           password: "",
@@ -98,7 +113,7 @@ const SignupForm = () => {
         validationSchema={SignUpFormValidation}
         onSubmit={onSignUp}
       >
-        {({ errors, touched, setFieldValue }) => (
+        {({ errors, touched }) => (
           <div className="">
             <section className="signup">
               <div className="container-forms">
@@ -106,28 +121,86 @@ const SignupForm = () => {
                   <div class="signup-form">
                     <h2 class="form-title h2-login-register">Registro</h2>
                     <Form className="register-form">
-                      <InputField label="Nombre" classes="zmdi-account material-icons-name" name="name" type="text" />
-                      <InputField label="Correo" classes="zmdi-email" name="email" type="text" />
-                      <InputField label="Fecha de Nacimiento" classes="" name="birthday" type="date" />
-                      {/* <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} /> */}
-                      <SelectField label="Especialidad o intereses" classes="" name="career" options={carreras} />
+                      <InputField
+                        label="Nombre"
+                        classes="zmdi-account material-icons-name"
+                        name="name"
+                        type="text"
+                      />
+                      <InputField
+                        label="Correo"
+                        classes="zmdi-email"
+                        name="email"
+                        type="text"
+                      />
+                      <InputField
+                        label="Fecha de Nacimiento"
+                        classes=""
+                        name="birthday"
+                        type="date"
+                      />
 
-                      <InputField label="Contraseña" classes="zmdi-lock" name="password" type="password" />
-                      <InputField label="Confirmar contraseña" classes="zmdi-lock-outline" name="confirmPassword" type="password" />
+                      <CityField name="location" />
+                      {/* <RadioButtons label="Género" classes="" name="gender" type="radio" options={generos} /> */}
+                      <SelectField
+                        label="Especialidad o intereses"
+                        classes=""
+                        name="career"
+                        options={carreras}
+                      />
+
+                      <InputField
+                        label="Contraseña"
+                        classes="zmdi-lock"
+                        name="password"
+                        type="password"
+                      />
+                      <InputField
+                        label="Confirmar contraseña"
+                        classes="zmdi-lock-outline"
+                        name="confirmPassword"
+                        type="password"
+                      />
 
                       {/****************** Términos y condiciones ******************/}
                       <div className="form-group">
-                        <Field id="terms" type="checkbox" name="terms" className={`me-2 agree-term ${errors.terms && touched.terms ? 'is-invalid' : null}`} />
-                        <label htmlFor="terms" className="label-agree-term">Acepto los <a href="#" class="term-service">términos y condiciones</a></label>
-                        <ErrorMessage name="terms" component="div" className="invalid-feedback" />
+                        <Field
+                          id="terms"
+                          type="checkbox"
+                          name="terms"
+                          className={`me-2 agree-term ${
+                            errors.terms && touched.terms ? "is-invalid" : null
+                          }`}
+                        />
+                        <label htmlFor="terms" className="label-agree-term">
+                          Acepto los{" "}
+                          <a href="#" class="term-service">
+                            términos y condiciones
+                          </a>
+                        </label>
+                        <ErrorMessage
+                          name="terms"
+                          component="div"
+                          className="invalid-feedback"
+                        />
                       </div>
                       <div class="form-group form-button">
-                        <input type="submit" name="signup" id="signup" class="form-submit" value="Registrarme" />
+                        <input
+                          type="submit"
+                          name="signup"
+                          id="signup"
+                          class="form-submit"
+                          value="Registrarme"
+                        />
 
                         {/****************** Resetear formulario ******************/}
                         <div className="d-inline-flex justify-content-center align-items-center ms-5">
                           <Tooltip title="Limpiar Formulario" placement="down">
-                            <IconButton type="reset" className="resetForm" aria-label="reset form">
+                            <IconButton
+                              type="reset"
+                              className="resetForm"
+                              aria-label="reset form"
+                            >
                               <RefreshIcon />
                             </IconButton>
                           </Tooltip>
@@ -136,8 +209,16 @@ const SignupForm = () => {
                     </Form>
                   </div>
                   <div class="signup-image">
-                    <figure className="figure-login-register"><img className="img-login-register" src="images/signup-image.jpg" alt="sing up image" /></figure>
-                    <a href="/login" class="signup-image-link">Ya estoy registrado</a>
+                    <figure className="figure-login-register">
+                      <img
+                        className="img-login-register"
+                        src="images/signup-image.jpg"
+                        alt="sing up image"
+                      />
+                    </figure>
+                    <a href="/login" class="signup-image-link">
+                      Ya estoy registrado
+                    </a>
                   </div>
                 </div>
               </div>
@@ -173,11 +254,18 @@ const SignupForm = () => {
               </Modal.Footer>
             </Modal>
             {/****************** Modal para el registro fallido ******************/}
-            <ModalForm show={showInvalid} success={false} title="Ooops!" message={signUpError} hide={handleCloseInvalid} />
+            <ModalForm
+              show={showInvalid}
+              success={false}
+              title="Ooops!"
+              message={signUpError}
+              hide={handleCloseInvalid}
+            />
           </div>
         )}
       </Formik>
-    </div>)
+    </div>
+  );
 };
 
-export default SignupForm
+export default SignupForm;

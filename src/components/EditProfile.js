@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import './EditProfile.css'
+import "./EditProfile.css";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
-import { EditFormValidation } from "../utils/FormValidation"
+import { EditFormValidation } from "../utils/FormValidation";
 import { carreras } from "../utils/dataForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import SelectField from "./SelectField"
-import InputFieldVariation from "./InputFieldVariation"
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import IconButton from '@material-ui/core/IconButton';
-import { Tooltip } from '@material-ui/core';
-import LoadingButton from '@mui/lab/LoadingButton';
-import SaveIcon from '@mui/icons-material/Save';
+import SelectField from "./SelectField";
+import CityField from "./CityField";
+import InputFieldVariation from "./InputFieldVariation";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import IconButton from "@material-ui/core/IconButton";
+import { Tooltip } from "@material-ui/core";
+import LoadingButton from "@mui/lab/LoadingButton";
+import SaveIcon from "@mui/icons-material/Save";
 
 const EditProfile = ({ userData, idUser }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,19 +20,23 @@ const EditProfile = ({ userData, idUser }) => {
   const onEdit = (values) => {
     setIsLoading(true);
 
-    let formData = new FormData(); 
-    formData.append('_id', idUser)
+    let formData = new FormData();
+    formData.append("_id", idUser);
 
-    for ( let key in values ) {
-      formData.append(key, values[key]);
+    for (let key in values) {
+      if (key === "location") {
+        formData.append(key, JSON.stringify(values[key]));
+      } else {
+        formData.append(key, values[key]);
+      }
     }
 
     axios
       .put("http://localhost:4000/app/update/", formData)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         if (response.status === 200 && response.data.success) {
-          window.location.reload()
+          window.location.reload();
         } else {
           setIsLoading(false);
         }
@@ -42,10 +47,16 @@ const EditProfile = ({ userData, idUser }) => {
       });
   };
 
+  console.log(userData);
+
   return (
     <>
       <div className="div_imagen_edit_perfil mt-3 mb-3">
-        <img className="imagen_persona_perfil" alt="" src={`/images/${userData.photo}`} />
+        <img
+          className="imagen_persona_perfil"
+          alt=""
+          src={`/images/${userData.photo}`}
+        />
       </div>
       <Formik
         initialValues={{
@@ -53,15 +64,19 @@ const EditProfile = ({ userData, idUser }) => {
           photo: userData.photo,
           name: userData.name,
           birthday: userData.birthday,
+          location: {
+            department: userData.location.department,
+            city: userData.location.city,
+          },
           career: userData.career,
         }}
         validationSchema={EditFormValidation}
         onSubmit={onEdit}
       >
-        {({errors, touched, setFieldValue}) => (
+        {({ errors, touched, setFieldValue }) => (
           <Form className="form_edit">
             {/****************** Cambiar imagen ******************/}
-            <div className="input-group mb-2">
+            <div className="input-group mb-3">
               <input
                 className="label-color form-control foto_input"
                 type="file"
@@ -70,33 +85,54 @@ const EditProfile = ({ userData, idUser }) => {
                 id="photo"
                 onChange={(e) => setFieldValue("photo", e.target.files[0])}
               />
-              <label htmlFor="photo" className="pointer w-100 input-group-text d-flex flex-column">
+              <label
+                htmlFor="photo"
+                className="pointer w-100 input-group-text d-flex flex-column"
+              >
                 Cambiar imagen
               </label>
             </div>
             <div className="input-group mb-2">
               <span className="input-group-text label_inputs">Nombre</span>
               <Field
-                className={`form-control ${errors.name && touched.name ? 'is-invalid' : null}`}
+                className={`form-control ${
+                  errors.name && touched.name ? "is-invalid" : null
+                }`}
                 type="name"
                 name="name"
               />
-              <ErrorMessage name="name" component="div" className="invalid-feedback" />
+              <ErrorMessage
+                name="name"
+                component="div"
+                className="invalid-feedback"
+              />
             </div>
             <div className="form-floating mb-2">
-              <Field as='textarea'
+              <Field
+                as="textarea"
                 id="description"
-                className="form-control txt-area"
+                className="form-control txt-area mt-3"
                 name="description"
-                placeholder="Añade una descripción breve de tí..."
-                style={{height: '8em'}}
+                // placeholder="Añade una descripción breve de tí..."
+                style={{ height: "12rem" }}
               />
               <label className="label_inputs" htmlFor="description">
                 ¡Añade una breve descripción tuya, sé creativo!
               </label>
             </div>
-            <InputFieldVariation label="Fecha de Nacimiento" name="birthday" type="date" />
-            <SelectField label="Especialidad o intereses" name="career" options={carreras} />
+            <InputFieldVariation
+              label="Fecha de Nacimiento"
+              name="birthday"
+              type="date"
+            />
+            <div className="editarLocation mb-3">
+              <CityField name="location" />
+            </div>
+            <SelectField
+              label="Especialidad o intereses"
+              name="career"
+              options={carreras}
+            />
 
             <LoadingButton
               loading={isLoading}
@@ -113,14 +149,13 @@ const EditProfile = ({ userData, idUser }) => {
       </Formik>
       {/* Cerrar sesión */}
       <div className="d-flex justify-content-center fondo-blanco mt-2">
-          {/* <p
+        {/* <p
             className="text-danger font-weight-bold h4 m-0 py-0 pointer"
             onClick={logOut}
           >
             Cerrar sesión
           </p> */}
-    
-        </div>
+      </div>
     </>
   );
 };

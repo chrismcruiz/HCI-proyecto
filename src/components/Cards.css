@@ -2,20 +2,17 @@
   overflow: hidden;
 } */
 
-
 .card__container {
   width: 90vw;
   max-width: 450px;
   height: 250px;
 }
 
-
 .swipe {
-    position: absolute;
-  }
+  position: absolute;
+}
 
-
-  /* .card {
+/* .card {
     position: relative;
     background-color: #fff;
     width: 80vw;
@@ -28,123 +25,131 @@
     background-size: cover;
     background-position: center;
   } */
-  
-  /* .card h3 {
+
+/* .card h3 {
     position: absolute;
     bottom: 0;
     margin: 10px;
     color: #fff;
   } */
 
-  
-  .buttons-container {
-    justify-content: space-evenly;
-    position: relative;
-  }
-  
-  .buttons {
-    margin: 12rem 35px 0;
-    display: flex;
-  }
-  
-  .buttons button:hover {
-    transform: scale(1.05);
-  }
-  
-  .buttons .MuiIconButton-root {
-    background-color: white;
-    padding: 1.8vw;
-    margin: 0 25px;
-    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
-  }
-  
-  .MuiIconButton-root:hover {
-    background-color: white !important;
-  }
- 
-  .buttons__close {
-    color: #ec5e6f !important;
-  }
+.buttons-container {
+  justify-content: space-evenly;
+  position: relative;
+}
 
-  .buttons__fav {
-    color: #76e2b3 !important;
+.buttons {
+  margin: 12rem 35px 0;
+  display: flex;
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+}
+
+.buttons .MuiIconButton-root {
+  background-color: white;
+  padding: 1.8vw;
+  margin: 0 25px;
+  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+}
+
+.MuiIconButton-root:hover {
+  background-color: white !important;
+}
+
+.buttons__close {
+  color: #ec5e6f !important;
+}
+
+.buttons__fav {
+  color: #76e2b3 !important;
+}
+
+.div_info_personas {
+  bottom: 15px;
+  left: 30px;
+  letter-spacing: 1px;
+  font-weight: bolder;
+  position: absolute;
+}
+
+.div_descripcion {
+  height: 178px;
+  overflow-y: auto;
+}
+
+.div_descripcion::-webkit-scrollbar {
+  width: 3px;
+}
+
+.div_descripcion::-webkit-scrollbar-arrow {
+  background-color: rgba(0, 0, 0, 0.986);
+}
+
+.div_descripcion::-webkit-scrollbar-track {
+  background-color: #949390;
+  border-radius: 0px;
+}
+
+.div_descripcion::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 20px;
+  border-radius: 11px;
+  height: 22px;
+  background: #070707;
+}
+
+.text__information {
+  width: 100%;
+  height: 28px;
+  justify-content: center;
+  display: flex;
+  color: #a9a9a9;
+  animation-name: popup;
+  animation-duration: 800ms;
+  padding: 2rem;
+
+  /* Pa aumentar el height de las columnas */
+  margin-bottom: 3.5rem;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(1, 1);
   }
-  
-
-
-  .div_info_personas {
-    bottom: 15px;
-    left: 30px;
-    letter-spacing: 1px;
-    font-weight: bolder;
-    position: absolute;
+  10% {
+    transform: scale(1.1, 1.1);
   }
-
-
-
-  .div_descripcion {
-    height: 178px;
-    overflow-y: auto;
+  30% {
+    transform: scale(0.9, 0.9);
   }
+  50% {
+    transform: scale(1, 1);
+  }
+  57% {
+    transform: scale(1, 1);
+  }
+  64% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
 
-  .div_descripcion::-webkit-scrollbar {
-    width: 3px;
-  }
-  
-  .div_descripcion::-webkit-scrollbar-arrow {
-    background-color: rgba(0, 0, 0, 0.986);
-  }
-  
-  .div_descripcion::-webkit-scrollbar-track {
-    background-color: #949390;
-    border-radius: 0px;
-  }
-  
-  .div_descripcion::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 20px;
-    border-radius: 11px;
-    height: 22px;
-    background: #070707;
-  }
+.no-people {
+  width: 100%;
+  color: #212529;
+  animation-name: popup;
+  animation-duration: 800ms;
+  padding: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+}
 
-  .text__information {
-    width: 100%;
-    height: 28px;
-    justify-content: center;
-    display: flex;
-    color: 	#A9A9A9;
-    animation-name: popup;
-    animation-duration: 800ms;
-    padding: 2rem;
-
-    /* Pa aumentar el height de las columnas */
-    margin-bottom: 3.5rem;
-  }
-  
-  @keyframes popup {
-    0%   { transform: scale(1,1) }
-    10%  { transform: scale(1.1,1.1) }
-    30%  { transform: scale(.9,.9) }
-    50%  { transform: scale(1,1) }
-    57%  { transform: scale(1,1) }
-    64%  { transform: scale(1,1) }
-    100% { transform: scale(1,1) }
-  }
-
-  .no-people {
-    width: 100%;
-    color: #212529;
-    animation-name: popup;
-    animation-duration: 800ms;
-    padding: 1rem;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    height: 70vh;
-  }
-
-
-  /* ************************ Alerta Match ******************************** */
+/* ************************ Alerta Match ******************************** */
 .alert_match {
   background: 50% 100% / 50% 50% no-repeat
     radial-gradient(ellipse at bottom, #262626, transparent, transparent);
@@ -159,7 +164,6 @@
   /* top: 38%;
   left: 50%; */
   /* position: absolute; */
-
 }
 
 @keyframes reveal {
@@ -188,16 +192,14 @@
 .varita {
   height: 3.5rem;
   /* height: 100px; */
-  color: 	#A9A9A9;
-
+  color: #a9a9a9;
 }
 
 .no-filtros > p {
-  color: 	#A9A9A9;
+  color: #a9a9a9;
   font-size: 0.8rem;
   padding: 1em;
 }
-
 
 /* Nueva tarjeta */
 
@@ -211,9 +213,10 @@
 /* Tarjetas */
 
 .card {
-  width: 800px;
+  /* width: 800px; */
+  width: 50vw;
   height: 390px;
-  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
   overflow: hidden;
   /* position: relative; */
@@ -225,7 +228,7 @@
 }
 
 .user-details {
-  color: #FFF;
+  color: #fff;
   font-family: "Montserrat";
   font-weight: bold;
   /* letter-spacing: 1px; */
@@ -241,9 +244,8 @@
 }
 
 .card.green .additional {
-  background: #0DBA7B;
+  background: #0dba7b;
 }
-
 
 .card:hover .additional {
   width: 100%;
@@ -264,7 +266,7 @@
   top: 10%;
   right: -2px;
   height: 80%;
-  border-left: 2px solid rgba(0,0,0,0.025);
+  border-left: 2px solid rgba(0, 0, 0, 0.025);
 }
 
 .card .additional .user-card .level,
@@ -274,7 +276,7 @@
   text-transform: uppercase;
   font-size: 0.75em;
   font-weight: bold;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0, 0, 0, 0.15);
   padding: 0.125rem 0.75rem;
   border-radius: 100px;
   white-space: nowrap;
@@ -289,7 +291,8 @@
 }
 
 .card .additional .more-info {
-  width: 580px;
+  /* width: 580px; */
+  width: 67%;
   float: left;
   position: absolute;
   left: 220px;
@@ -302,7 +305,7 @@
 }
 
 .card.green .additional .more-info h1 {
-  color: #224C36;
+  color: #224c36;
 }
 
 .card .additional .coords {
@@ -312,7 +315,7 @@
 }
 
 .card.green .additional .coords {
-  color: #325C46;
+  color: #325c46;
 }
 
 .card .additional .coords span + span {
@@ -331,7 +334,7 @@
 }
 
 .card.green .additional .stats {
-  color: #325C46;
+  color: #325c46;
 }
 
 .card .additional .stats > div {
@@ -360,7 +363,8 @@
 }
 
 .card .general {
-  width: 580px;
+  /* width: 580px; */
+  width: 68%;
   height: 100%;
   position: absolute;
   top: 0;
@@ -385,13 +389,14 @@
 .general p {
   text-align: justify;
   padding: 2rem;
+  /* width: 7%; */
 }
-
 
 /* Puntuation */
 
-.fa-star, .fa-star-half-alt {
-  color: #FFE779;
+.fa-star,
+.fa-star-half-alt {
+  color: #ffe779;
   margin: 0 3px;
   font-size: 1.2rem;
 }

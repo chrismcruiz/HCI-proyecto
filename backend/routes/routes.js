@@ -31,9 +31,11 @@ let upload = multer({ storage, fileFilter });
 
 router.post("/signup", upload.single("photo"), async (req, res) => {
   const { body, file } = req;
-  const { name, email, birthday, career, password } = body;
+  const { name, email, birthday, location, career, password } = body;
 
-  let photo = file
+  let locacion = JSON.parse(location);
+
+  let photo = file;
 
   if (!name) {
     return res.send({
@@ -102,8 +104,12 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
       // newUser.gender = gender;
       newUser.career = career;
       newUser.birthday = birthday;
+      newUser.location = {
+        department: locacion.department,
+        city: locacion.city,
+      };
       // newUser.photo = photo ? photo.filename : gender === 'masculino' ? 'male_icon.png' : gender === 'femenino' ? 'female_icon.png' : 'user_icon.png';
-      newUser.photo = 'user_icon.png';
+      newUser.photo = "user_icon.png";
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
         if (err) {
@@ -156,7 +162,8 @@ router.post("/signin", (req, res, next) => {
       if (users.length != 1) {
         return res.send({
           success: false,
-          message: "El correo electrónico ingresado no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.",
+          message:
+            "El correo electrónico ingresado no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.",
         });
       }
 
@@ -164,7 +171,8 @@ router.post("/signin", (req, res, next) => {
       if (!user.validPassword(password)) {
         return res.send({
           success: false,
-          message: "La contraseña ingresada no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.",
+          message:
+            "La contraseña ingresada no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.",
         });
       }
 
@@ -267,16 +275,17 @@ router.get("/users", (req, res) => {
   });
 });
 
-router.get('/users/sesion', (req, res) => { // downloading data from our database
+router.get("/users/sesion", (req, res) => {
+  // downloading data from our database
   const sessions = req.body;
   UserSession.find((err, data) => {
     if (err) {
-      res.status(500).send(err) // 500 means 'internal server error'
+      res.status(500).send(err); // 500 means 'internal server error'
     } else {
-      res.status(200).send(data) // 200 means 'success'
+      res.status(200).send(data); // 200 means 'success'
     }
-  })
-})
+  });
+});
 
 router.post("/liked", (req, res, next) => {
   const { body } = req;
@@ -307,8 +316,6 @@ router.post("/liked", (req, res, next) => {
   );
 });
 
-
-
 // users.findOneAndUpdate(
 //   {
 //     _id: idUser,
@@ -335,31 +342,25 @@ router.post("/liked", (req, res, next) => {
 //   }
 // );
 
-
 router.post("/setmatch", (req, res, next) => {
   const { body } = req;
   const peopleToUpdate = body;
 
   users.bulkWrite(
-    peopleToUpdate.map((person) =>
-    ({
+    peopleToUpdate.map((person) => ({
       updateOne: {
-        filter:
-        {
-          _id: person._id
+        filter: {
+          _id: person._id,
         },
         update: {
-          $addToSet:
-          {
+          $addToSet: {
             matches: person.liked,
           },
-        }
-      }
-    })
-    )
-  )
+        },
+      },
+    }))
+  );
 });
-
 
 // router.post("/setmatch", (req, res, next) => {
 //   const { body } = req;
@@ -420,7 +421,6 @@ router.delete("/deletesessions", (req, res, next) => {
   });
 });
 
-
 router.get("/matches", (req, res) => {
   // downloading data from our database
 
@@ -464,7 +464,7 @@ router.post("/getInfo", (req, res) => {
   users.find(
     {
       _id: {
-        $in: _id
+        $in: _id,
       },
     },
     (err, data) => {
@@ -486,7 +486,7 @@ router.post("/getInfoMatches", (req, res) => {
   users.find(
     {
       _id: {
-        $in: ids
+        $in: ids,
       },
     },
     (err, data) => {
@@ -503,9 +503,10 @@ router.put("/update", upload.single("photo"), async (req, res) => {
   // downloading data from our database
 
   const { body, file } = req;
-  const { _id, name, birthday, description, career, photo } = body;
+  const { _id, name, birthday, description, location, career, photo } = body;
 
   let photoxd = "";
+  let locacion = JSON.parse(location);
 
   if (file === undefined) {
     photoxd = photo;
@@ -522,6 +523,12 @@ router.put("/update", upload.single("photo"), async (req, res) => {
         name: name,
         birthday: birthday,
         description: description,
+        location: {
+          department: locacion.department,
+          city: locacion.city,
+        },
+        // location.department: locacion.department,
+        // location.city: locacion.city,
         career: career,
         photo: photoxd,
       },
@@ -542,11 +549,9 @@ router.put("/update", upload.single("photo"), async (req, res) => {
   );
 });
 
-
 router.post("/deleteMatch", (req, res, next) => {
   const { body } = req;
   const [idMatch, idUser] = body;
-
 
   users.findOneAndUpdate(
     {
@@ -555,7 +560,7 @@ router.post("/deleteMatch", (req, res, next) => {
     {
       $pull: {
         liked: idMatch,
-        matches: idMatch
+        matches: idMatch,
       },
     },
     { new: true },
@@ -569,7 +574,7 @@ router.post("/deleteMatch", (req, res, next) => {
       return res.send({
         success: true,
         message: "Correcto",
-        tarjetas: usuario.matches
+        tarjetas: usuario.matches,
       });
     }
   );
@@ -633,7 +638,6 @@ router.post("/deleteFilter", (req, res, next) => {
   const { body } = req;
   const [name, idUser] = body;
 
-
   users.findOneAndUpdate(
     {
       _id: idUser,
@@ -664,7 +668,6 @@ router.post("/getInfoTarjetas", (req, res, next) => {
   const { body } = req;
   const { idUser } = body;
 
-
   users.find(
     {
       _id: idUser,
@@ -681,11 +684,9 @@ router.post("/getInfoTarjetas", (req, res, next) => {
         message: "Correctito!",
         tarjetas: user[0],
       });
-
     }
   );
 });
-
 
 // Chats
 
@@ -696,21 +697,21 @@ router.post("/createConversation", (req, res) => {
   conversations.findOne(
     {
       participants: {
-        $all: [idA, idB]
-      }
+        $all: [idA, idB],
+      },
     },
     (err, conversation) => {
       if (err) {
         return res.send({
           success: false,
           message: "Error: Server error",
-        })
+        });
       } else if (conversation) {
         return res.send({
           success: false,
           conversationId: conversation._id,
           message: "Ya existe está conversación",
-        })
+        });
       }
 
       const newConversation = new conversations();
@@ -719,18 +720,18 @@ router.post("/createConversation", (req, res) => {
         if (err) {
           return res.send({
             success: false,
-            message: "Error: Server error"
+            message: "Error: Server error",
           });
         }
         return res.send({
           success: true,
           message: "Conversación creada",
-          conversationId: conversation._id
+          conversationId: conversation._id,
         });
-      })
+      });
     }
-  )
-})
+  );
+});
 
 router.get("/conversations/verify", (req, res) => {
   //get the token
@@ -741,8 +742,8 @@ router.get("/conversations/verify", (req, res) => {
   conversations.find(
     {
       participants: {
-        $all: [idA, idB]
-      }
+        $all: [idA, idB],
+      },
     },
     (err, conversation) => {
       if (err) {
@@ -767,7 +768,6 @@ router.get("/conversations/verify", (req, res) => {
   );
 });
 
-
 router.get("/getConversations", (req, res) => {
   //get the token
   const { query } = req;
@@ -777,8 +777,8 @@ router.get("/getConversations", (req, res) => {
   conversations.find(
     {
       participants: {
-        $in: [_id]
-      }
+        $in: [_id],
+      },
     },
     (err, conversations) => {
       if (err) {
@@ -790,7 +790,7 @@ router.get("/getConversations", (req, res) => {
       return res.send({
         success: true,
         message: "Correctito!",
-        conversations: conversations
+        conversations: conversations,
       });
     }
   );
@@ -804,7 +804,7 @@ router.get("/getParticipants", (req, res) => {
 
   conversations.find(
     {
-      _id: room
+      _id: room,
     },
     (err, participants) => {
       if (err) {
@@ -816,12 +816,11 @@ router.get("/getParticipants", (req, res) => {
       return res.send({
         success: true,
         message: "Correctito!",
-        participants: participants
+        participants: participants,
       });
     }
   );
 });
-
 
 // Guardar mensajes
 
@@ -830,24 +829,23 @@ router.post("/storeMessages", (req, res) => {
   const { sender, message, room, timestamp } = body;
 
   const newMessage = new messages();
-  newMessage.sender = sender
-  newMessage.message = message
-  newMessage.room = room
-  newMessage.timestamp = timestamp
+  newMessage.sender = sender;
+  newMessage.message = message;
+  newMessage.room = room;
+  newMessage.timestamp = timestamp;
   newMessage.save((err, message) => {
     if (err) {
       return res.send({
         success: false,
-        message: "Error: Server error"
+        message: "Error: Server error",
       });
     }
     return res.send({
       success: true,
-      message: "Mensaje guardado"
+      message: "Mensaje guardado",
     });
-  })
-})
-
+  });
+});
 
 router.get("/getMessages", (req, res) => {
   //get the token
@@ -855,10 +853,10 @@ router.get("/getMessages", (req, res) => {
   const { _id } = query;
   // verify the token of one of a kind and its not deleted
 
-  if (_id !== '') {
+  if (_id !== "") {
     messages.find(
       {
-        room: _id
+        room: _id,
       },
       (err, messages) => {
         if (err) {
@@ -872,27 +870,23 @@ router.get("/getMessages", (req, res) => {
           message: "Correctito!",
           messages: messages,
         });
-  
       }
     );
   } else {
-    messages.find(
-      (err, messages) => {
-        if (err) {
-          return res.send({
-            sucess: false,
-            message: "Error: Server error",
-          });
-        }
+    messages.find((err, messages) => {
+      if (err) {
         return res.send({
-          success: true,
-          message: "Correctito!",
-          messages: messages,
+          sucess: false,
+          message: "Error: Server error",
         });
       }
-    );
+      return res.send({
+        success: true,
+        message: "Correctito!",
+        messages: messages,
+      });
+    });
   }
-  
 });
 
 router.get("/getLastMessage", (req, res) => {
@@ -903,7 +897,7 @@ router.get("/getLastMessage", (req, res) => {
 
   messages.find(
     {
-      sender: name
+      sender: name,
     },
     (err, mensaje) => {
       if (err) {
@@ -917,41 +911,39 @@ router.get("/getLastMessage", (req, res) => {
         message: "Correctito!",
         mensajes: mensaje,
       });
-
     }
   );
 });
-
 
 router.get("/getLastMessages", (req, res) => {
   //get the token
   const { body } = req;
 
   // verify the token of one of a kind and its not deleted
-  messages.aggregate([
-    {
-      $group: { 
-        _id: "$room",
-        timestamp: { $last: "$timestamp"},
-        ultimo: { $last: "$message"},
+  messages
+    .aggregate([
+      {
+        $group: {
+          _id: "$room",
+          timestamp: { $last: "$timestamp" },
+          ultimo: { $last: "$message" },
+        },
+      },
+    ])
+    .exec((err, post) => {
+      // console.log(post)
+      if (err) {
+        return res.send({
+          sucess: false,
+          message: "Error: Server error",
+        });
       }
-    }
-  ]).exec((err, post) => {
-    // console.log(post)
-    if (err) {
       return res.send({
-        sucess: false,
-        message: "Error: Server error",
+        success: true,
+        message: "Correctito!",
+        mensajes: post,
       });
-    }
-    return res.send({
-      success: true,
-      message: "Correctito!",
-      mensajes: post
     });
-
-  });
 });
-
 
 module.exports = router;

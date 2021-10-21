@@ -32,8 +32,14 @@ const signUpTemplate = new mongoose.Schema({
         default: ''
     },
     location: {
-        type: String,
-        default: ''
+        department: {
+            type: String,
+            default: ''
+        },
+        city: {
+            type: String,
+            default: ''
+        }
     },
     password: {
         type: String,

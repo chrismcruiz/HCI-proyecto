@@ -5,11 +5,11 @@ import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
 import CloseIcon from "@material-ui/icons/Close";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import "./Cards.css"
+import "./Cards.css";
 import { calcularEdad } from "../utils/Utils";
 import { CircularProgress } from "@material-ui/core";
-import { toast } from 'react-toastify';
-import Filtros from './Filtros'
+import { toast } from "react-toastify";
+import Filtros from "./Filtros";
 
 const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,12 +19,15 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
   // let myInfo = []
 
   const filtrarUsuarios = (users) => {
-    let usuarios = users.filter((user) => (user._id !== idUser && !user.admin && !userData.liked.includes(user._id)))
+    let usuarios = users.filter(
+      (user) =>
+        user._id !== idUser && !user.admin && !userData.liked.includes(user._id)
+    );
     if (filtros.length > 0) {
-      usuarios = usuarios.filter(usuario => filtros.includes(usuario.career))
+      usuarios = usuarios.filter((usuario) => filtros.includes(usuario.career));
     }
-    return usuarios
-  }
+    return usuarios;
+  };
 
   // traer la info de todos los usuarios menos del admin y el usuario actual
   useEffect(async () => {
@@ -35,23 +38,21 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
     setIsLoading(false);
   }, [filtros]);
 
-
-
   const setMatch = (idUser, idPersonLiked) => {
     const body = [
       {
         _id: idUser,
-        liked: idPersonLiked
+        liked: idPersonLiked,
       },
       {
         _id: idPersonLiked,
-        liked: idUser
-      }
+        liked: idUser,
+      },
     ];
     axios
       .post("http://localhost:4000/app/setmatch", body)
       .then((response) => {
-        console.log(response)
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -60,11 +61,11 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
 
   const revisarLikeMutuo = (idUser, idPersonLiked) => {
     let match = false;
-    const leGustan = db.filter((user) => user._id === idPersonLiked)[0].liked
+    const leGustan = db.filter((user) => user._id === idPersonLiked)[0].liked;
     if (leGustan.includes(idUser)) match = true;
     if (match) {
       setMatch(idUser, idPersonLiked);
-      getInfo(idUser)
+      getInfo(idUser);
       notify();
     }
   };
@@ -86,7 +87,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
   // Mostrar tarjetas y funcionalidad de los botones
 
   // Crear un clón de "users"
-  const db = [...users]
+  const db = [...users];
 
   const alreadyRemoved = [];
   let charactersState = db;
@@ -110,25 +111,28 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
     if (cardsLeft.length) {
       const currentCard = cardsLeft[cardsLeft.length - 1]._id;
       const index = db.map((person) => person._id).indexOf(currentCard);
-      childRefs[index].current.onClick = () => console.log(`Clickaste la tarjeta número ${index}`)
+      childRefs[index].current.onClick = () =>
+        console.log(`Clickaste la tarjeta número ${index}`);
     }
-  }
+  };
 
   // Match
   const swiped = (direction, nameToDelete) => {
-    if (direction === 'right') {
-      setTimeout(() => enviarLike(idUser, nameToDelete), 500)
+    if (direction === "right") {
+      setTimeout(() => enviarLike(idUser, nameToDelete), 500);
     }
-    console.log('removing: ' + nameToDelete)
-    setLastDirection(direction)
-    alreadyRemoved.push(nameToDelete)
-  }
+    console.log("removing: " + nameToDelete);
+    setLastDirection(direction);
+    alreadyRemoved.push(nameToDelete);
+  };
 
   const outOfFrame = (_id) => {
-    console.log(_id + ' left the screen!')
-    charactersState = charactersState.filter(character => character._id !== _id)
-    setUsers(charactersState)
-  }
+    console.log(_id + " left the screen!");
+    charactersState = charactersState.filter(
+      (character) => character._id !== _id
+    );
+    setUsers(charactersState);
+  };
 
   const swipe = (dir) => {
     const cardsLeft = users.filter(
@@ -142,9 +146,8 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
     }
   };
 
-
   const notify = () => {
-    toast.info('¡Nuevo Contacto!', {
+    toast.info("¡Nuevo Contacto!", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -160,7 +163,14 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       <div>
         {/* Filtros */}
         <div className="filtros">
-          {filtros.map((filtro) => <Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />)}
+          {filtros.map((filtro) => (
+            <Filtros
+              idUser={idUser}
+              key={filtro}
+              name={filtro}
+              borrarFiltro={borrarFiltro}
+            />
+          ))}
         </div>
         <div className="d-flex justify-content-center align-items-center no-people">
           No hay personas para mostrar...
@@ -168,7 +178,6 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       </div>
     );
   }
-
 
   if (isLoading) {
     return (
@@ -182,23 +191,35 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
     <>
       {/* Filtros */}
       <div className="filtros">
-
-        {filtros.length > 0 ?
-          filtros.map((filtro) => (<Filtros idUser={idUser} key={filtro} name={filtro} borrarFiltro={borrarFiltro} />))
-          :
-          (
-            <div className="no-filtros">
-              <img className="varita" src="/assets/varita.png"></img>
-              <p>Puedes personalizar tu búsqueda añadidendo filtros</p>
-            </div>
-          )
-        }
+        {filtros.length > 0 ? (
+          filtros.map((filtro) => (
+            <Filtros
+              idUser={idUser}
+              key={filtro}
+              name={filtro}
+              borrarFiltro={borrarFiltro}
+            />
+          ))
+        ) : (
+          <div className="no-filtros">
+            <img className="varita" src="/assets/varita.png"></img>
+            <p>Puedes personalizar tu búsqueda añadidendo filtros</p>
+          </div>
+        )}
       </div>
 
       {/* Card */}
       <div className="card__container d-flex justify-content-center mx-auto">
-        {users.map((character, index) =>
-          <TinderCard ref={childRefs[index]} preventSwipe={['up', 'down']} className='swipe' key={character._id} onSwipe={(dir) => swiped(dir, character._id)} onCardLeftScreen={() => outOfFrame(character._id)} onClick={clickTarjeta} >
+        {users.map((character, index) => (
+          <TinderCard
+            ref={childRefs[index]}
+            preventSwipe={["up", "down"]}
+            className="swipe"
+            key={character._id}
+            onSwipe={(dir) => swiped(dir, character._id)}
+            onCardLeftScreen={() => outOfFrame(character._id)}
+            onClick={clickTarjeta}
+          >
             {/* <div style={{ backgroundImage: `url(./images/${character.photo})` }} className='card'>
               <h3>{character.name.split(" ").slice(0, 2).join(' ')}</h3>
             </div> */}
@@ -211,18 +232,26 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                   {/* <div class="points center">
                     5,312 Points
                   </div> */}
-                  <img className="pic" alt="" width="170" heigth="170" src={`/images/${character.photo}`} />
+                  <img
+                    className="pic"
+                    alt=""
+                    width="170"
+                    heigth="170"
+                    src={`/images/${character.photo}`}
+                  />
                   <div className="puntuation mt-3">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                    </div>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
                   <div className="user-details mt-3">
                     <p>{calcularEdad(character.birthday)}</p>
                     <p>{character.career}</p>
-                    <p>Bucaramanga</p>
+                    <p>
+                      {`${character.location.department}, ${character.location.city}`}
+                    </p>
                   </div>
                 </div>
                 <div class="more-info">
@@ -262,12 +291,18 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
               <div className="general">
                 <h1 className="mt-2">{character.name}</h1>
                 {/* <p>{character.description}</p> */}
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse s urna. Morbi eu quam ante. Ut fermentum mauris vel mauris commodo consectetur. Donec a euismod tortor. Integer non mi urna. Morbi varius nulla eget mi imperdiet mollis.</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse s urna. Morbi eu quam ante. Ut fermentum mauris
+                  vel mauris commodo consectetur. Donec a euismod tortor.
+                  Integer non mi urna. Morbi varius nulla eget mi imperdiet
+                  mollis.
+                </p>
                 {/* <span class="more">Mouse over the card for more info</span> */}
               </div>
             </div>
           </TinderCard>
-        )}
+        ))}
       </div>
       {/* Botones */}
       <div className="buttons d-flex justify-content-center">
@@ -280,10 +315,19 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
       </div>
       {/* {matches && (<div className="alert_match">¡Match!</div>)} */}
       <div className="info-container">
-        {lastDirection ? <h2 key={lastDirection} className='text__information'>Deslizaste hacía la {lastDirection === 'left' ? 'izquierda' : 'derecha'}</h2> : <h2 className='text__information'>¡Desliza una tarjeta o presiona un botón para comenzar!</h2>}
+        {lastDirection ? (
+          <h2 key={lastDirection} className="text__information">
+            Deslizaste hacía la{" "}
+            {lastDirection === "left" ? "izquierda" : "derecha"}
+          </h2>
+        ) : (
+          <h2 className="text__information">
+            ¡Desliza una tarjeta o presiona un botón para comenzar!
+          </h2>
+        )}
       </div>
     </>
   );
-}
+};
 
 export default Cards;
