@@ -47,6 +47,8 @@ const CityField = ({ name }) => {
   // console.log(field.value);
   // console.log(helpers);
   return (
+    <div>
+
     <div className="form-group">
       <label className="labels" htmlFor={field.name}>
         <i class="zmdi zmdi-city"></i>
@@ -69,11 +71,11 @@ const CityField = ({ name }) => {
           </option>
         ))}
       </datalist>
-      <ErrorMessage
+      {/* <ErrorMessage
         component="div"
         name={field.name}
-        className="invalid-feedback"
-      />
+        className="invalid-feedback dpto-invalid"
+      /> */}
       <label className="labels" htmlFor={field2.name}>
         <i className="zmdi zmdi-graduation-cap"></i>
       </label>
@@ -102,8 +104,9 @@ const CityField = ({ name }) => {
       <ErrorMessage
         component="div"
         name={field2.name}
-        className="invalid-feedback"
+        className="invalid-feedback city-invalid"
       />
+    </div>
     </div>
   );
 };

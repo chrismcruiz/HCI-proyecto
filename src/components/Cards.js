@@ -10,6 +10,7 @@ import { calcularEdad } from "../utils/Utils";
 import { CircularProgress } from "@material-ui/core";
 import { toast } from "react-toastify";
 import Filtros from "./Filtros";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -266,25 +267,25 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                   </div> */}
                   <div class="stats">
                     <div>
-                      <div class="title">Awards</div>
+                      <div class="title">Premios</div>
                       <i class="fa fa-trophy"></i>
                       <div class="value">2</div>
                     </div>
                     <div>
-                      <div class="title">Matches</div>
+                      <div class="title">Contactos</div>
                       <i class="fa fa-gamepad"></i>
-                      <div class="value">27</div>
+                      <div class="value">2</div>
                     </div>
                     <div>
-                      <div class="title">Pals</div>
+                      <div class="title">Amigos</div>
                       <i class="fa fa-group"></i>
-                      <div class="value">123</div>
+                      <div class="value">12</div>
                     </div>
-                    <div>
+                    {/* <div>
                       <div class="title">Coffee</div>
                       <i class="fa fa-coffee"></i>
                       <div class="value infinity">∞</div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -298,6 +299,11 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                   Integer non mi urna. Morbi varius nulla eget mi imperdiet
                   mollis.
                 </p>
+                {/* <FontAwesomeIcon icon="fa-brands fa-github" /> */}
+                <div className="icons">
+                  <i class="fa-brands fa-github"></i>
+                  <i class="fa-brands fa-accessible-icon"></i>
+                </div>
                 {/* <span class="more">Mouse over the card for more info</span> */}
               </div>
             </div>

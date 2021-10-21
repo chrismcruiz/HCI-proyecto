@@ -159,13 +159,14 @@ const SignupForm = () => {
                         name="career"
                         options={carreras}
                       />
-
-                      <InputField
-                        label="Contraseña"
-                        classes="zmdi-lock"
-                        name="password"
-                        type="password"
-                      />
+                      <div className="contenedor-pass">
+                        <InputField
+                          label="Contraseña"
+                          classes="zmdi-lock"
+                          name="password"
+                          type="password"
+                        />
+                      </div>
                       <InputField
                         label="Confirmar contraseña"
                         classes="zmdi-lock-outline"
@@ -200,7 +201,7 @@ const SignupForm = () => {
                           type="submit"
                           name="signup"
                           id="signup"
-                          class="form-submit"
+                          className="form-submit"
                           value="Registrarme"
                         />
 

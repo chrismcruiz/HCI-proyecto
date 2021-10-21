@@ -215,6 +215,7 @@
 .card {
   /* width: 800px; */
   width: 50vw;
+  /* width: 50vw; */
   height: 390px;
   box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
@@ -235,8 +236,11 @@
 }
 
 .card .additional {
+  /* display: flex;
+  justify-content: center; */
   position: absolute;
-  width: 220px;
+  /* width: 235px; */
+  width: 18.5vw;
   height: 100%;
   transition: width 0.4s;
   overflow: hidden;
@@ -253,7 +257,8 @@
 }
 
 .card .additional .user-card {
-  width: 220px;
+  /* width: 235px; */
+  width: 18.5vw;
   height: 100%;
   /* position: relative; */
   float: left;
@@ -291,12 +296,13 @@
 }
 
 .card .additional .more-info {
-  /* width: 580px; */
-  width: 67%;
+  width: 31.5vw;
+  /* width: 61%; */
   float: left;
   position: absolute;
-  left: 220px;
+  left: 18.5vw;
   height: 100%;
+  text-align: center;
 }
 
 .card .additional .more-info h1 {
@@ -363,8 +369,8 @@
 }
 
 .card .general {
-  /* width: 580px; */
-  width: 68%;
+  width: 31.2vw;
+  /* width: 68%; */
   height: 100%;
   position: absolute;
   top: 0;
@@ -384,6 +390,9 @@
 
 .pic {
   border-radius: 100%;
+  height: 180px;
+  width: 180px;
+
 }
 
 .general p {

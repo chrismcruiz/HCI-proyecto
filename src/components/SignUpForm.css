@@ -42,3 +42,11 @@
 .afirmative {
     background-color: #4DECB2;
 } */
+
+.contenedor-pass .form-group {
+    height: 5rem;
+}
+
+.form-submit {
+    border: 0;
+}
