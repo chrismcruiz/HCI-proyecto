@@ -138,7 +138,10 @@ const Matches = ({ userData, idsMatches }) => {
         >
 
           <div className="row p-3">
-            {!tarjetas.length ? (<p className="me-auto">Todavía no tienes ningún contacto.</p>)
+            {!tarjetas.length ? (<div className="text-center nomatches">
+            <i class="far fa-handshake fa-8x"></i>
+            <p>Todavía no tienes contactos!</p>
+            </div>)
               :
               tarjetas.map((tarjeta, index) => (
                 <div
