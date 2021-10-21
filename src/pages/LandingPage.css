@@ -1,215 +1,435 @@
 /* Header */
 
 .header {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(90deg, #27996C 0%, #09BF7D 100%);
-    color: #fff;
-    padding: 3% 10%;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(90deg, #27996c 0%, #09bf7d 100%);
+  color: #fff;
+  padding: 3% 10%;
 }
 .header2 {
-    margin-top: -35px;
-    background: linear-gradient(90deg, #27996C 0%, #09BF7D 100%);
-    height: 30VH;
-    clip-path: polygon(100% 0%, 0% 0% , 0% 65%, 1% 64.95%, 2% 64.8%, 3% 64.6%, 4% 64.3%, 5% 63.9%, 6% 63.45%, 7% 62.9%, 8% 62.25%, 9% 61.55%, 10% 60.8%, 11% 59.95%, 12% 59.05%, 13% 58.1%, 14% 57.1%, 15% 56.05%, 16% 55%, 17% 53.9%, 18% 52.8%, 19% 51.65%, 20% 50.5%, 21% 49.35%, 22% 48.2%, 23% 47.05%, 24% 45.9%, 25% 44.8%, 26% 43.75%, 27% 42.75%, 28% 41.75%, 29% 40.8%, 30% 39.9%, 31% 39.1%, 32% 38.35%, 33% 37.65%, 34% 37.05%, 35% 36.5%, 36% 36.05%, 37% 35.65%, 38% 35.35%, 39% 35.15%, 40% 35.05%, 41% 35%, 42% 35.05%, 43% 35.2%, 44% 35.45%, 45% 35.75%, 46% 36.15%, 47% 36.65%, 48% 37.2%, 49% 37.85%, 50% 38.55%, 51% 39.35%, 52% 40.2%, 53% 41.1%, 54% 42.05%, 55% 43.05%, 56% 44.1%, 57% 45.15%, 58% 46.3%, 59% 47.4%, 60% 48.55%, 61% 49.7%, 62% 50.85%, 63% 52%, 64% 53.15%, 65% 54.25%, 66% 55.35%, 67% 56.4%, 68% 57.45%, 69% 58.4%, 70% 59.35%, 71% 60.2%, 72% 61.05%, 73% 61.8%, 74% 62.45%, 75% 63.05%, 76% 63.6%, 77% 64.05%, 78% 64.4%, 79% 64.7%, 80% 64.85%, 81% 65%, 82% 65%, 83% 64.9%, 84% 64.75%, 85% 64.5%, 86% 64.2%, 87% 63.75%, 88% 63.25%, 89% 62.7%, 90% 62.05%, 91% 61.3%, 92% 60.5%, 93% 59.65%, 94% 58.75%, 95% 57.8%, 96% 56.8%, 97% 55.75%, 98% 54.65%, 99% 53.55%, 100% 52.4%);
+  margin-top: -35px;
+  background: linear-gradient(90deg, #27996c 0%, #09bf7d 100%);
+  height: 30vh;
+  clip-path: polygon(
+    100% 0%,
+    0% 0%,
+    0% 65%,
+    1% 64.95%,
+    2% 64.8%,
+    3% 64.6%,
+    4% 64.3%,
+    5% 63.9%,
+    6% 63.45%,
+    7% 62.9%,
+    8% 62.25%,
+    9% 61.55%,
+    10% 60.8%,
+    11% 59.95%,
+    12% 59.05%,
+    13% 58.1%,
+    14% 57.1%,
+    15% 56.05%,
+    16% 55%,
+    17% 53.9%,
+    18% 52.8%,
+    19% 51.65%,
+    20% 50.5%,
+    21% 49.35%,
+    22% 48.2%,
+    23% 47.05%,
+    24% 45.9%,
+    25% 44.8%,
+    26% 43.75%,
+    27% 42.75%,
+    28% 41.75%,
+    29% 40.8%,
+    30% 39.9%,
+    31% 39.1%,
+    32% 38.35%,
+    33% 37.65%,
+    34% 37.05%,
+    35% 36.5%,
+    36% 36.05%,
+    37% 35.65%,
+    38% 35.35%,
+    39% 35.15%,
+    40% 35.05%,
+    41% 35%,
+    42% 35.05%,
+    43% 35.2%,
+    44% 35.45%,
+    45% 35.75%,
+    46% 36.15%,
+    47% 36.65%,
+    48% 37.2%,
+    49% 37.85%,
+    50% 38.55%,
+    51% 39.35%,
+    52% 40.2%,
+    53% 41.1%,
+    54% 42.05%,
+    55% 43.05%,
+    56% 44.1%,
+    57% 45.15%,
+    58% 46.3%,
+    59% 47.4%,
+    60% 48.55%,
+    61% 49.7%,
+    62% 50.85%,
+    63% 52%,
+    64% 53.15%,
+    65% 54.25%,
+    66% 55.35%,
+    67% 56.4%,
+    68% 57.45%,
+    69% 58.4%,
+    70% 59.35%,
+    71% 60.2%,
+    72% 61.05%,
+    73% 61.8%,
+    74% 62.45%,
+    75% 63.05%,
+    76% 63.6%,
+    77% 64.05%,
+    78% 64.4%,
+    79% 64.7%,
+    80% 64.85%,
+    81% 65%,
+    82% 65%,
+    83% 64.9%,
+    84% 64.75%,
+    85% 64.5%,
+    86% 64.2%,
+    87% 63.75%,
+    88% 63.25%,
+    89% 62.7%,
+    90% 62.05%,
+    91% 61.3%,
+    92% 60.5%,
+    93% 59.65%,
+    94% 58.75%,
+    95% 57.8%,
+    96% 56.8%,
+    97% 55.75%,
+    98% 54.65%,
+    99% 53.55%,
+    100% 52.4%
+  );
 }
 
 .footer2 {
-    margin-top: -35px;
-    background: linear-gradient(90deg, #27996C 0%, #09BF7D 100%);
-    height: 30VH;
-    clip-path: polygon(100% 100%, 0% 100% , 0% 65%, 1% 64.95%, 2% 64.8%, 3% 64.6%, 4% 64.3%, 5% 63.9%, 6% 63.45%, 7% 62.9%, 8% 62.25%, 9% 61.55%, 10% 60.8%, 11% 59.95%, 12% 59.05%, 13% 58.1%, 14% 57.1%, 15% 56.05%, 16% 55%, 17% 53.9%, 18% 52.8%, 19% 51.65%, 20% 50.5%, 21% 49.35%, 22% 48.2%, 23% 47.05%, 24% 45.9%, 25% 44.8%, 26% 43.75%, 27% 42.75%, 28% 41.75%, 29% 40.8%, 30% 39.9%, 31% 39.1%, 32% 38.35%, 33% 37.65%, 34% 37.05%, 35% 36.5%, 36% 36.05%, 37% 35.65%, 38% 35.35%, 39% 35.15%, 40% 35.05%, 41% 35%, 42% 35.05%, 43% 35.2%, 44% 35.45%, 45% 35.75%, 46% 36.15%, 47% 36.65%, 48% 37.2%, 49% 37.85%, 50% 38.55%, 51% 39.35%, 52% 40.2%, 53% 41.1%, 54% 42.05%, 55% 43.05%, 56% 44.1%, 57% 45.15%, 58% 46.3%, 59% 47.4%, 60% 48.55%, 61% 49.7%, 62% 50.85%, 63% 52%, 64% 53.15%, 65% 54.25%, 66% 55.35%, 67% 56.4%, 68% 57.45%, 69% 58.4%, 70% 59.35%, 71% 60.2%, 72% 61.05%, 73% 61.8%, 74% 62.45%, 75% 63.05%, 76% 63.6%, 77% 64.05%, 78% 64.4%, 79% 64.7%, 80% 64.85%, 81% 65%, 82% 65%, 83% 64.9%, 84% 64.75%, 85% 64.5%, 86% 64.2%, 87% 63.75%, 88% 63.25%, 89% 62.7%, 90% 62.05%, 91% 61.3%, 92% 60.5%, 93% 59.65%, 94% 58.75%, 95% 57.8%, 96% 56.8%, 97% 55.75%, 98% 54.65%, 99% 53.55%, 100% 52.4%);
+  margin-top: -35px;
+  background: linear-gradient(90deg, #27996c 0%, #09bf7d 100%);
+  height: 30vh;
+  clip-path: polygon(
+    100% 100%,
+    0% 100%,
+    0% 65%,
+    1% 64.95%,
+    2% 64.8%,
+    3% 64.6%,
+    4% 64.3%,
+    5% 63.9%,
+    6% 63.45%,
+    7% 62.9%,
+    8% 62.25%,
+    9% 61.55%,
+    10% 60.8%,
+    11% 59.95%,
+    12% 59.05%,
+    13% 58.1%,
+    14% 57.1%,
+    15% 56.05%,
+    16% 55%,
+    17% 53.9%,
+    18% 52.8%,
+    19% 51.65%,
+    20% 50.5%,
+    21% 49.35%,
+    22% 48.2%,
+    23% 47.05%,
+    24% 45.9%,
+    25% 44.8%,
+    26% 43.75%,
+    27% 42.75%,
+    28% 41.75%,
+    29% 40.8%,
+    30% 39.9%,
+    31% 39.1%,
+    32% 38.35%,
+    33% 37.65%,
+    34% 37.05%,
+    35% 36.5%,
+    36% 36.05%,
+    37% 35.65%,
+    38% 35.35%,
+    39% 35.15%,
+    40% 35.05%,
+    41% 35%,
+    42% 35.05%,
+    43% 35.2%,
+    44% 35.45%,
+    45% 35.75%,
+    46% 36.15%,
+    47% 36.65%,
+    48% 37.2%,
+    49% 37.85%,
+    50% 38.55%,
+    51% 39.35%,
+    52% 40.2%,
+    53% 41.1%,
+    54% 42.05%,
+    55% 43.05%,
+    56% 44.1%,
+    57% 45.15%,
+    58% 46.3%,
+    59% 47.4%,
+    60% 48.55%,
+    61% 49.7%,
+    62% 50.85%,
+    63% 52%,
+    64% 53.15%,
+    65% 54.25%,
+    66% 55.35%,
+    67% 56.4%,
+    68% 57.45%,
+    69% 58.4%,
+    70% 59.35%,
+    71% 60.2%,
+    72% 61.05%,
+    73% 61.8%,
+    74% 62.45%,
+    75% 63.05%,
+    76% 63.6%,
+    77% 64.05%,
+    78% 64.4%,
+    79% 64.7%,
+    80% 64.85%,
+    81% 65%,
+    82% 65%,
+    83% 64.9%,
+    84% 64.75%,
+    85% 64.5%,
+    86% 64.2%,
+    87% 63.75%,
+    88% 63.25%,
+    89% 62.7%,
+    90% 62.05%,
+    91% 61.3%,
+    92% 60.5%,
+    93% 59.65%,
+    94% 58.75%,
+    95% 57.8%,
+    96% 56.8%,
+    97% 55.75%,
+    98% 54.65%,
+    99% 53.55%,
+    100% 52.4%
+  );
 }
 .hr {
-    border-top: 5px solid white;
-    height: 2px;
-    max-width: 70%;
-    padding: 0;
-    margin: 0 auto 20px auto;
-    width: 70%;
-  }
+  border-top: 5px solid white;
+  height: 2px;
+  max-width: 70%;
+  padding: 0;
+  margin: 0 auto 20px auto;
+  width: 70%;
+}
 
 .header-img {
-    width: 90%;
-    margin-top: 10px;
+  width: 90%;
+  margin-top: 10px;
 }
 
 .title {
-    font-weight: 900;
-    font-size: 2.6rem;
-    line-height: 1.5; 
-    /* padding-right: 70% */
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 1.5;
+  /* padding-right: 70% */
 }
 
 .motto {
-    font-size: 0.8rem;
-    padding-right: 30%;
-    color: #EEFDF4;
-    font-weight: 100;
+  font-size: 0.8rem;
+  padding-right: 30%;
+  color: #eefdf4;
+  font-weight: 100;
 }
 
 /* Navbar */
 
 nav.nav-header {
-    padding: 0 0 4.5rem;
+  padding: 0 0 4.5rem;
 }
 
 .home-brand {
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .nav-header-item {
-    padding: 0 18px;
+  padding: 0 18px;
 }
 
 .nav-header-link {
-    font-size: 1.2em;
-    font-weight: 100;
+  font-size: 1.2em;
+  font-weight: 100;
 }
 
 /* Botones */
 
 .signup-button {
-    margin-top: 5%;
-    color: #EEFDF4;
-    border-radius: 50px;
-    font-weight: 400;
-    /* background-color: #008EC2; */
-    background-color: #394B40;
-    /* width: 9rem; */
+  margin-top: 5%;
+  color: #eefdf4;
+  border-radius: 50px;
+  font-weight: 400;
+  /* background-color: #008EC2; */
+  background-color: #394b40;
+  /* width: 9rem; */
 }
 
 .login-button {
-    background-color: #394B40;
-    /* color: #EEFDF4; */
-    height: 2.5rem;
-    width: 8rem;
-    border-radius: 50px;
-    font-size: 1.2em;
-    font-weight: 400;
-    padding: 0;
+  background-color: #394b40;
+  /* color: #EEFDF4; */
+  height: 2.5rem;
+  width: 8rem;
+  border-radius: 50px;
+  font-size: 1.2em;
+  font-weight: 400;
+  padding: 0;
 }
 
 a.iconos {
-   text-decoration: none;
-   color: #EEFDF4;
-   /* margin-left: 5px; */
+  text-decoration: none;
+  color: #eefdf4;
+  /* margin-left: 5px; */
 }
 
 a.iconos:hover {
-    color:#212529;
+  color: #212529;
 }
 
 /* Carrusel */
 
 .carrusel {
-    padding: 7% 5%;
+  padding: 7% 5%;
 }
 
 .carrusel-img {
-    height: 650px;
+  height: 650px;
 }
 
-
 .content img {
-	vertical-align:middle;
+  vertical-align: middle;
 }
 
 /* Footer */
 
 .footer {
-    background: linear-gradient(90deg, #27996C 0%, #09BF7D 100%);;
-    color: white;
-    text-align: center;
-    padding: 2%;
+  background: linear-gradient(90deg, #27996c 0%, #09bf7d 100%);
+  color: white;
+  text-align: center;
+  padding: 2%;
 }
 
 .icon_color {
-    color: white !important;
+  color: white !important;
 }
 
 .icono {
-    margin: 0 1em !important; 
+  margin: 0 1em !important;
 }
 
 .footer__icons {
-    margin-right: 1em;
+  margin-right: 1em;
 }
 
 .guia {
-    color: black;
+  color: black;
 }
 
-.entrar{
-    color: white !important;
-    text-decoration:  none !important;
+.entrar {
+  color: white !important;
+  text-decoration: none !important;
 }
-.letrap{
-    font-size: x-large;
+.letrap {
+  font-size: x-large;
 
-    margin-left: 255px;
+  margin-left: 255px;
 }
 
-.pequeña{
-    width: 300px; height: 300px;
-   
-  }
-.ubic{
-    margin-left: 255px;
-    margin-top: 200px;
+.pequeña {
+  width: 300px;
+  height: 300px;
 }
-.izq{
-    padding: 10px; float: left; width: 45%; text-align:center;
-
+.ubic {
+  margin-left: 255px;
+  margin-top: 200px;
 }
-.der{
-    padding: 10px; float: right; width: 45%; text-align: justify;
-    vertical-align: middle;
+.izq {
+  padding: 10px;
+  float: left;
+  width: 45%;
+  text-align: center;
 }
-.cen{
-    align-items: center;
+.der {
+  padding: 10px;
+  float: right;
+  width: 45%;
+  text-align: justify;
+  vertical-align: middle;
+}
+.cen {
+  align-items: center;
 }
 
 carousel {
-    width: 100%;
-    text-align: center;
-    font-family: Trebuchet MS;
-    display: block;
-    font-size: 6vmin;
-  }
-  carousel page {
-    position: absolute;
-    top: 13em;
-    left: 0;
-    width: 100%;
-    transition: transform 0.5s;
-    transform: scale(0);
-  }
-  carousel page div {
-    padding: 2em;
-  }
-  carousel page label {
-    cursor: pointer;
-    background: #27996C;
-    padding: 1em 2em;
-    margin-left: 50px;
-    margin-top: 300px;
+  width: 100%;
+  text-align: center;
+  font-family: Trebuchet MS;
+  display: block;
+  font-size: 6vmin;
+}
+carousel page {
+  position: absolute;
+  top: 13em;
+  left: 0;
+  width: 100%;
+  transition: transform 0.5s;
+  transform: scale(0);
+}
+carousel page div {
+  padding: 2em;
+}
+carousel page label {
+  cursor: pointer;
+  background: #27996c;
+  padding: 1em 2em;
+  margin-left: 50px;
+  margin-top: 300px;
+}
+carousel #page1cb:checked ~ #page1 {
+  transform: scale(1);
+}
+carousel #page2cb:checked ~ #page2 {
+  transform: scale(1);
+}
+carousel #page3cb:checked ~ #page3 {
+  transform: scale(1);
+}
+carousel #page4cb:checked ~ #page4 {
+  transform: scale(1);
+}
+carousel #page5cb:checked ~ #page5 {
+  transform: scale(1);
+}
 
-  }
-  carousel #page1cb:checked ~ #page1 {
-    transform: scale(1);
-  }
-  carousel #page2cb:checked ~ #page2 {
-    transform: scale(1);
-  }
-  carousel #page3cb:checked ~ #page3 {
-    transform: scale(1);
-  }
-  carousel #page4cb:checked ~ #page4 {
-    transform: scale(1);
-  }
-  carousel #page5cb:checked ~ #page5 {
-    transform: scale(1);
-  }
-  
+.logo {
+  margin-right: -38px;
+  margin-left: -48px;
+  /* margin-left: -30px; */
+}
+
+.pequeña {
+  border-radius: 100%;
+}

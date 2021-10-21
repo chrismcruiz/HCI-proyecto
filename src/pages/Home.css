@@ -11,7 +11,10 @@
   padding: 2% 5%;
 }
 
-
 .margen-derecho {
   margin-right: 2rem;
+}
+
+.boton-ayuda {
+  color: #0dba7b;
 }
