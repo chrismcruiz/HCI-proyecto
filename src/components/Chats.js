@@ -182,9 +182,9 @@ const Chats = ({ userData, socket, usersData }) => {
           </Tooltip>
         </div>
       </div>
-      <div className="container chats-vista columna-altura border">
+      <div className="container  chats-vista columna-altura border">
         <div className="row">
-          <div className="col-4 columna-izquierda columna-altura pt-3">
+          <div className="col-4 bordes-chat columna-izquierda columna-altura pt-3">
             <form
               className="input-group rounded buscar-chat"
               onSubmit={(e) => e.preventDefault()}
@@ -233,7 +233,7 @@ const Chats = ({ userData, socket, usersData }) => {
               </SimpleBar>
             </div>
           </div>
-          <div className="col-8 position-relative border-start">
+          <div className="col-8 bordes-chat position-relative border-start">
             <ChatScreen
               userData={userData}
               socket={socket}

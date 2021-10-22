@@ -274,7 +274,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                         className="img-reseñas mb-2 me-2"
                         alt=""
                       />
-                      <h6 className="d-inline-block">Jean Carlos Portilla</h6>
+                      <h6 className="d-inline-block">Jeank Portilla</h6>
                       <blockquote>
                         "Un pelao serio. Muy acomedido y con ganas de salir
                         adelante".

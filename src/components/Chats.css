@@ -37,3 +37,8 @@
 .buscar-chat {
     color: #27996c !important;
 }
+
+.bordes-chat{
+    border: 1px solid #a0a0a0;
+    /* border-right: none; */
+}
