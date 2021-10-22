@@ -359,9 +359,17 @@ a.iconos:hover {
 }
 
 .pequeña {
-  width: 300px;
-  height: 300px;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1em;
 }
+
+.reseña-user {
+  padding: 1em;
+  text-align: center;
+  color: #a0a0a0; 
+}
+
 .ubic {
   margin-left: 255px;
   margin-top: 200px;
@@ -432,4 +440,24 @@ carousel #page5cb:checked ~ #page5 {
 
 .pequeña {
   border-radius: 100%;
+}
+
+.features-description {
+  width: 50%;
+  line-height: 2.5;
+  text-align: justify;
+  color: #a0a0a0;
+}
+
+/* .features-title {
+  alig
+} */
+
+.reseñas {
+  margin-bottom: 3em;
+}
+
+.reseñas-titulo {
+  margin-top: 1.5em;
+  margin-bottom: 3em;
 }

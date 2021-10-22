@@ -10,7 +10,7 @@ import ModalForm from "./ModalForm"
 import { Modal } from "react-bootstrap";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom"
-
+import { CircularProgress } from "@material-ui/core";
 
 const Matches = ({ userData, idsMatches }) => {
   // const [matchesUser, setMatchesUser] = useState([]);
@@ -21,9 +21,11 @@ const Matches = ({ userData, idsMatches }) => {
   // const [conversationId, setConversationId] = useState(null)
   const [infoRoom, setInfoRoom] = useState('')
   const [dataMatch, setDataMatch] = useState({});
+  const [isLoading, setIsLoading] = useState(false)
 
   // Esto podría no ser necesario!
   useEffect(async () => {
+    setIsLoading(true)
     const response = await axios.post("http://localhost:4000/app/getInfo", {
       _id: userData._id,
     })
@@ -33,6 +35,7 @@ const Matches = ({ userData, idsMatches }) => {
       if (request.status === 200) {
         setTarjetas(request.data)
       }
+      setIsLoading(false)
     }
   }, [idsMatches]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -90,6 +93,15 @@ const Matches = ({ userData, idsMatches }) => {
       progress: undefined,
     });
   };
+
+   // Si está cargando muestro el spinner
+   if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <CircularProgress color="primary" size={50} />
+      </div>
+    );
+  }
 
   return (
     <>
