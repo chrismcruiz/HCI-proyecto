@@ -70,22 +70,13 @@
   height: 35rem;
 }
 
-<<<<<<< HEAD
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
-=======
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
->>>>>>> 54f325d270b8dbd516880ab11f38bdc133451f9c
   color: #fff;
   background-color: #048f5c;
 }
 
 .nav-tabs .nav-link {
   color: #fff;
-<<<<<<< HEAD
-  background: #0dba7b;
-}
-=======
   background: #0DBA7B;
 }
 
@@ -97,4 +88,3 @@
   align-items: center;
   height: 700px;
 }
->>>>>>> 54f325d270b8dbd516880ab11f38bdc133451f9c

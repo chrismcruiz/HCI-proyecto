@@ -61,7 +61,7 @@ const Navbar = ({ userData, filtrar, type }) => {
                                 <span className="input-group-text border-0" id="search-addon">
                                     <Tooltip title="Añadir">
                                         <IconButton size="small" className="navbar__icons__search icono">
-                                            <AddIcon className="icon__color" type="submit" onClick={aplicarfiltro} />
+                                            <AddIcon className="icon__color add-filtro" type="submit" onClick={aplicarfiltro} />
                                         </IconButton>
                                     </Tooltip>
                                 </span>
