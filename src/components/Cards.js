@@ -202,10 +202,10 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
             />
           ))
         ) : (
-          <div className="no-filtros">
+          <div className="no-filtros pt-4">
             <div className="varita">
-              <i class="fas fa-magic fa-2x"></i>
-              <p>Puedes personalizar tu búsqueda añadidendo filtros</p>
+              <i class="fas fa-magic fa-2x d-block mb-2"></i>
+              <p className="info-filtros">¡Puedes personalizar tu búsqueda añadidendo filtros!</p>
             </div>
           </div>
         )}
@@ -267,11 +267,11 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                     <span>Position/Role</span>
                     <span>City, Country</span>
                   </div> */}
-                  <div className="reseñas mb-4 d-flex">
-                    <div className="reseña mb-3">
+                  <div className="reseñas d-flex">
+                    <div className="reseña">
                       <img
                         src="/assets/come1.png"
-                        className="img-reseñas mb-2"
+                        className="img-reseñas mb-2 me-2"
                         alt=""
                       />
                       <h6 className="d-inline-block">Jean Carlos Portilla</h6>
@@ -283,7 +283,7 @@ const Cards = ({ userData, idUser, filtros, borrarFiltro, getInfo }) => {
                     <div className="reseña">
                       <img
                         src="/assets/come4.png"
-                        className="img-reseñas mb-2"
+                        className="img-reseñas mb-2 me-2"
                         alt=""
                       />
                       <h6 className="d-inline-block">Paula Hernández</h6>

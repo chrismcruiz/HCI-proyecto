@@ -203,7 +203,7 @@ const Chats = ({ userData, socket, usersData }) => {
                     size="small"
                     className="navbar__icons__search icono"
                   >
-                    <SearchIcon className="icon__color" type="submit" />
+                    <SearchIcon className="icon__color buscar-chat" type="submit" />
                   </IconButton>
                 </Tooltip>
               </span>
