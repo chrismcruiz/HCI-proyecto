@@ -11,7 +11,11 @@ const Questions = ({ setMdShow }) => {
   });
 
   function goNextPage() {
-    if (page === 4) return;
+    if (page === 3) {
+      // setPage((page) => page + 1);
+      setMdShow(false)
+      return
+    };
     setPage((page) => page + 1);
   }
 
@@ -35,7 +39,7 @@ const Questions = ({ setMdShow }) => {
           <Button className="btn-questions afirmative" onClick={goNextPage} variant="success" size="lg">
               Sí
           </Button>
-          <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">
+          <Button className="btn-questions" onClick={goNextPage} variant="secondary" size="lg">
               No
           </Button>
           </div>
@@ -51,7 +55,7 @@ const Questions = ({ setMdShow }) => {
           <Button className="btn-questions afirmative" onClick={goNextPage} variant="success" size="lg">
               Sí
           </Button>
-          <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">
+          <Button className="btn-questions" onClick={goNextPage} variant="secondary" size="lg">
               No
           </Button>
           </div>
@@ -67,7 +71,7 @@ const Questions = ({ setMdShow }) => {
               <Button className="btn-questions afirmative" onClick={goNextPage} variant="success" size="lg">
                   Sí
               </Button>
-              <Button className="btn-questions" onClick={() => setMdShow(false)} variant="secondary" size="lg">
+              <Button className="btn-questions" onClick={goNextPage} variant="secondary" size="lg">
                   No
               </Button>
               </div>
